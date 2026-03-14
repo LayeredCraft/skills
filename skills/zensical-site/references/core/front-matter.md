@@ -25,6 +25,7 @@ Page content starts here.
 
 - Front matter support is expected in docs authoring flow.
 - Some keys influence behavior only when related setup features are enabled (search, navigation, templates).
+- Use [Configuration Reference](../dependencies/configuration-reference.md) when status labels, template overrides, or search behavior need matching `zensical.toml` setup.
 
 ## What to capture in output
 

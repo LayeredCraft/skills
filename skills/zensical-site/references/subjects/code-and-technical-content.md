@@ -43,6 +43,7 @@ $$
 - syntax highlighting and advanced code features depend on markdown extensions
 - diagrams require Mermaid support
 - math rendering requires configured math engine (MathJax/KaTeX path)
+- use [Configuration Reference](../dependencies/configuration-reference.md) when the user needs actual TOML, `extra_javascript`, or `extra_css` examples
 
 Use [Extension Prerequisites](../dependencies/extension-prereqs.md) for prerequisite mapping.
 

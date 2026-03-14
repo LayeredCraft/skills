@@ -21,6 +21,7 @@ Includes data tables and structured visual data presentation.
 
 - basic tables work in markdown
 - sortable/interactive behavior may require extra setup
+- use [Configuration Reference](../dependencies/configuration-reference.md) when the answer needs `extra_javascript` examples or search-related caveats
 
 Check [Extension Prerequisites](../dependencies/extension-prereqs.md) and [Navigation and Runtime Caveats](../dependencies/navigation-runtime-caveats.md) for setup-sensitive behavior.
 

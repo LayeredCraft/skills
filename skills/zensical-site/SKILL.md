@@ -62,8 +62,9 @@ Then load only what is needed:
 - [Data and Visualization](references/subjects/data-and-visualization.md) for tables and structured visual content patterns.
 - [Inline Formatting and Microcontent](references/subjects/inline-formatting-and-microcontent.md) for lists, inline formatting, and footnotes.
 
-If output depends on setup/runtime behavior, load:
+If output depends on setup/runtime behavior, feature flags, or config snippets, load:
 
+- [Configuration Reference](references/dependencies/configuration-reference.md)
 - [Extension Prerequisites](references/dependencies/extension-prereqs.md)
 - [Navigation and Runtime Caveats](references/dependencies/navigation-runtime-caveats.md)
 - [Customization Boundaries](references/dependencies/customization-boundaries.md)

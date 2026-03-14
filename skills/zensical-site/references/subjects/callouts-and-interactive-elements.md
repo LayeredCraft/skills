@@ -46,6 +46,7 @@ The API uses HTML.
 
 - Most patterns depend on specific markdown extensions.
 - Verify extension availability in [Extension Prerequisites](../dependencies/extension-prereqs.md) when behavior is uncertain.
+- Use [Configuration Reference](../dependencies/configuration-reference.md) when the answer should include TOML examples for tabs, admonitions, buttons, tooltips, or linked tabs.
 
 ## Common options the model may need
 
