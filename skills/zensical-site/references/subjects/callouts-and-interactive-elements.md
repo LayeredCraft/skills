@@ -45,7 +45,7 @@ The API uses HTML.
 ## Required config / prerequisites
 
 - Most patterns depend on specific markdown extensions.
-- Verify extension availability in `dependencies/extension-prereqs.md` when behavior is uncertain.
+- Verify extension availability in [Extension Prerequisites](../dependencies/extension-prereqs.md) when behavior is uncertain.
 
 ## Common options the model may need
 
@@ -63,11 +63,11 @@ The API uses HTML.
 ## Interactions / caveats
 
 - Tabs and tooltips may rely on extension support and theme behavior.
-- If interaction behavior is runtime-sensitive, check `dependencies/navigation-runtime-caveats.md`.
+- If interaction behavior is runtime-sensitive, check [Navigation and Runtime Caveats](../dependencies/navigation-runtime-caveats.md).
 
 ## Deeper docs
 
-- `https://zensical.org/docs/authoring/admonitions/`
-- `https://zensical.org/docs/authoring/buttons/`
-- `https://zensical.org/docs/authoring/content-tabs/`
-- `https://zensical.org/docs/authoring/tooltips/`
+- [Admonitions](https://zensical.org/docs/authoring/admonitions/)
+- [Buttons](https://zensical.org/docs/authoring/buttons/)
+- [Content tabs](https://zensical.org/docs/authoring/content-tabs/)
+- [Tooltips](https://zensical.org/docs/authoring/tooltips/)

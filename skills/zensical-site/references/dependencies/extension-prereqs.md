@@ -33,5 +33,5 @@ Use this page to check feature prerequisites before generating advanced syntax.
 
 ## Deeper docs
 
-- `https://zensical.org/docs/setup/extensions/python-markdown/`
-- `https://zensical.org/docs/setup/extensions/python-markdown-extensions/`
+- [Python Markdown](https://zensical.org/docs/setup/extensions/python-markdown/)
+- [Python Markdown Extensions](https://zensical.org/docs/setup/extensions/python-markdown-extensions/)

@@ -22,7 +22,7 @@ Includes data tables and structured visual data presentation.
 - basic tables work in markdown
 - sortable/interactive behavior may require extra setup
 
-Check `dependencies/extension-prereqs.md` and `dependencies/navigation-runtime-caveats.md` for setup-sensitive behavior.
+Check [Extension Prerequisites](../dependencies/extension-prereqs.md) and [Navigation and Runtime Caveats](../dependencies/navigation-runtime-caveats.md) for setup-sensitive behavior.
 
 ## Common options the model may need
 
@@ -39,9 +39,9 @@ Check `dependencies/extension-prereqs.md` and `dependencies/navigation-runtime-c
 ## Interactions / caveats
 
 - large tables often need surrounding explanation text.
-- for complex visualizations, use diagrams guidance in `code-and-technical-content.md`.
+- for complex visualizations, use diagrams guidance in [Code and Technical Content](code-and-technical-content.md).
 
 ## Deeper docs
 
-- `https://zensical.org/docs/authoring/data-tables/`
-- `https://zensical.org/docs/authoring/diagrams/`
+- [Data tables](https://zensical.org/docs/authoring/data-tables/)
+- [Diagrams](https://zensical.org/docs/authoring/diagrams/)

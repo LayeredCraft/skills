@@ -13,14 +13,14 @@ Use this page to decide which reference file to load for a task.
 
 | User need | Open this reference first | Also check |
 | --- | --- | --- |
-| Write or rewrite a standard docs page | `core/markdown-and-links.md` | `shared-patterns.md`, `core/front-matter.md` |
-| Set page metadata | `core/front-matter.md` | `dependencies/navigation-runtime-caveats.md` |
-| Use admonitions, tabs, buttons, or tooltips | `subjects/callouts-and-interactive-elements.md` | `dependencies/extension-prereqs.md` |
-| Add code snippets, diagrams, or equations | `subjects/code-and-technical-content.md` | `dependencies/extension-prereqs.md`, `dependencies/navigation-runtime-caveats.md` |
-| Build media-rich layouts | `subjects/layout-and-media.md` | `dependencies/customization-boundaries.md` |
-| Create tables and structured data sections | `subjects/data-and-visualization.md` | `dependencies/extension-prereqs.md` |
-| Improve text-level formatting and list structure | `subjects/inline-formatting-and-microcontent.md` | `shared-patterns.md` |
-| Figure out whether custom CSS/JS/templates are needed | `dependencies/customization-boundaries.md` | upstream customization docs |
+| Write or rewrite a standard docs page | [Markdown and Links](core/markdown-and-links.md) | [Shared Patterns](shared-patterns.md), [Front Matter](core/front-matter.md) |
+| Set page metadata | [Front Matter](core/front-matter.md) | [Navigation and Runtime Caveats](dependencies/navigation-runtime-caveats.md) |
+| Use admonitions, tabs, buttons, or tooltips | [Callouts and Interactive Elements](subjects/callouts-and-interactive-elements.md) | [Extension Prerequisites](dependencies/extension-prereqs.md) |
+| Add code snippets, diagrams, or equations | [Code and Technical Content](subjects/code-and-technical-content.md) | [Extension Prerequisites](dependencies/extension-prereqs.md), [Navigation and Runtime Caveats](dependencies/navigation-runtime-caveats.md) |
+| Build media-rich layouts | [Layout and Media](subjects/layout-and-media.md) | [Customization Boundaries](dependencies/customization-boundaries.md) |
+| Create tables and structured data sections | [Data and Visualization](subjects/data-and-visualization.md) | [Extension Prerequisites](dependencies/extension-prereqs.md) |
+| Improve text-level formatting and list structure | [Inline Formatting and Microcontent](subjects/inline-formatting-and-microcontent.md) | [Shared Patterns](shared-patterns.md) |
+| Figure out whether custom CSS/JS/templates are needed | [Customization Boundaries](dependencies/customization-boundaries.md) | [Docs Reference Outline](docs-reference-outline.md) |
 
 ## When to escalate to upstream docs
 
@@ -31,4 +31,4 @@ Escalate (link out) when the task asks for:
 - unusual runtime behavior across multiple plugins
 - edge-case compatibility behavior that affects production output
 
-Use upstream links from `references/docs-reference-outline.md`.
+Use upstream links from [Docs Reference Outline](docs-reference-outline.md).

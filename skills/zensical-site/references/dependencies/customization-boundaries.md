@@ -37,11 +37,11 @@ When customization is needed, say:
 
 ## Deeper docs
 
-- `https://zensical.org/docs/customization/`
-- `https://zensical.org/docs/customization/#additional-css`
-- `https://zensical.org/docs/customization/#additional-javascript`
-- `https://zensical.org/docs/customization/#custom-templates`
-- `https://zensical.org/docs/customization/#configuring-overrides`
-- `https://zensical.org/docs/customization/#template-overrides`
-- `https://zensical.org/docs/customization/#overriding-blocks`
-- `https://zensical.org/docs/customization/#extending-the-theme`
+- [Customization](https://zensical.org/docs/customization/)
+- [Customization: additional CSS](https://zensical.org/docs/customization/#additional-css)
+- [Customization: additional JavaScript](https://zensical.org/docs/customization/#additional-javascript)
+- [Customization: custom templates](https://zensical.org/docs/customization/#custom-templates)
+- [Customization: configuring overrides](https://zensical.org/docs/customization/#configuring-overrides)
+- [Customization: template overrides](https://zensical.org/docs/customization/#template-overrides)
+- [Customization: overriding blocks](https://zensical.org/docs/customization/#overriding-blocks)
+- [Customization: extending the theme](https://zensical.org/docs/customization/#extending-the-theme)

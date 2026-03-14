@@ -59,6 +59,6 @@ The behavior depends on configuration.[^1]
 
 ## Deeper docs
 
-- `https://zensical.org/docs/authoring/formatting/`
-- `https://zensical.org/docs/authoring/lists/`
-- `https://zensical.org/docs/authoring/footnotes/`
+- [Formatting](https://zensical.org/docs/authoring/formatting/)
+- [Lists](https://zensical.org/docs/authoring/lists/)
+- [Footnotes](https://zensical.org/docs/authoring/footnotes/)

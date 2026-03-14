@@ -5,7 +5,7 @@ description: Use this skill whenever the user asks for anything related to https
 
 # Zensical Site Assistant
 
-Use this skill to create, revise, and organize content for `https://zensical.org/`.
+Use this skill to create, revise, and organize content for [zensical.org](https://zensical.org/).
 
 This skill is intentionally lightweight: use compact reference pages for output-critical rules, and link out to upstream docs for deep detail.
 
@@ -23,7 +23,7 @@ Use this skill if the user asks to:
 
 1. Clarify the content objective (page type, audience, and intent).
 2. Collect source material from zensical.org and any user-provided notes.
-3. Open `references/authoring-reference-index.md` and load only the subject references needed for this task.
+3. Open [Authoring Reference Index](references/authoring-reference-index.md) and load only the subject references needed for this task.
 4. Draft using the output template in this skill.
 5. Run a quality pass for tone, structure, links, front matter, and factual consistency.
 6. Return final markdown plus a short rationale and suggested next edits.
@@ -36,7 +36,7 @@ Always provide:
 2. `Rationale` (2-5 bullets explaining important choices)
 3. `Open Questions` (only when missing info blocks quality)
 
-Use the page template in `templates/page-draft-template.md` unless the user requests another format.
+Use the page template in [Page Draft Template](templates/page-draft-template.md) unless the user requests another format.
 
 ## Writing guidance
 
@@ -50,25 +50,25 @@ Use the page template in `templates/page-draft-template.md` unless the user requ
 
 Start with:
 
-- `references/authoring-reference-index.md`
+- [Authoring Reference Index](references/authoring-reference-index.md)
 
 Then load only what is needed:
 
-- `references/core/markdown-and-links.md` for links, heading structure, and title behavior.
-- `references/core/front-matter.md` for page metadata.
-- `references/subjects/callouts-and-interactive-elements.md` for admonitions, buttons, tabs, and tooltips.
-- `references/subjects/code-and-technical-content.md` for code blocks, diagrams, and math.
-- `references/subjects/layout-and-media.md` for grids, images, and icons/emojis.
-- `references/subjects/data-and-visualization.md` for tables and structured visual content patterns.
-- `references/subjects/inline-formatting-and-microcontent.md` for lists, inline formatting, and footnotes.
+- [Markdown and Links](references/core/markdown-and-links.md) for links, heading structure, and title behavior.
+- [Front Matter](references/core/front-matter.md) for page metadata.
+- [Callouts and Interactive Elements](references/subjects/callouts-and-interactive-elements.md) for admonitions, buttons, tabs, and tooltips.
+- [Code and Technical Content](references/subjects/code-and-technical-content.md) for code blocks, diagrams, and math.
+- [Layout and Media](references/subjects/layout-and-media.md) for grids, images, and icons/emojis.
+- [Data and Visualization](references/subjects/data-and-visualization.md) for tables and structured visual content patterns.
+- [Inline Formatting and Microcontent](references/subjects/inline-formatting-and-microcontent.md) for lists, inline formatting, and footnotes.
 
 If output depends on setup/runtime behavior, load:
 
-- `references/dependencies/extension-prereqs.md`
-- `references/dependencies/navigation-runtime-caveats.md`
-- `references/dependencies/customization-boundaries.md`
+- [Extension Prerequisites](references/dependencies/extension-prereqs.md)
+- [Navigation and Runtime Caveats](references/dependencies/navigation-runtime-caveats.md)
+- [Customization Boundaries](references/dependencies/customization-boundaries.md)
 
-Use `references/shared-patterns.md` for common rules and shared conventions.
+Use [Shared Patterns](references/shared-patterns.md) for common rules and shared conventions.
 
 ## Sources and verification
 

@@ -47,11 +47,11 @@ Page content starts here.
 
 ## Interactions / caveats
 
-- title precedence is affected by navigation and markdown heading (`core/markdown-and-links.md`).
-- search/layout behavior can depend on setup configuration (`dependencies/navigation-runtime-caveats.md`).
+- title precedence is affected by navigation and markdown heading ([Markdown and Links](markdown-and-links.md)).
+- search/layout behavior can depend on setup configuration ([Navigation and Runtime Caveats](../dependencies/navigation-runtime-caveats.md)).
 
 ## Deeper docs
 
-- `https://zensical.org/docs/authoring/frontmatter/`
-- `https://zensical.org/docs/setup/search/`
-- `https://zensical.org/docs/setup/navigation/`
+- [Front matter](https://zensical.org/docs/authoring/frontmatter/)
+- [Search](https://zensical.org/docs/setup/search/)
+- [Navigation](https://zensical.org/docs/setup/navigation/)

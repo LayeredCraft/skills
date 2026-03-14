@@ -50,10 +50,10 @@ In practice, title resolution follows this order:
 
 ## Interactions / caveats
 
-- front matter can override visible title behavior (`core/front-matter.md`).
-- URL mode impacts generated paths (`dependencies/navigation-runtime-caveats.md`).
+- front matter can override visible title behavior ([Front Matter](front-matter.md)).
+- URL mode impacts generated paths ([Navigation and Runtime Caveats](../dependencies/navigation-runtime-caveats.md)).
 
 ## Deeper docs
 
-- `https://zensical.org/docs/authoring/markdown/`
-- `https://zensical.org/docs/setup/basics/#use_directory_urls`
+- [Markdown](https://zensical.org/docs/authoring/markdown/)
+- [Basics: use_directory_urls](https://zensical.org/docs/setup/basics/#use_directory_urls)

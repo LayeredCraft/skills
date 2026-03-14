@@ -44,7 +44,7 @@ $$
 - diagrams require Mermaid support
 - math rendering requires configured math engine (MathJax/KaTeX path)
 
-Use `dependencies/extension-prereqs.md` for prerequisite mapping.
+Use [Extension Prerequisites](../dependencies/extension-prereqs.md) for prerequisite mapping.
 
 ## Common options the model may need
 
@@ -62,10 +62,10 @@ Use `dependencies/extension-prereqs.md` for prerequisite mapping.
 ## Interactions / caveats
 
 - client-side navigation may require runtime-safe behavior for diagrams/math rendering.
-- if runtime behavior is uncertain, check `dependencies/navigation-runtime-caveats.md`.
+- if runtime behavior is uncertain, check [Navigation and Runtime Caveats](../dependencies/navigation-runtime-caveats.md).
 
 ## Deeper docs
 
-- `https://zensical.org/docs/authoring/code-blocks/`
-- `https://zensical.org/docs/authoring/diagrams/`
-- `https://zensical.org/docs/authoring/math/`
+- [Code blocks](https://zensical.org/docs/authoring/code-blocks/)
+- [Diagrams](https://zensical.org/docs/authoring/diagrams/)
+- [Math](https://zensical.org/docs/authoring/math/)

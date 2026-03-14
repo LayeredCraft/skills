@@ -36,4 +36,4 @@ Before final output, quickly check:
 ## Escalation rule
 
 When deeper behavior is needed, do not guess.
-Link to the corresponding upstream docs listed in `references/docs-reference-outline.md`.
+Link to the corresponding upstream docs listed in [Docs Reference Outline](docs-reference-outline.md).

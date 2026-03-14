@@ -27,6 +27,6 @@ Use this page when rendering behavior may change due to navigation/runtime confi
 
 ## Deeper docs
 
-- `https://zensical.org/docs/setup/navigation/#instant-navigation`
-- `https://zensical.org/docs/setup/navigation/#hide-the-sidebars`
-- `https://zensical.org/docs/setup/basics/#use_directory_urls`
+- [Navigation: instant navigation](https://zensical.org/docs/setup/navigation/#instant-navigation)
+- [Navigation: hide the sidebars](https://zensical.org/docs/setup/navigation/#hide-the-sidebars)
+- [Basics: use_directory_urls](https://zensical.org/docs/setup/basics/#use_directory_urls)

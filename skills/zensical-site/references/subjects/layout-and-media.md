@@ -30,7 +30,7 @@ Use supported shortcode or icon notation from the active icon set.
 - some icon sets require explicit setup
 - light/dark image swaps may rely on theme conventions
 
-See `dependencies/extension-prereqs.md` and `dependencies/customization-boundaries.md`.
+See [Extension Prerequisites](../dependencies/extension-prereqs.md) and [Customization Boundaries](../dependencies/customization-boundaries.md).
 
 ## Common options the model may need
 
@@ -52,7 +52,7 @@ See `dependencies/extension-prereqs.md` and `dependencies/customization-boundari
 
 ## Deeper docs
 
-- `https://zensical.org/docs/authoring/grids/`
-- `https://zensical.org/docs/authoring/images/`
-- `https://zensical.org/docs/authoring/icons-emojis/`
-- `https://zensical.org/docs/setup/logo-and-icons/#additional-icons`
+- [Grids](https://zensical.org/docs/authoring/grids/)
+- [Images](https://zensical.org/docs/authoring/images/)
+- [Icons and emojis](https://zensical.org/docs/authoring/icons-emojis/)
+- [Logo and icons: additional icons](https://zensical.org/docs/setup/logo-and-icons/#additional-icons)
