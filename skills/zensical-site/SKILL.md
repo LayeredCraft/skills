@@ -7,13 +7,7 @@ description: Use this skill whenever the user asks for anything related to https
 
 Use this skill to create, revise, and organize content for `https://zensical.org/`.
 
-This is a scaffold meant to be expanded over time.
-
-## Goals
-
-- Keep outputs aligned with Zensical voice and structure.
-- Produce publish-ready markdown with clear headings and links.
-- Ground every recommendation in source material from zensical.org when available.
+This skill is intentionally lightweight: use compact reference pages for output-critical rules, and link out to upstream docs for deep detail.
 
 ## When to use this skill
 
@@ -29,9 +23,10 @@ Use this skill if the user asks to:
 
 1. Clarify the content objective (page type, audience, and intent).
 2. Collect source material from zensical.org and any user-provided notes.
-3. Draft using the output template in this skill.
-4. Run a quality pass for tone, structure, links, and factual consistency.
-5. Return final markdown plus a short rationale and suggested next edits.
+3. Open `references/authoring-reference-index.md` and load only the subject references needed for this task.
+4. Draft using the output template in this skill.
+5. Run a quality pass for tone, structure, links, front matter, and factual consistency.
+6. Return final markdown plus a short rationale and suggested next edits.
 
 ## Output format
 
@@ -43,7 +38,7 @@ Always provide:
 
 Use the page template in `templates/page-draft-template.md` unless the user requests another format.
 
-## Writing guidance (initial)
+## Writing guidance
 
 - Prefer plain language and concrete examples.
 - Keep paragraphs short and scannable.
@@ -51,17 +46,33 @@ Use the page template in `templates/page-draft-template.md` unless the user requ
 - Avoid hype and vague claims.
 - Include links with meaningful anchor text.
 
+## Reference routing
+
+Start with:
+
+- `references/authoring-reference-index.md`
+
+Then load only what is needed:
+
+- `references/core/markdown-and-links.md` for links, heading structure, and title behavior.
+- `references/core/front-matter.md` for page metadata.
+- `references/subjects/callouts-and-interactive-elements.md` for admonitions, buttons, tabs, and tooltips.
+- `references/subjects/code-and-technical-content.md` for code blocks, diagrams, and math.
+- `references/subjects/layout-and-media.md` for grids, images, and icons/emojis.
+- `references/subjects/data-and-visualization.md` for tables and structured visual content patterns.
+- `references/subjects/inline-formatting-and-microcontent.md` for lists, inline formatting, and footnotes.
+
+If output depends on setup/runtime behavior, load:
+
+- `references/dependencies/extension-prereqs.md`
+- `references/dependencies/navigation-runtime-caveats.md`
+- `references/dependencies/customization-boundaries.md`
+
+Use `references/shared-patterns.md` for common rules and shared conventions.
+
 ## Sources and verification
 
 - If browsing is available, reference exact pages used.
 - Flag uncertainty instead of guessing.
 - Do not invent product features, policies, or URLs.
-
-## Customization checklist
-
-When extending this scaffold later, prioritize:
-
-1. Fill `references/voice-and-tone.md` with real examples from zensical.org.
-2. Fill `references/content-types.md` with page-specific conventions.
-3. Add reusable snippets for recurring page sections.
-4. Add concrete do/don't examples based on accepted published pages.
+- If deeper implementation detail is needed, cite the relevant upstream Zensical doc rather than expanding these references inline.
