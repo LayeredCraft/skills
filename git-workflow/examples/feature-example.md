@@ -46,10 +46,10 @@ Current work adds automatic PR template loading and branch creation when running
 ## ✅ Checklist
 
 - [ ] My changes build cleanly
-- [ ] I’ve added or updated relevant tests
-- [ ] I’ve added or updated documentation or README content
-- [ ] I’ve followed the coding style for this project
-- [ ] I’ve tested the changes locally when applicable
+- [ ] I've added or updated relevant tests
+- [ ] I've added or updated documentation or README content
+- [ ] I've followed the coding style for this project
+- [ ] I've tested the changes locally when applicable
 
 ---
 
