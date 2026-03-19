@@ -13,9 +13,10 @@ This repo is a shared home for installable agent skills.
 
 ## Available skills
 
-| Skill           | Description                                                   | Install                                                                       |
-| --------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `zensical-site` | Tooling and guidance for Zensical-flavored documentation work | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site` |
+| Skill           | Description                                                                                                   | Install                                                                        |
+| --------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `git-workflow`  | Commit work, create branches, and open pull requests using conventional git workflow conventions               | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`   |
+| `zensical-site` | Tooling and guidance for Zensical-flavored documentation work                                                 | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`  |
 
 ## Install a skill
 
@@ -31,6 +32,16 @@ npx skills add https://github.com/LayeredCraft/skills --skill zensical-site
 - `skills-lock.json` - tracked skill dependency metadata
 
 ## Skills
+
+### `git-workflow`
+
+Unified git workflow skill for committing, branching, and opening pull requests. Routes to the correct workflow based on your request.
+
+- Commits using conventional commit format with automatic scope detection
+- Creates branches using `<type>/<scope>-<short-description>` naming
+- Runs the full PR workflow: branch, commit, push, and open PR from a template
+- Shared rules for file inclusion, scope detection, and safety across all workflows
+- Install with `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`
 
 ### `zensical-site`
 
