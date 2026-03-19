@@ -27,8 +27,10 @@ Template location: `../templates/pull-request-template.md`
 ## PR title format
 
 ```
-<type>(<scope>): <description>
+<type>[optional scope]: <description>
 ```
+
+For breaking changes, append `!` after the type/scope: `feat(api)!: remove deprecated endpoint`
 
 Example: `feat(core): add automated PR workflow`
 

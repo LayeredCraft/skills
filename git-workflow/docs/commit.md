@@ -18,14 +18,16 @@ Create a commit representing the user's current working changes using a conventi
 ## Commit format
 
 ```
-<type>(<scope>): <description>
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
 ```
 
-If no scope applies:
+The description must immediately follow the colon and space. Scope is wrapped in parentheses when present: `feat(parser): add CSV support`.
 
-```
-<type>: <description>
-```
+For breaking changes, append `!` after the type/scope and/or include a `BREAKING CHANGE:` footer. See [Conventional Types](../shared/conventional-types.md) for details.
 
 ## Workflow
 
