@@ -2,50 +2,52 @@
 
 ## 📋 Summary
 
-> Briefly describe what this PR does, why it is needed, and the main outcome.
+> 2-4 sentences: what changed, why it changed, and the expected outcome.
 
 ---
 
 ## 📝 Changes
 
-- Summarize the key code or configuration changes
-- Call out any important implementation details
-- Mention any behavior, packaging, workflow, or documentation impact
+<!-- Group by what makes this change easiest to review. -->
+<!-- Examples: API behavior, data flow, tests, docs, migration, cleanup. -->
 
 ---
 
 ## 🧪 Validation
 
+<!-- Include concrete checks you actually ran. -->
+
 - Build/test status:
 - Manual verification performed:
-- Deployment impact:
-- Breaking changes:
+- Edge cases checked:
 
 ---
 
-## ✅ Checklist
+## ⚠️ Breaking Changes (Optional)
 
-- [ ] My changes build cleanly
-- [ ] I've added or updated relevant tests
-- [ ] I've added or updated documentation or README content
-- [ ] I've followed the coding style for this project
-- [ ] I've tested the changes locally when applicable
+<!-- Include only if behavior, API, or compatibility changed. -->
 
----
-
-## 🧩 Related Issues or PRs
-
-Closes #...
+- What changed:
+- Previous behavior:
+- New behavior:
+- Migration/action needed:
 
 ---
 
-## 📦 Release Notes
+## 🧩 Related Issues (Optional)
 
-- Add release-note bullets if this change is user-visible or package-relevant
-- Omit or simplify if not applicable
+<!-- Include only when there is a real issue/work item link. -->
+
+<!-- Example: Fixes #123, Relates to ABC-456 -->
 
 ---
 
-## 💬 Notes for Reviewers
+## 📦 Release Notes (Optional)
 
-> Call out any areas that need special attention, known limitations, or follow-up work.
+<!-- Include only for user-visible or package-relevant changes. -->
+
+---
+
+## 💬 Notes for Reviewers (Optional)
+
+<!-- Include when review guidance, risks, tradeoffs, or follow-up context will help. -->

@@ -22,49 +22,31 @@ Current work adds automatic PR template loading and branch creation when running
 
 ## 📋 Summary
 
-> Adds automation for branch creation, committing, and PR generation when preparing a pull request from the current repository state.
+> Adds automation for branch preparation and PR generation when opening a pull request from the current repository state. This removes manual branch setup when starting from `main` and keeps PR metadata generation consistent with inferred change intent.
 
 ---
 
 ## 📝 Changes
 
-- Added logic to detect `main` and detached `HEAD`
-- Added branch name generation based on inferred PR metadata
-- Added PR template loading from the local skill templates folder
+- Branch preparation flow
+  - Detects `main` and detached `HEAD` before PR creation
+  - Creates and switches to a generated branch only when needed
+- Metadata and PR drafting
+  - Infers PR metadata (`type`, optional `scope`, short description)
+  - Loads the local PR template and builds the PR body from current repository state
+- Workflow consistency
+  - Reuses shared scope and inclusion policy logic so commit and PR behavior stay aligned
 
 ---
 
 ## 🧪 Validation
 
 - Build/test status: Not explicitly verified by the agent
-- Manual verification performed: Reviewed repository status and diff
-- Deployment impact: None
-- Breaking changes: None known
-
----
-
-## ✅ Checklist
-
-- [ ] My changes build cleanly
-- [ ] I've added or updated relevant tests
-- [ ] I've added or updated documentation or README content
-- [ ] I've followed the coding style for this project
-- [ ] I've tested the changes locally when applicable
-
----
-
-## 🧩 Related Issues or PRs
-
-Closes #...
-
----
-
-## 📦 Release Notes
-
-- Added automation for branch creation and PR preparation
+- Manual verification performed: Reviewed repository status, branch behavior, and generated PR content paths
+- Edge cases checked: Existing feature branch path and detached `HEAD` path
 
 ---
 
 ## 💬 Notes for Reviewers
 
-> Please review the inferred branch naming and commit message behavior for edge cases.
+> Please focus on branch creation guardrails and metadata inference fallbacks, especially when repository state is ambiguous.

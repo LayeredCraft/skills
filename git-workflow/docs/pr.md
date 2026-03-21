@@ -18,7 +18,7 @@ Prepare the current work for review and create a pull request that includes:
 - a correctly named branch
 - a conventional commit message
 - a PR title following the required format
-- a PR body generated from the local template
+- a reviewable PR body that explains what changed, why, validation, and risk
 
 Template location: `../templates/pull-request-template.md`
 
@@ -53,7 +53,7 @@ Branch naming follows `<type>/<scope>-<short-description>` (or `<type>/<short-de
 
 ### 1 — Inspect repository
 
-Determine: current branch, whether HEAD is detached, git status, modified files, diff summary.
+Determine: current branch, whether HEAD is detached, git status, modified files, diff summary, and commit history against the base branch.
 
 ### 2 — Infer metadata
 
@@ -73,20 +73,41 @@ Push to origin. Set upstream if necessary.
 
 ### 6 — Generate PR body
 
-Load `../templates/pull-request-template.md` and populate:
+Load `../templates/pull-request-template.md` and adapt it to the actual change.
 
-- Summary — what this PR does and why
-- Changes — key implementation details
-- Validation — build/test status, breaking changes
-- Related Issues — do not invent issue numbers
-- Release Notes — user-visible changes only
-- Notes for Reviewers — risky areas, known limitations, follow-up work
+Treat the template as a default outline, not a rigid contract. Prioritize reviewer scanability and signal quality over filling every heading.
 
-Do not mark checklist items complete unless confirmed.
+Required information:
+
+- what changed
+- why it changed
+- how it was validated
+
+Default outline (adapt as needed):
+
+- Summary - 2-4 sentences covering what changed and why
+- Changes - grouped in the way that makes the diff easiest to review (for example by concern, subsystem, workflow, or user impact)
+- Validation - concrete tests, manual verification, and confidence signals
+- Breaking Changes - include only when applicable
+- Related Issues - include only when applicable; do not invent issue numbers
+- Release Notes - include only for user-visible or package-relevant changes
+- Notes for Reviewers - include when review guidance, risks, tradeoffs, follow-up context, or requested feedback focus would help; for UI changes, include screenshots/video links when useful
+
+Review mode:
+
+- open as draft when implementation is incomplete, checks are pending, or early feedback is requested
+- when draft, state what is incomplete and what feedback is being requested
+
+Rules:
+
+- omit empty sections entirely (do not include `N/A`, `None`, or `No related issues`)
+- prefer fewer, high-signal sections over boilerplate
+- use backticks for identifiers, commands, files, and code terms
+- keep the Summary concise and focused on intent, not file-by-file trivia
 
 ### 7 — Create PR
 
-Create the pull request using the generated title and body.
+Create the pull request using the generated title and body, as draft or ready-for-review based on the review mode rules above.
 
 ---
 
