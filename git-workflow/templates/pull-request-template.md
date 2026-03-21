@@ -2,15 +2,23 @@
 
 ## 📋 Summary
 
-> Briefly describe what this PR does, why it is needed, and the main outcome.
+> 2-4 sentences: what changed, why it changed, and the expected outcome.
 
 ---
 
 ## 📝 Changes
 
-- Summarize the key code or configuration changes
-- Call out any important implementation details
-- Mention any behavior, packaging, workflow, or documentation impact
+### Added
+
+-
+
+### Updated
+
+-
+
+### Removed
+
+-
 
 ---
 
@@ -18,8 +26,7 @@
 
 - Build/test status:
 - Manual verification performed:
-- Deployment impact:
-- Breaking changes:
+- Edge cases checked:
 
 ---
 
@@ -33,16 +40,25 @@
 
 ---
 
-## 🧩 Related Issues or PRs
+## ⚠️ Breaking Changes (Optional)
+
+- What changed:
+- Previous behavior:
+- New behavior:
+- Migration/action needed:
+
+---
+
+## 🧩 Related Issues (Optional)
 
 Closes #...
 
 ---
 
-## 📦 Release Notes
+## 📦 Release Notes (Optional)
 
 - Add release-note bullets if this change is user-visible or package-relevant
-- Omit or simplify if not applicable
+- Omit this section if not applicable
 
 ---
 

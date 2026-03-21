@@ -18,7 +18,7 @@ Prepare the current work for review and create a pull request that includes:
 - a correctly named branch
 - a conventional commit message
 - a PR title following the required format
-- a PR body generated from the local template
+- a reviewable PR body that explains what changed, why, validation, and risk
 
 Template location: `../templates/pull-request-template.md`
 
@@ -53,7 +53,7 @@ Branch naming follows `<type>/<scope>-<short-description>` (or `<type>/<short-de
 
 ### 1 — Inspect repository
 
-Determine: current branch, whether HEAD is detached, git status, modified files, diff summary.
+Determine: current branch, whether HEAD is detached, git status, modified files, diff summary, and commit history against the base branch.
 
 ### 2 — Infer metadata
 
@@ -73,14 +73,23 @@ Push to origin. Set upstream if necessary.
 
 ### 6 — Generate PR body
 
-Load `../templates/pull-request-template.md` and populate:
+Load `../templates/pull-request-template.md` and adapt it to the actual change.
 
-- Summary — what this PR does and why
-- Changes — key implementation details
-- Validation — build/test status, breaking changes
-- Related Issues — do not invent issue numbers
-- Release Notes — user-visible changes only
-- Notes for Reviewers — risky areas, known limitations, follow-up work
+Write the PR for reviewer scanability:
+
+- Summary - 2-4 sentences covering what changed and why
+- Changes - grouped by concern, not a long flat list
+- Validation - concrete tests, manual verification, and confidence signals
+- Breaking Changes - include only when applicable
+- Related Issues - include only when applicable; do not invent issue numbers
+- Release Notes - include only for user-visible or package-relevant changes
+- Notes for Reviewers - include when review guidance, risks, or follow-up context would help
+
+Rules:
+
+- omit empty sections entirely (do not include `N/A`, `None`, or `No related issues`)
+- use backticks for identifiers, commands, files, and code terms
+- keep the Summary concise and focused on intent, not file-by-file trivia
 
 Do not mark checklist items complete unless confirmed.
 
