@@ -8,21 +8,16 @@
 
 ## 📝 Changes
 
-### Added
-
--
-
-### Updated
-
--
-
-### Removed
+<!-- Group by what makes this change easiest to review. -->
+<!-- Examples: API behavior, data flow, tests, docs, migration, cleanup. -->
 
 -
 
 ---
 
 ## 🧪 Validation
+
+<!-- Include concrete checks you actually ran. -->
 
 - Build/test status:
 - Manual verification performed:
@@ -42,6 +37,8 @@
 
 ## ⚠️ Breaking Changes (Optional)
 
+<!-- Include only if behavior, API, or compatibility changed. -->
+
 - What changed:
 - Previous behavior:
 - New behavior:
@@ -51,17 +48,22 @@
 
 ## 🧩 Related Issues (Optional)
 
+<!-- Include only when there is a real issue/work item link. -->
+
 Closes #...
 
 ---
 
 ## 📦 Release Notes (Optional)
 
-- Add release-note bullets if this change is user-visible or package-relevant
-- Omit this section if not applicable
+<!-- Include only for user-visible or package-relevant changes. -->
+
+-
 
 ---
 
-## 💬 Notes for Reviewers
+## 💬 Notes for Reviewers (Optional)
 
-> Call out any areas that need special attention, known limitations, or follow-up work.
+<!-- Include when review guidance, risks, tradeoffs, or follow-up context will help. -->
+
+>

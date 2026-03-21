@@ -75,10 +75,18 @@ Push to origin. Set upstream if necessary.
 
 Load `../templates/pull-request-template.md` and adapt it to the actual change.
 
-Write the PR for reviewer scanability:
+Treat the template as a default outline, not a rigid contract. Prioritize reviewer scanability and signal quality over filling every heading.
+
+Required information:
+
+- what changed
+- why it changed
+- how it was validated
+
+Default outline (adapt as needed):
 
 - Summary - 2-4 sentences covering what changed and why
-- Changes - grouped by concern, not a long flat list
+- Changes - grouped in the way that makes the diff easiest to review (for example by concern, subsystem, workflow, or user impact)
 - Validation - concrete tests, manual verification, and confidence signals
 - Breaking Changes - include only when applicable
 - Related Issues - include only when applicable; do not invent issue numbers
@@ -88,6 +96,7 @@ Write the PR for reviewer scanability:
 Rules:
 
 - omit empty sections entirely (do not include `N/A`, `None`, or `No related issues`)
+- prefer fewer, high-signal sections over boilerplate
 - use backticks for identifiers, commands, files, and code terms
 - keep the Summary concise and focused on intent, not file-by-file trivia
 
