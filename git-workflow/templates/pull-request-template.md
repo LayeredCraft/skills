@@ -11,8 +11,6 @@
 <!-- Group by what makes this change easiest to review. -->
 <!-- Examples: API behavior, data flow, tests, docs, migration, cleanup. -->
 
--
-
 ---
 
 ## 🧪 Validation
@@ -22,16 +20,6 @@
 - Build/test status:
 - Manual verification performed:
 - Edge cases checked:
-
----
-
-## ✅ Checklist
-
-- [ ] My changes build cleanly
-- [ ] I've added or updated relevant tests
-- [ ] I've added or updated documentation or README content
-- [ ] I've followed the coding style for this project
-- [ ] I've tested the changes locally when applicable
 
 ---
 
@@ -50,7 +38,7 @@
 
 <!-- Include only when there is a real issue/work item link. -->
 
-Closes #...
+<!-- Example: Fixes #123, Relates to ABC-456 -->
 
 ---
 
@@ -58,12 +46,8 @@ Closes #...
 
 <!-- Include only for user-visible or package-relevant changes. -->
 
--
-
 ---
 
 ## 💬 Notes for Reviewers (Optional)
 
 <!-- Include when review guidance, risks, tradeoffs, or follow-up context will help. -->
-
->

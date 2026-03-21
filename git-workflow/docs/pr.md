@@ -91,7 +91,12 @@ Default outline (adapt as needed):
 - Breaking Changes - include only when applicable
 - Related Issues - include only when applicable; do not invent issue numbers
 - Release Notes - include only for user-visible or package-relevant changes
-- Notes for Reviewers - include when review guidance, risks, or follow-up context would help
+- Notes for Reviewers - include when review guidance, risks, tradeoffs, follow-up context, or requested feedback focus would help; for UI changes, include screenshots/video links when useful
+
+Review mode:
+
+- open as draft when implementation is incomplete, checks are pending, or early feedback is requested
+- when draft, state what is incomplete and what feedback is being requested
 
 Rules:
 
@@ -100,11 +105,9 @@ Rules:
 - use backticks for identifiers, commands, files, and code terms
 - keep the Summary concise and focused on intent, not file-by-file trivia
 
-Do not mark checklist items complete unless confirmed.
-
 ### 7 — Create PR
 
-Create the pull request using the generated title and body.
+Create the pull request using the generated title and body, as draft or ready-for-review based on the review mode rules above.
 
 ---
 
