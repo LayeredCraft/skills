@@ -2,18 +2,18 @@
 
 Valid `<type>` values:
 
-| Type | Description | SemVer impact |
-|---|---|---|
-| `feat` | Introduces a new feature | MINOR |
-| `fix` | Patches a bug | PATCH |
-| `build` | Changes to the build system or external dependencies | — |
-| `chore` | Maintenance tasks not modifying src or test files | — |
-| `ci` | Changes to CI/CD configuration or scripts | — |
-| `docs` | Documentation changes only | — |
-| `perf` | A code change that improves performance | — |
-| `refactor` | A code change that neither fixes a bug nor adds a feature | — |
-| `style` | Changes that do not affect meaning (whitespace, formatting, etc.) | — |
-| `test` | Adding or updating tests | — |
+| Type       | Description                                                       | SemVer impact |
+| ---------- | ----------------------------------------------------------------- | ------------- |
+| `feat`     | Introduces a new feature                                          | MINOR         |
+| `fix`      | Patches a bug                                                     | PATCH         |
+| `build`    | Changes to the build system or external dependencies              | —             |
+| `chore`    | Maintenance tasks not modifying src or test files                 | —             |
+| `ci`       | Changes to CI/CD configuration or scripts                         | —             |
+| `docs`     | Documentation changes only                                        | —             |
+| `perf`     | A code change that improves performance                           | —             |
+| `refactor` | A code change that neither fixes a bug nor adds a feature         | —             |
+| `style`    | Changes that do not affect meaning (whitespace, formatting, etc.) | —             |
+| `test`     | Adding or updating tests                                          | —             |
 
 ## Breaking changes
 

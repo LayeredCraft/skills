@@ -4,14 +4,15 @@
 
 > 2-4 sentences: what changed, why it changed, and the expected outcome.
 
----
+______________________________________________________________________
 
 ## 📝 Changes
 
 <!-- Group by what makes this change easiest to review. -->
+
 <!-- Examples: API behavior, data flow, tests, docs, migration, cleanup. -->
 
----
+______________________________________________________________________
 
 ## 🧪 Validation
 
@@ -21,7 +22,7 @@
 - Manual verification performed:
 - Edge cases checked:
 
----
+______________________________________________________________________
 
 ## ⚠️ Breaking Changes (Optional)
 
@@ -32,7 +33,7 @@
 - New behavior:
 - Migration/action needed:
 
----
+______________________________________________________________________
 
 ## 🧩 Related Issues (Optional)
 
@@ -40,13 +41,13 @@
 
 <!-- Example: Fixes #123, Relates to ABC-456 -->
 
----
+______________________________________________________________________
 
 ## 📦 Release Notes (Optional)
 
 <!-- Include only for user-visible or package-relevant changes. -->
 
----
+______________________________________________________________________
 
 ## 💬 Notes for Reviewers (Optional)
 

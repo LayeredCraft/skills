@@ -9,7 +9,7 @@ Load before executing:
 - [Safety Rules](../shared/safety-rules.md)
 - [Conventional Types](../shared/conventional-types.md)
 
----
+______________________________________________________________________
 
 ## Goal
 
@@ -22,7 +22,7 @@ Prepare the current work for review and create a pull request that includes:
 
 Template location: `../templates/pull-request-template.md`
 
----
+______________________________________________________________________
 
 ## PR title format
 
@@ -34,7 +34,7 @@ For breaking changes, append `!` after the type/scope: `feat(api)!: remove depre
 
 Example: `feat(core): add automated PR workflow`
 
----
+______________________________________________________________________
 
 ## Branch rules
 
@@ -47,7 +47,7 @@ If already on a feature branch, use the current branch.
 
 Branch naming follows `<type>/<scope>-<short-description>` (or `<type>/<short-description>` when no scope applies). See [Branch Workflow](branch.md) for full naming rules.
 
----
+______________________________________________________________________
 
 ## Execution flow
 
@@ -109,7 +109,7 @@ Rules:
 
 Create the pull request using the generated title and body, as draft or ready-for-review based on the review mode rules above.
 
----
+______________________________________________________________________
 
 ## Output
 
