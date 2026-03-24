@@ -22,7 +22,7 @@ def main():
 
         match ext.lower():
             case ".md":
-                csharp(cwd, eddited_input)
+                markdown(cwd, eddited_input)
             case _:
                 print(f"Skipping unsupported file type: '{ext}'")
 
