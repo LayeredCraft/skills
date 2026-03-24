@@ -9,12 +9,21 @@
         "uvx",
         "--with",
         "mdformat-frontmatter",
+        "--with",
+        "mdformat-gfm",
         "mdformat",
-        "$FILE",
+        "--number",
+        "--extensions",
+        "frontmatter",
+        "--extensions",
+        "tables",
+        "--exclude",
+        ".agent/**",
+        "--exclude",
+        ".claude/**",
         "--exclude",
         ".opencode/**",
-        "--exclude",
-        ".calude/**"
+        "$FILE"
       ],
       "extensions": [
         ".md"
