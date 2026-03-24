@@ -24,7 +24,7 @@ Current work adds automatic PR template loading and branch creation when running
 
 > Adds automation for branch preparation and PR generation when opening a pull request from the current repository state. This removes manual branch setup when starting from `main` and keeps PR metadata generation consistent with inferred change intent.
 
----
+______________________________________________________________________
 
 ## 📝 Changes
 
@@ -37,7 +37,7 @@ Current work adds automatic PR template loading and branch creation when running
 - Workflow consistency
   - Reuses shared scope and inclusion policy logic so commit and PR behavior stay aligned
 
----
+______________________________________________________________________
 
 ## 🧪 Validation
 
@@ -45,7 +45,7 @@ Current work adds automatic PR template loading and branch creation when running
 - Manual verification performed: Reviewed repository status, branch behavior, and generated PR content paths
 - Edge cases checked: Existing feature branch path and detached `HEAD` path
 
----
+______________________________________________________________________
 
 ## 💬 Notes for Reviewers
 

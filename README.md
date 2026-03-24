@@ -1,6 +1,9 @@
 # LayeredCraft Skills
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This repo is a shared home for installable agent skills.
@@ -13,10 +16,10 @@ This repo is a shared home for installable agent skills.
 
 ## Available skills
 
-| Skill           | Description                                                                                                   | Install                                                                        |
-| --------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `git-workflow`  | Commit work, create branches, and open pull requests using conventional git workflow conventions               | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`   |
-| `zensical-site` | Tooling and guidance for Zensical-flavored documentation work                                                 | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`  |
+| Skill           | Description                                                                                      | Install                                                                       |
+| --------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| `git-workflow`  | Commit work, create branches, and open pull requests using conventional git workflow conventions | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`  |
+| `zensical-site` | Tooling and guidance for Zensical-flavored documentation work                                    | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site` |
 
 ## Install a skill
 
@@ -60,8 +63,11 @@ Licensed under MIT. See `LICENSE`.
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 <!-- prettier-ignore-start -->
+
 <!-- markdownlint-disable -->
+
 <table>
   <tbody>
     <tr>
@@ -72,6 +78,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 </table>
 
 <!-- markdownlint-restore -->
+
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->

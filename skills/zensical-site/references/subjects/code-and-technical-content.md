@@ -29,14 +29,14 @@ graph TD
 
 ### Math
 
-````markdown
+```markdown
 Inline: $E=mc^2$
 
 Block:
 $$
 \int_0^1 x^2 dx
 $$
-````
+```
 
 ## Required config / prerequisites
 

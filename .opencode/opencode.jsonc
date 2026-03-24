@@ -1,0 +1,33 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "CLAUDE.local.md"
+  ],
+  "formatter": {
+    "mdformat": {
+      "command": [
+        "uvx",
+        "--with",
+        "mdformat-frontmatter",
+        "--with",
+        "mdformat-gfm",
+        "mdformat",
+        "--number",
+        "--extensions",
+        "frontmatter",
+        "--extensions",
+        "gfm",
+        "--exclude",
+        ".agent/**",
+        "--exclude",
+        ".claude/**",
+        "--exclude",
+        ".opencode/**",
+        "$FILE"
+      ],
+      "extensions": [
+        ".md"
+      ]
+    }
+  }
+}

@@ -30,13 +30,15 @@ Files may only be excluded if they are clearly not intended for source control:
 
 Example patterns:
 
-    .DS_Store
-    *.swp
-    *.tmp
-    bin/
-    obj/
-    node_modules/
-    .vscode/*
+```
+.DS_Store
+*.swp
+*.tmp
+bin/
+obj/
+node_modules/
+.vscode/*
+```
 
 ## Ambiguity rule
 
