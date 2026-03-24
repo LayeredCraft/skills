@@ -16,7 +16,7 @@
         "--extensions",
         "frontmatter",
         "--extensions",
-        "tables",
+        "gfm",
         "--exclude",
         ".agent/**",
         "--exclude",
