@@ -33,7 +33,7 @@ Use this page for supported arithmetic, comparison, and logical operators in Dyn
 ## Limitations
 
 - Only operators listed in DynamoDB PartiQL docs are supported.
-- `IN` has documented limits: up to 50 hash attribute values or up to 100 non-key attribute values.
+- `IN` has documented limits: up to 50 partition-key values (AWS docs use "hash attribute") or up to 100 non-key attribute values.
 - `IN` results are paged (up to 10 items per page) and may require `NextToken` retrieval.
 
 ## Related references

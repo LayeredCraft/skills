@@ -10,7 +10,7 @@ Use this page for multi-statement transactional PartiQL execution in DynamoDB.
 
 - Up to 100 total statements per transaction.
 - A transaction must be all reads or all writes.
-- `EXISTS` is the documented exception used for conditional-style checks within transaction workflows.
+- `EXISTS` is the documented exception used for condition-style checks in transaction workflows.
 
 ## Statement shape
 
@@ -28,9 +28,8 @@ Use this page for multi-statement transactional PartiQL execution in DynamoDB.
 ## Parts explained
 
 - `Statement`: required PartiQL statement string.
-- `Parameters`: optional typed values used in positional placeholders.
-- `parametertype`: DynamoDB type wrapper (for example `S`, `N`, `BOOL`).
-- `parametervalue`: value for that typed parameter.
+- `Parameters`: optional positional values for `?` placeholders.
+- Each entry in `Parameters` is a DynamoDB `AttributeValue` object (for example `{ "S": "value" }`, `{ "N": "42" }`, `{ "BOOL": true }`).
 
 ## Return behavior
 
@@ -40,8 +39,8 @@ Use this page for multi-statement transactional PartiQL execution in DynamoDB.
 ## Operational caveats
 
 - On per-statement failures, transaction cancellation behavior is surfaced as `TransactionCanceledException`.
-- Keep statements and conditions deterministic to avoid partial-intent retries.
 - If any statement fails, DynamoDB cancels the transaction.
+- Prefer idempotent retry strategies in client code for transient failures.
 
 ## Limitations
 

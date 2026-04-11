@@ -15,7 +15,7 @@ attributename IS NOT MISSING
 
 ## Key DynamoDB behavior
 
-- Only equality and inequality style checks are supported with this function pattern.
+- Only `IS MISSING` and `IS NOT MISSING` predicate forms are supported.
 
 ## Limitations
 

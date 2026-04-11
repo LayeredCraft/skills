@@ -19,7 +19,7 @@ EXISTS(statement)
 ## Key DynamoDB behavior
 
 - Only valid in transactional operations.
-- The `SELECT` inside `EXISTS` must specify a full primary key and one additional condition.
+- The `SELECT` inside `EXISTS` must specify the full primary key and one additional condition.
 
 ## Limitations
 
@@ -35,7 +35,9 @@ EXISTS(statement)
 ```sql
 EXISTS(
   SELECT * FROM "Music"
-  WHERE "Artist" = 'Acme Band' AND "SongTitle" = 'PartiQL Rocks'
+  WHERE "Artist" = 'Acme Band'
+    AND "SongTitle" = 'PartiQL Rocks'
+    AND "Awards" IS MISSING
 )
 ```
 

@@ -8,6 +8,7 @@ Use this page to map DynamoDB types to PartiQL representations and write valid l
 
 ## Core mappings
 
+- `Binary` -> `N/A` (inline literal not supported; use typed parameters in code/API)
 - `String` -> `'value'`
 - `Number` -> `1`, `1.0`, `1e0`
 - `Boolean` -> `TRUE` / `FALSE`
@@ -23,12 +24,13 @@ Use this page to map DynamoDB types to PartiQL representations and write valid l
 - `Map` values can mix types across keys.
 - `Number Set` members must all be numbers.
 - `String Set` members must all be strings.
+- `Binary` values must be passed through typed `Parameters` (`AttributeValue`) rather than inline literals.
 
 ## Limitations
 
 - String literals must use single quotes.
 - Number precision follows DynamoDB numeric limits (up to 38 digits).
-- Binary is supported in DynamoDB but not represented as inline PartiQL literal syntax in this reference context.
+- Binary values are supported only via typed parameters (no inline PartiQL literal form).
 - Set values are type-constrained (`Number Set` must be numeric, `String Set` must be string).
 - Attribute names are case-sensitive.
 

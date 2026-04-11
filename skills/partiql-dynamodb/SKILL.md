@@ -61,8 +61,9 @@ Load by user intent:
 - DynamoDB supports only a subset of PartiQL.
 - `SELECT` can become a full table scan if partition-key equality or `IN` patterns are not used correctly.
 - `INSERT`, `UPDATE`, and `DELETE` operate on one item per statement.
-- A transaction can contain up to 100 statements and must be all reads or all writes.
+- A transaction can contain up to 100 statements and must be all reads or all writes (`EXISTS` is the documented exception for condition-style checks).
 - A batch can contain up to 25 statements and cannot mix reads and writes.
+- `EXISTS` is only valid in transactional operations.
 - IAM permissions are action specific: `dynamodb:PartiQLSelect`, `dynamodb:PartiQLInsert`, `dynamodb:PartiQLUpdate`, `dynamodb:PartiQLDelete`.
 
 ## Output guidance

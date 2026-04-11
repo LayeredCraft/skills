@@ -33,6 +33,7 @@ FROM table[.index]
 ## Practical guardrails
 
 - Prefer `WHERE PartitionKey = value` or `WHERE PartitionKey IN [...]`.
+- `OR` conditions can still be query-like if every branch is partition-key equality.
 - Be careful with `OR` combinations that include non-key predicates.
 - Use IAM policy controls when you must block scan-causing PartiQL patterns.
 
@@ -40,11 +41,12 @@ FROM table[.index]
 
 - Without partition-key equality or `IN` conditions in `WHERE`, `SELECT` can become a full table scan.
 - Omitting `WHERE` reads all items in the table.
-- `IN` usage has DynamoDB-specific limits documented under operators (max 50 hash-key values or max 100 non-key values, paged responses).
+- `IN` usage has DynamoDB-specific limits documented under operators (max 50 partition-key values or max 100 non-key values, paged responses).
 
 ## Safe vs risky WHERE patterns
 
 - Generally safe: `WHERE PartitionKey = ...`.
+- Generally safe: `WHERE PartitionKey = ... OR PartitionKey = ...`.
 - Generally safe: `WHERE PartitionKey IN [...]`.
 - Often risky: predicates only on non-key attributes.
 - Often risky: inequality (`>`, `<`, `BETWEEN`) on non-key attributes.

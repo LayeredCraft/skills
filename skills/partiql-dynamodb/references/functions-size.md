@@ -1,10 +1,11 @@
 # SIZE
 
-Returns a number representing an attribute size in bytes.
+Returns a numeric size value for an attribute using DynamoDB `size` semantics.
 
 ## Source
 
 - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-functions.size.html
+- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.OperatorsAndFunctions.html#Expressions.OperatorsAndFunctions.Functions
 
 ## Syntax
 
@@ -27,7 +28,8 @@ size(path)
 ## Limitations
 
 - Valid only for DynamoDB-supported `size` operand types.
-- Returns an integer byte size; use comparisons in conditions for filtering.
+- `size` behavior is type dependent: string length for `String`, byte count for `Binary`, and element count for `Set`, `List`, or `Map`.
+- Returns an integer size value; use comparisons in conditions for filtering.
 
 ## Example
 

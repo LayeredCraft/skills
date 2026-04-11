@@ -1,10 +1,11 @@
 # CONTAINS
 
-Checks whether a string contains a substring or whether a set includes a member.
+Checks whether a string contains a substring, a set includes a member, or a list includes an element.
 
 ## Source
 
 - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-functions.contains.html
+- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.OperatorsAndFunctions.html#Expressions.OperatorsAndFunctions.Functions
 
 ## Syntax
 
@@ -15,7 +16,7 @@ contains(path, substring)
 ## Arguments
 
 - `path`: attribute name or document path.
-- `substring`: target substring or set member.
+- `substring`: target substring, set member, or list element.
 
 ## Return type
 
@@ -23,12 +24,12 @@ contains(path, substring)
 
 ## Where to use it
 
-- Typically used in `WHERE` conditions for substring or set-member checks.
+- Typically used in `WHERE` conditions for substring, set-member, or list-member checks.
 
 ## Limitations
 
-- `contains` is documented for string substring checks and set membership checks.
 - Input/value compatibility depends on the underlying attribute type.
+- `path` and comparison value must be distinct; `contains(a, a)` is invalid.
 
 ## Example
 

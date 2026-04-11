@@ -27,14 +27,13 @@ Use this page for batch PartiQL execution in DynamoDB.
 ## Parts explained
 
 - `Statement`: required PartiQL statement string.
-- `Parameters`: optional typed parameter values for placeholders.
-- `parametertype`: DynamoDB type wrapper (for example `S`, `N`, `BOOL`).
-- `parametervalue`: value for that typed parameter.
+- `Parameters`: optional positional values for `?` placeholders.
+- Each entry in `Parameters` is a DynamoDB `AttributeValue` object (for example `{ "S": "value" }`, `{ "N": "42" }`, `{ "BOOL": true }`).
 
 ## Return behavior
 
 - Batch responses are returned per statement entry.
-- Batches are not documented as an all-or-nothing transaction boundary.
+- Batch execution is not an all-or-nothing transaction boundary.
 
 ## Operational caveats
 
