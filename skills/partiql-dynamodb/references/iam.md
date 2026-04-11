@@ -29,10 +29,11 @@ Use this page for permission requirements and policy patterns for DynamoDB Parti
 - deny transactional PartiQL while allowing non-transactional usage
 - deny full-table-scan style `SELECT` using `dynamodb:FullTableScan`
 
-## Caveats
+## Limitations
 
-- Scope permissions to exact table/index ARNs whenever possible.
-- Use explicit deny rules for scan-risk controls when needed.
+- PartiQL permissions are action-specific (`PartiQLSelect`, `PartiQLInsert`, `PartiQLUpdate`, `PartiQLDelete`); missing one blocks that statement type.
+- Resource scoping must match table/index ARNs used by statements.
+- Full table scan blocking for `SELECT` requires explicit deny conditions such as `dynamodb:FullTableScan`.
 
 ## Related references
 

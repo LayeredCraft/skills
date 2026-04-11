@@ -43,6 +43,12 @@ Use this page for multi-statement transactional PartiQL execution in DynamoDB.
 - Keep statements and conditions deterministic to avoid partial-intent retries.
 - If any statement fails, DynamoDB cancels the transaction.
 
+## Limitations
+
+- Maximum 100 statements per transaction.
+- You cannot mix read and write statements in the same transaction.
+- `EXISTS` is the documented exception used for transaction-side conditional checks.
+
 ## Related references
 
 - [EXISTS](functions-exists.md)

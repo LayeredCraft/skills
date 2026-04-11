@@ -30,10 +30,11 @@ Use this page for supported arithmetic, comparison, and logical operators in Dyn
 - `NOT` negates a condition
 - `OR` at least one condition must be true
 
-## DynamoDB caveats
+## Limitations
 
-- Only listed operators are supported.
-- `IN` has practical limits called out in docs (value count and paginated retrieval behavior).
+- Only operators listed in DynamoDB PartiQL docs are supported.
+- `IN` has documented limits: up to 50 hash attribute values or up to 100 non-key attribute values.
+- `IN` results are paged (up to 10 items per page) and may require `NextToken` retrieval.
 
 ## Related references
 

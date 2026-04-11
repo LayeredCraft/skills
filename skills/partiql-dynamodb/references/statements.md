@@ -18,9 +18,10 @@ DynamoDB also supports multi-statement execution patterns through:
 - transactions
 - batch operations
 
-## Caveats
+## Limitations
 
-- DynamoDB does not support every PartiQL statement.
+- DynamoDB does not support every PartiQL statement in the broader PartiQL spec.
+- `INSERT`, `UPDATE`, and `DELETE` operate on one item per statement.
 
 ## Statement anatomy quick map
 

@@ -44,6 +44,12 @@ WHERE condition [RETURNING returnvalues]
 - Expecting updates without `RETURNING` to include item data in the response.
 - Using set operations on non-set attributes.
 
+## Limitations
+
+- A single `UPDATE` statement can only target one item.
+- `WHERE` must resolve to a single primary key value.
+- If no item matches a true condition, DynamoDB can return `ConditionalCheckFailedException`.
+
 ## Minimal examples
 
 ```sql

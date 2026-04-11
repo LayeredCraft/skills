@@ -21,6 +21,11 @@ EXISTS(statement)
 - Only valid in transactional operations.
 - The `SELECT` inside `EXISTS` must specify a full primary key and one additional condition.
 
+## Limitations
+
+- `EXISTS` can only be used in transactional operations.
+- The inner `SELECT` must include full primary key criteria plus one additional condition.
+
 ## Return type
 
 - `bool`

@@ -20,6 +20,15 @@ size(path)
 
 - `int`
 
+## Where to use it
+
+- Typically used in `WHERE` conditions to filter by attribute size.
+
+## Limitations
+
+- Valid only for DynamoDB-supported `size` operand types.
+- Returns an integer byte size; use comparisons in conditions for filtering.
+
 ## Example
 
 ```sql

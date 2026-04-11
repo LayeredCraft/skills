@@ -42,6 +42,12 @@ Use this page for batch PartiQL execution in DynamoDB.
 - Batch behavior is still bounded by DynamoDB throughput and request limits.
 - Keep read batches and write batches separate; mixed batches are rejected.
 
+## Limitations
+
+- Maximum 25 statements per batch request.
+- You cannot mix read and write statements in one batch.
+- Batch execution is not a transactional all-or-nothing boundary.
+
 ## Related references
 
 - [Statements](statements.md)

@@ -36,6 +36,12 @@ FROM table[.index]
 - Be careful with `OR` combinations that include non-key predicates.
 - Use IAM policy controls when you must block scan-causing PartiQL patterns.
 
+## Limitations
+
+- Without partition-key equality or `IN` conditions in `WHERE`, `SELECT` can become a full table scan.
+- Omitting `WHERE` reads all items in the table.
+- `IN` usage has DynamoDB-specific limits documented under operators (max 50 hash-key values or max 100 non-key values, paged responses).
+
 ## Safe vs risky WHERE patterns
 
 - Generally safe: `WHERE PartitionKey = ...`.

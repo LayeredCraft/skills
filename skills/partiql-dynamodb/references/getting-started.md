@@ -30,10 +30,11 @@ Use this page for first-run DynamoDB PartiQL workflows in console, NoSQL Workben
 - In API and CLI workflows, use `?` placeholders in statements and pass typed `Parameters` separately.
 - This keeps statements reusable and avoids embedding dynamic values directly in query text.
 
-## Caveats
+## Limitations
 
-- Keep examples DynamoDB-specific and table-key aware.
-- Prefer parameterized statements for safety and clarity in API workflows.
+- AWS starter flows use example tables and keys (such as `Music`); you must adapt statements to your own schema.
+- CLI/API placeholder usage requires separate typed `Parameters`; placeholders alone are not sufficient.
+- Getting-started examples are usage patterns, not guarantees against scan-heavy statements unless key conditions are correct.
 
 ## Related references
 

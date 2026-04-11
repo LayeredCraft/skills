@@ -21,6 +21,15 @@ attribute_type(attributename, type)
 
 - `bool`
 
+## Where to use it
+
+- Typically used in `WHERE` conditions to enforce type checks before matching or projection assumptions.
+
+## Limitations
+
+- The `type` argument must be a valid DynamoDB attribute type token.
+- This function only checks type identity, not value ranges or schema constraints.
+
 ## Example
 
 ```sql

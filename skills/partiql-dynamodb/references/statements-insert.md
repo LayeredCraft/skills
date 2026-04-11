@@ -31,6 +31,12 @@ INSERT INTO table VALUE item
 - Omitting required key attributes for the target table.
 - Mixing quote styles for string literals.
 
+## Limitations
+
+- A single `INSERT` statement can only add one item.
+- If the primary key already exists, DynamoDB returns `DuplicateItemException`.
+- `INSERT` does not return item attributes.
+
 ## Minimal example
 
 ```sql

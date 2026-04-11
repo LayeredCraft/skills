@@ -24,9 +24,10 @@ Use this page to identify built-in DynamoDB PartiQL functions and open the right
 - substring or set membership check -> use [CONTAINS](functions-contains.md)
 - attribute presence check -> use [MISSING](functions-missing.md)
 
-## Caveat
+## Limitations
 
-- Functions not listed in DynamoDB docs are not currently supported.
+- Only functions listed in DynamoDB PartiQL docs are supported.
+- `EXISTS` is restricted to transactional operations.
 
 ## Related references
 

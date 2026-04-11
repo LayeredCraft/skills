@@ -12,10 +12,18 @@ PartiQL in DynamoDB provides SQL-compatible statements for reading and modifying
 - Works through DynamoDB console, NoSQL Workbench, AWS CLI, and DynamoDB APIs.
 - Uses DynamoDB service semantics for performance and availability.
 
-## Important boundaries
+## How to use this reference set
 
-- DynamoDB supports a subset of PartiQL.
-- DynamoDB docs explicitly call out that Amazon Ion format and literals are not supported.
+- Start with [Getting Started](getting-started.md) for first execution patterns.
+- Use [Statements](statements.md) when deciding between `SELECT`, `INSERT`, `UPDATE`, and `DELETE`.
+- Use [Data Types](data-types.md) when building literals or nested values.
+- Use [Functions](functions.md) and [Operators](operators.md) for condition logic.
+- Use [Transactions](transactions.md), [Batch Operations](batch-operations.md), and [IAM](iam.md) for production constraints.
+
+## Limitations
+
+- DynamoDB supports only a subset of PartiQL, not the full language.
+- Amazon Ion data format and Ion literals are not supported in DynamoDB PartiQL.
 
 ## Related references
 

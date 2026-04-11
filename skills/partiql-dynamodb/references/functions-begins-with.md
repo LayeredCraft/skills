@@ -21,6 +21,15 @@ begins_with(path, value)
 
 - `bool`
 
+## Where to use it
+
+- Typically used in `WHERE` conditions for prefix matching.
+
+## Limitations
+
+- `begins_with` is for prefix matching and is typically applied to string values.
+- Its behavior is condition-focused; use it in predicates rather than as a projection transform.
+
 ## Example
 
 ```sql

@@ -17,6 +17,15 @@ attributename IS NOT MISSING
 
 - Only equality and inequality style checks are supported with this function pattern.
 
+## Limitations
+
+- `MISSING` checks are limited to `IS MISSING` and `IS NOT MISSING` style predicates.
+- This is an attribute-presence test, not a null-value test.
+
+## Where to use it
+
+- Typically used in `WHERE` conditions to check attribute presence or absence.
+
 ## Return type
 
 - `bool`

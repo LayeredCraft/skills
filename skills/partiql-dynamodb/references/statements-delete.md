@@ -32,6 +32,13 @@ WHERE condition [RETURNING returnvalues]
 - Using non-key-only filters and expecting a single-item delete.
 - Expecting deleted item attributes without adding `RETURNING ALL OLD *`.
 
+## Limitations
+
+- A single `DELETE` statement can only target one item.
+- `WHERE` must resolve to a single primary key value.
+- If no item exists for the key, operation succeeds with zero deleted items.
+- If key exists but condition evaluates false, DynamoDB returns `ConditionalCheckFailedException`.
+
 ## Minimal example
 
 ```sql

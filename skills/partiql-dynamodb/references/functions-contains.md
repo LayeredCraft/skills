@@ -21,6 +21,15 @@ contains(path, substring)
 
 - `bool`
 
+## Where to use it
+
+- Typically used in `WHERE` conditions for substring or set-member checks.
+
+## Limitations
+
+- `contains` is documented for string substring checks and set membership checks.
+- Input/value compatibility depends on the underlying attribute type.
+
 ## Example
 
 ```sql
