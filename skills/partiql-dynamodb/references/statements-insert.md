@@ -23,6 +23,7 @@ INSERT INTO table VALUE item
 - If an item with the same primary key exists, DynamoDB returns `DuplicateItemException`.
 - Attribute names are case-sensitive.
 - Use single quotes for string values.
+- You can parameterize values with placeholders (`?`) when using API parameter lists.
 
 ## Common mistakes
 

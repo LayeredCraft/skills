@@ -25,6 +25,7 @@ WHERE condition [RETURNING returnvalues]
 - `WHERE` must resolve to a single primary key value.
 - `RETURNING ALL OLD *` returns the deleted item content.
 - If no matching item exists, operation succeeds with zero items deleted.
+- Conditions can use placeholders (`?`) with typed parameters in API calls.
 
 ## Common mistakes
 

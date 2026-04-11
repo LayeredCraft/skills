@@ -30,6 +30,7 @@ WHERE condition [RETURNING returnvalues]
 - `WHERE` must resolve to a single primary key value.
 - Supports `LIST_APPEND`, `SET_ADD`, and `SET_DELETE` in `SET` operations.
 - Optional `RETURNING` controls whether old/new attributes are returned.
+- Values can be parameterized with placeholders (`?`) and supplied separately in API calls.
 
 ## Supported set operations
 

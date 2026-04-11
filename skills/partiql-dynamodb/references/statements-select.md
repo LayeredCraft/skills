@@ -28,6 +28,7 @@ FROM table[.index]
 - `WHERE` design determines whether the operation is query-like or scan-like.
 - To avoid full table scans, include partition-key equality or `IN` conditions.
 - Missing or non-key-only filters can force full scans.
+- Omitting `WHERE` retrieves all items from the table.
 
 ## Practical guardrails
 
@@ -55,6 +56,12 @@ WHERE OrderID = 1
 SELECT OrderID, Total
 FROM "Orders"
 WHERE OrderID IN [1, 2, 3] ORDER BY OrderID DESC
+```
+
+```sql
+SELECT *
+FROM "TableName"."IndexName"
+WHERE PartitionKey = 'pk-value'
 ```
 
 ## Related references

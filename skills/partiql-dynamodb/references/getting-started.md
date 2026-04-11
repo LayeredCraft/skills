@@ -25,6 +25,11 @@ Use this page for first-run DynamoDB PartiQL workflows in console, NoSQL Workben
 - Modify with `UPDATE`.
 - Remove with `DELETE`.
 
+## Parameter placeholders
+
+- In API and CLI workflows, use `?` placeholders in statements and pass typed `Parameters` separately.
+- This keeps statements reusable and avoids embedding dynamic values directly in query text.
+
 ## Caveats
 
 - Keep examples DynamoDB-specific and table-key aware.
