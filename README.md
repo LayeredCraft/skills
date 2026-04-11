@@ -16,10 +16,11 @@ This repo is a shared home for installable agent skills.
 
 ## Available skills
 
-| Skill           | Description                                                                                      | Install                                                                       |
-| --------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
-| `git-workflow`  | Commit work, create branches, and open pull requests using conventional git workflow conventions | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`  |
-| `zensical-site` | Tooling and guidance for Zensical-flavored documentation work                                    | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site` |
+| Skill              | Description                                                                                                            | Install                                                                          |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `git-workflow`     | Commit work, create branches, and open pull requests using conventional git workflow conventions                       | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`     |
+| `zensical-site`    | Tooling and guidance for Zensical-flavored documentation work                                                          | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`    |
+| `partiql-dynamodb` | DynamoDB-specific PartiQL guidance with focused references for statements, functions, operators, transactions, and IAM | `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb` |
 
 ## Install a skill
 
@@ -53,6 +54,15 @@ Zensical-flavored documentation skill for structured authoring, reference-driven
 - Best for teams building polished docs with consistent voice and formatting
 - Includes supporting references and templates inside `skills/zensical-site`
 - Install with `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`
+
+### `partiql-dynamodb`
+
+DynamoDB PartiQL skill for statement syntax, practical usage guidance, caveats, and IAM-aware operational safety.
+
+- Covers `SELECT`, `INSERT`, `UPDATE`, `DELETE`, built-in functions, operators, transactions, and batch operations
+- Includes local references sourced from AWS DynamoDB PartiQL docs
+- Adds source links in each reference page for traceability
+- Install with `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb`
 
 ## Licensing
 
