@@ -14,12 +14,34 @@ UPDATE table
 WHERE condition [RETURNING returnvalues]
 ```
 
+## Parts explained
+
+- `table`: table containing the item to modify.
+- `SET`: adds/replaces attribute values.
+- `REMOVE`: removes attribute paths (for example list members or map entries).
+- `path`: attribute name or document path to modify.
+- `data`: literal value or supported operation result.
+- `condition`: must resolve to a single item key.
+- `RETURNING`: optional output selector (`ALL OLD *`, `MODIFIED OLD *`, `ALL NEW *`, `MODIFIED NEW *`).
+
 ## Key DynamoDB behavior
 
 - One item per statement.
 - `WHERE` must resolve to a single primary key value.
 - Supports `LIST_APPEND`, `SET_ADD`, and `SET_DELETE` in `SET` operations.
 - Optional `RETURNING` controls whether old/new attributes are returned.
+
+## Supported set operations
+
+- `LIST_APPEND(list, values)`
+- `SET_ADD(set, values)`
+- `SET_DELETE(set, values)`
+
+## Common mistakes
+
+- Using a `WHERE` clause that can match multiple partition keys.
+- Expecting updates without `RETURNING` to include item data in the response.
+- Using set operations on non-set attributes.
 
 ## Minimal examples
 

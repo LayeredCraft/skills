@@ -15,6 +15,7 @@ Use this skill if the user asks to:
 
 - learn how to use PartiQL in DynamoDB
 - write or debug DynamoDB PartiQL statements
+- break down statement syntax parts (for example what `expression`, `condition`, or `RETURNING` mean)
 - understand supported statements, functions, or operators
 - avoid full table scans with PartiQL `SELECT`
 - use PartiQL with transactions or batch operations

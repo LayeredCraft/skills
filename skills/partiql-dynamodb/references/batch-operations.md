@@ -24,10 +24,23 @@ Use this page for batch PartiQL execution in DynamoDB.
 ]
 ```
 
+## Parts explained
+
+- `Statement`: required PartiQL statement string.
+- `Parameters`: optional typed parameter values for placeholders.
+- `parametertype`: DynamoDB type wrapper (for example `S`, `N`, `BOOL`).
+- `parametervalue`: value for that typed parameter.
+
+## Return behavior
+
+- Batch responses are returned per statement entry.
+- Batches are not documented as an all-or-nothing transaction boundary.
+
 ## Operational caveats
 
 - Keep batches small and predictable for retry safety.
 - Batch behavior is still bounded by DynamoDB throughput and request limits.
+- Keep read batches and write batches separate; mixed batches are rejected.
 
 ## Related references
 

@@ -8,27 +8,27 @@ Use this page for supported arithmetic, comparison, and logical operators in Dyn
 
 ## Arithmetic operators
 
-- `+`
-- `-`
+- `+` add numeric values
+- `-` subtract numeric values
 
 ## Comparison operators
 
-- `=`
-- `<>`
-- `!=`
-- `>`
-- `<`
-- `>=`
-- `<=`
+- `=` equal to
+- `<>` not equal to
+- `!=` not equal to
+- `>` greater than
+- `<` less than
+- `>=` greater than or equal to
+- `<=` less than or equal to
 
 ## Logical operators
 
-- `AND`
-- `BETWEEN`
-- `IN`
-- `IS`
-- `NOT`
-- `OR`
+- `AND` all conditions must be true
+- `BETWEEN` inclusive range check
+- `IN` membership check in a list of values
+- `IS` type/null/missing style checks
+- `NOT` negates a condition
+- `OR` at least one condition must be true
 
 ## DynamoDB caveats
 

@@ -13,6 +13,11 @@ Use this page for first-run DynamoDB PartiQL workflows in console, NoSQL Workben
 - AWS CLI: run `aws dynamodb execute-statement --statement "..."`.
 - SDK/API: run `ExecuteStatement` style operations with parameterized values.
 
+## Prerequisites
+
+- Have a DynamoDB table with known partition key (and sort key if applicable).
+- For AWS examples that use `Music`, adapt key names and values to your table schema.
+
 ## Useful starter sequence
 
 - Insert one item with `INSERT`.

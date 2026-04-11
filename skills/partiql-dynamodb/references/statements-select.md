@@ -15,6 +15,14 @@ FROM table[.index]
 [ORDER BY key [DESC|ASC], ...]
 ```
 
+## Parts explained
+
+- `expression`: projected attributes, `*`, document paths, or supported function expressions.
+- `table`: DynamoDB table name.
+- `index`: optional index name. When selecting from an index, quote table and index names.
+- `condition`: optional filter criteria in `WHERE`.
+- `key`: partition key or sort key used in `ORDER BY`.
+
 ## Key DynamoDB behavior
 
 - `WHERE` design determines whether the operation is query-like or scan-like.
@@ -26,6 +34,14 @@ FROM table[.index]
 - Prefer `WHERE PartitionKey = value` or `WHERE PartitionKey IN [...]`.
 - Be careful with `OR` combinations that include non-key predicates.
 - Use IAM policy controls when you must block scan-causing PartiQL patterns.
+
+## Safe vs risky WHERE patterns
+
+- Generally safe: `WHERE PartitionKey = ...`.
+- Generally safe: `WHERE PartitionKey IN [...]`.
+- Often risky: predicates only on non-key attributes.
+- Often risky: inequality (`>`, `<`, `BETWEEN`) on non-key attributes.
+- Easy to misuse: `OR` expressions that include any non-key-only branch.
 
 ## Minimal examples
 
@@ -46,3 +62,4 @@ WHERE OrderID IN [1, 2, 3] ORDER BY OrderID DESC
 - [Operators](operators.md)
 - [Functions](functions.md)
 - [IAM](iam.md)
+- [Transactions](transactions.md)

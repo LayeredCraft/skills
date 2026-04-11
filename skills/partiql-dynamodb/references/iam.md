@@ -13,6 +13,13 @@ Use this page for permission requirements and policy patterns for DynamoDB Parti
 - `dynamodb:PartiQLUpdate`
 - `dynamodb:PartiQLDelete`
 
+## Statement to action mapping
+
+- `SELECT` -> `dynamodb:PartiQLSelect`
+- `INSERT` -> `dynamodb:PartiQLInsert`
+- `UPDATE` -> `dynamodb:PartiQLUpdate`
+- `DELETE` -> `dynamodb:PartiQLDelete`
+
 ## Practical policy patterns
 
 - allow all PartiQL actions on a table

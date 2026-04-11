@@ -12,10 +12,23 @@ Use `INSERT` to add one new item to a DynamoDB table.
 INSERT INTO table VALUE item
 ```
 
+## Parts explained
+
+- `table`: destination table that already exists.
+- `item`: one PartiQL tuple representing one DynamoDB item.
+
 ## Key DynamoDB behavior
 
 - One item per statement.
 - If an item with the same primary key exists, DynamoDB returns `DuplicateItemException`.
+- Attribute names are case-sensitive.
+- Use single quotes for string values.
+
+## Common mistakes
+
+- Trying to insert multiple items in one `INSERT` statement.
+- Omitting required key attributes for the target table.
+- Mixing quote styles for string literals.
 
 ## Minimal example
 

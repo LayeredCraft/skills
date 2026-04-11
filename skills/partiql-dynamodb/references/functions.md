@@ -15,6 +15,15 @@ Use this page to identify built-in DynamoDB PartiQL functions and open the right
 - `CONTAINS`
 - `MISSING`
 
+## Choose by intent
+
+- size-based checks -> use [SIZE](functions-size.md)
+- transactional existence check -> use [EXISTS](functions-exists.md)
+- validate attribute type -> use [ATTRIBUTE_TYPE](functions-attribute-type.md)
+- string prefix matching -> use [BEGINS_WITH](functions-begins-with.md)
+- substring or set membership check -> use [CONTAINS](functions-contains.md)
+- attribute presence check -> use [MISSING](functions-missing.md)
+
 ## Caveat
 
 - Functions not listed in DynamoDB docs are not currently supported.

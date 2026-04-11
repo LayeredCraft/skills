@@ -22,6 +22,22 @@ DynamoDB also supports multi-statement execution patterns through:
 
 - DynamoDB does not support every PartiQL statement.
 
+## Statement anatomy quick map
+
+- `SELECT expression FROM table[.index] [WHERE condition] [ORDER BY ...]`
+- `INSERT INTO table VALUE item`
+- `UPDATE table [SET|REMOVE ...] WHERE condition [RETURNING ...]`
+- `DELETE FROM table WHERE condition [RETURNING ...]`
+
+## How to choose the right statement
+
+- Read one or more items -> use `SELECT`.
+- Create one item -> use `INSERT`.
+- Change attributes on one item -> use `UPDATE`.
+- Remove one item -> use `DELETE`.
+- Apply multiple statements atomically -> use [Transactions](transactions.md).
+- Apply multiple statements in a single batch request (non-atomic) -> use [Batch Operations](batch-operations.md).
+
 ## Related references
 
 - [SELECT](statements-select.md)

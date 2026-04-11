@@ -25,10 +25,23 @@ Use this page for multi-statement transactional PartiQL execution in DynamoDB.
 ]
 ```
 
+## Parts explained
+
+- `Statement`: required PartiQL statement string.
+- `Parameters`: optional typed values used in positional placeholders.
+- `parametertype`: DynamoDB type wrapper (for example `S`, `N`, `BOOL`).
+- `parametervalue`: value for that typed parameter.
+
+## Return behavior
+
+- Write transactions do not return item content.
+- Read transactions return items based on the `SELECT` statements and conditions.
+
 ## Operational caveats
 
 - On per-statement failures, transaction cancellation behavior is surfaced as `TransactionCanceledException`.
 - Keep statements and conditions deterministic to avoid partial-intent retries.
+- If any statement fails, DynamoDB cancels the transaction.
 
 ## Related references
 
