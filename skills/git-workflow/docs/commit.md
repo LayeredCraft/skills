@@ -1,13 +1,16 @@
 # Commit Workflow
 
-## Shared references
+## Context budget
 
-Load before executing:
+This is the lightweight workflow. Do not load shared references by default.
+Consult them only when compact git inspection leaves real ambiguity:
 
-- [Scope Detection](../shared/scope-detection.md)
-- [File Inclusion Policy](../shared/file-inclusion-policy.md)
-- [Safety Rules](../shared/safety-rules.md)
-- [Conventional Types](../shared/conventional-types.md)
+- [Scope Detection](../shared/scope-detection.md) - when the scope is unclear
+- [File Inclusion Policy](../shared/file-inclusion-policy.md) - when file
+  inclusion is ambiguous
+- [Safety Rules](../shared/safety-rules.md) - when repository state is unusual
+- [Conventional Types](../shared/conventional-types.md) - when the type is
+  unclear or the change may be breaking
 
 ______________________________________________________________________
 
@@ -31,12 +34,16 @@ For breaking changes, append `!` after the type/scope and/or include a `BREAKING
 
 ## Workflow
 
-1. Inspect repository status
-2. Identify all modified files
-3. Stage all user-modified files (see [File Inclusion Policy](../shared/file-inclusion-policy.md))
-4. Exclude only obvious junk artifacts
-5. Infer `<type>` and `<scope>` (see [Conventional Types](../shared/conventional-types.md) and [Scope Detection](../shared/scope-detection.md))
+1. Inspect repository status with `git status --short`
+2. Identify changed files with `git diff --name-status` and `git diff --stat`
+3. Stage all user-modified files
+4. Exclude only obvious junk, local config, generated build/cache output, and
+   secrets
+5. Infer `<type>` and optional `<scope>` from filenames, paths, and stat output
 6. Generate and create the commit
+
+Use full `git diff` only when the compact status, names, and stats are not
+enough to write an accurate commit message.
 
 ## Output
 

@@ -29,14 +29,26 @@ Use this skill whenever the user asks to:
 
 ______________________________________________________________________
 
-## Shared references
+## Commit-only fast path
 
-Before executing any workflow, load all four shared references:
+When the user only asks to commit, stage and commit, save current work, or
+otherwise create a commit without asking for a branch, push, or PR, keep the
+workflow compact:
 
-- [Scope Detection](shared/scope-detection.md)
-- [File Inclusion Policy](shared/file-inclusion-policy.md)
-- [Safety Rules](shared/safety-rules.md)
-- [Conventional Types](shared/conventional-types.md)
+1. Do not load PR, branch, template, release note, or example files.
+2. Do not load shared references unless compact git inspection leaves real
+   ambiguity.
+3. Inspect with `git status --short`, `git diff --name-status`, and
+   `git diff --stat` first.
+4. Avoid full `git diff` unless the commit message cannot be inferred from
+   file names and diff stats.
+5. Stage all user-modified files except obvious junk, local config, generated
+   build/cache output, and secrets.
+6. Create a concise conventional commit.
+7. Report only the commit message, files committed, and any exclusions.
+
+For branch and PR requests, load only the workflow doc selected below. Let that
+doc identify any extra references needed for the requested workflow.
 
 ______________________________________________________________________
 
