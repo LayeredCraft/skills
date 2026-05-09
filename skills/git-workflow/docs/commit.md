@@ -12,7 +12,7 @@ Consult them only when compact git inspection leaves real ambiguity:
 - [Conventional Types](../shared/conventional-types.md) - when the type is
   unclear or the change may be breaking
 
-______________________________________________________________________
+---
 
 ## Goal
 
@@ -36,9 +36,9 @@ For breaking changes, append `!` after the type/scope and/or include a `BREAKING
 
 1. Inspect repository status with `git status --short`
 2. Identify changed files with `git diff --name-status` and `git diff --stat`
-3. Stage all user-modified files
-4. Exclude only obvious junk, local config, generated build/cache output, and
-   secrets
+3. Identify automatic exclusions first: obvious junk, local config, generated
+   build/cache output, and secrets
+4. Stage remaining user-modified files
 5. Infer `<type>` and optional `<scope>` from filenames, paths, and stat output
 6. Generate and create the commit
 
