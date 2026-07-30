@@ -16,11 +16,12 @@ This repo is a shared home for installable agent skills.
 
 ## Available skills
 
-| Skill              | Description                                                                                                            | Install                                                                          |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `git-workflow`     | Commit work, create branches, and open pull requests using conventional git workflow conventions                       | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`     |
-| `zensical-site`    | Tooling and guidance for Zensical-flavored documentation work                                                          | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`    |
-| `partiql-dynamodb` | DynamoDB-specific PartiQL guidance with focused references for statements, functions, operators, transactions, and IAM | `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb` |
+| Skill                  | Description                                                                                                            | Install                                                                              |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `git-workflow`         | Commit work, create branches, and open pull requests using conventional git workflow conventions                       | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`         |
+| `engineering-workflow` | Project-agnostic process for design, implementation, testing, review, feedback, security, and documentation            | `npx skills add https://github.com/LayeredCraft/skills --skill engineering-workflow` |
+| `zensical-site`        | Tooling and guidance for Zensical-flavored documentation work                                                          | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`        |
+| `partiql-dynamodb`     | DynamoDB-specific PartiQL guidance with focused references for statements, functions, operators, transactions, and IAM | `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb`     |
 
 ## Install a skill
 
@@ -46,6 +47,15 @@ Unified git workflow skill for committing, branching, and opening pull requests.
 - Runs the full PR workflow: branch, commit, push, and open PR from a template
 - Shared rules for file inclusion, scope detection, and safety across all workflows
 - Install with `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`
+
+### `engineering-workflow`
+
+Project-agnostic workflow for non-trivial engineering work. Adapts to local repository policies and technology choices instead of imposing one stack.
+
+- Routes design, implementation, review, feedback response, and explanation tasks
+- Includes reusable guidance for coding, testing, security, documentation, decisions, and collaboration
+- Preserves repository-local conventions while keeping safety requirements explicit
+- Install with `npx skills add https://github.com/LayeredCraft/skills --skill engineering-workflow`
 
 ### `zensical-site`
 
