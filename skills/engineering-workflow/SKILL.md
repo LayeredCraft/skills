@@ -4,21 +4,24 @@ description: >
   Project-agnostic engineering workflow for non-trivial software work.
   Use whenever designing or implementing features, fixing meaningful bugs,
   reviewing code or pull requests, responding to review feedback, writing
-  tests or technical documentation, introducing architecture or coding
-  patterns, or deciding how work should be structured. Consult this skill
-  even when user does not explicitly request an engineering workflow. It
-  adapts to repository-local instructions, architecture records, language
-  conventions, test tooling, and contribution rules instead of imposing a
-  specific stack.
+  substantive tests or technical documentation, explaining code or completed
+  work in detail, introducing architecture or coding patterns, or deciding how
+  work should be structured. Consult this skill even when user does not name an
+  engineering workflow. Do not use it solely for commit/branch/PR-opening
+  mechanics, trivial typo-only edits, or specialized domain work covered by a
+  narrower skill. It adapts to repository-local instructions, architecture
+  records, language conventions, test tooling, and contribution rules instead
+  of imposing a specific stack.
 ---
 
 # Engineering Workflow
 
 Use this skill as process guidance for non-trivial work in any software
-repository. Apply guidance in this order: system and user instructions; explicit
-current project policy; accepted architecture decisions; then established code
-as evidence of precedent. Existing code may be legacy, defective, or insecure,
-so never let precedent override safety requirements. Note meaningful conflicts
+repository. Apply instructions according to host-defined precedence—normally
+system, then developer, then user instructions. Within that boundary, prefer
+explicit current project policy, then accepted architecture decisions, then
+established code as evidence of precedent. Existing code may be legacy,
+defective, or insecure, so never let precedent override safety requirements. Note meaningful conflicts
 rather than silently inventing a third convention.
 
 ## Start with repository discovery
@@ -53,15 +56,16 @@ does not require a formal decision record.
 
 ## References
 
-| Work                                                           | Read                                               |
-| -------------------------------------------------------------- | -------------------------------------------------- |
-| Architecture decisions, ADRs, plans, or roadmap changes        | [Design decisions](references/design-decisions.md) |
-| Writing or reviewing code                                      | [Coding standards](references/coding-standards.md) |
-| Adding or changing tests                                       | [Testing](references/testing.md)                   |
-| Trust boundaries, dependencies, credentials, or sensitive data | [Security](references/security.md)                 |
-| Docs, comments, changelogs, or commit messages                 | [Documentation](references/documentation.md)       |
-| Giving feedback or resolving disagreements                     | [Collaboration](references/code-of-conduct.md)     |
-| Preparing a change for contribution                            | [Contributing](references/contributing.md)         |
+| Work                                                           | Read                                                     |
+| -------------------------------------------------------------- | -------------------------------------------------------- |
+| Architecture decisions, ADRs, plans, or roadmap changes        | [Design decisions](references/design-decisions.md)       |
+| Writing or reviewing code                                      | [Coding standards](references/coding-standards.md)       |
+| Adding or changing tests                                       | [Testing](references/testing.md)                         |
+| Trust boundaries, dependencies, credentials, or sensitive data | [Security](references/security.md)                       |
+| Docs, comments, changelogs, or commit messages                 | [Documentation](references/documentation.md)             |
+| Giving feedback or resolving disagreements                     | [Collaboration](references/code-of-conduct.md)           |
+| Posting PR findings or a review verdict                        | [Review emoji legend](references/review-emoji-legend.md) |
+| Preparing a change for contribution                            | [Contributing](references/contributing.md)               |
 
 Most non-trivial work needs several references. Read matched files before
 producing code, design, docs, or review findings.

@@ -8,23 +8,27 @@ verify, reply, then close threads where platform supports them.
 
 Always:
 
-- [Coding standards](../references/coding-standards.md)
-- [Documentation](../references/documentation.md)
 - [Collaboration](../references/code-of-conduct.md)
+- [Review emoji legend](../references/review-emoji-legend.md)
 
 As relevant:
 
-- [Design decisions](../references/design-decisions.md)
-- [Testing](../references/testing.md)
-- [Security](../references/security.md)
-- [Contributing](../references/contributing.md)
+- [Coding standards](../references/coding-standards.md) — feedback concerns code
+- [Documentation](../references/documentation.md) — feedback concerns docs or
+  public contracts
+- [Design decisions](../references/design-decisions.md) — architecture or plans
+- [Testing](../references/testing.md) — behavior or coverage
+- [Security](../references/security.md) — trust boundaries or sensitive data
+- [Contributing](../references/contributing.md) — contribution process
 
 ## Procedure
 
 ### 1. Fetch and triage
 
 1. Fetch all feedback using platform's available APIs or tools, including
-   pagination, replies, and resolution state where supported.
+   pagination, replies, and resolution state where supported. If network or review
+   APIs are unavailable, use supplied exports or local context, identify missing
+   threads or state, and do not imply review-system mutations succeeded.
 2. Skip resolved threads and comments already handled. Preserve stable record so
    reruns converge instead of replying repeatedly.
 3. Classify each remaining item:

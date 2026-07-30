@@ -8,21 +8,24 @@ repository-process conformance.
 
 Always:
 
-- [Coding standards](../references/coding-standards.md)
 - [Collaboration](../references/code-of-conduct.md)
-- [Documentation](../references/documentation.md)
+- [Review emoji legend](../references/review-emoji-legend.md)
 
 As relevant:
 
-- [Design decisions](../references/design-decisions.md)
-- [Testing](../references/testing.md)
-- [Security](../references/security.md)
-- [Contributing](../references/contributing.md)
+- [Coding standards](../references/coding-standards.md) — code changes
+- [Documentation](../references/documentation.md) — docs or public contracts
+- [Design decisions](../references/design-decisions.md) — architecture or plans
+- [Testing](../references/testing.md) — behavior or tests
+- [Security](../references/security.md) — trust boundaries or sensitive data
+- [Contributing](../references/contributing.md) — contribution process
 
 ## Procedure
 
 1. Determine review target and base. Fetch complete diff and metadata without
-   modifying work.
+   modifying work. If git, network, or platform APIs are unavailable, review
+   user-provided or locally available material, state missing context, and request
+   only information required for a reliable verdict.
 2. Read repository instructions and changed files in full where context matters.
 3. Identify intent, affected contracts, and associated issue/decision/plan.
 4. Walk every changed file before reporting. Check:
@@ -42,17 +45,13 @@ As relevant:
 
 ## Severity
 
-- **Blocking**: correctness, security, data loss, broken contract, or required
-  validation gap that must be fixed before merge.
-- **Important**: real maintainability, reliability, or coverage issue worth fixing
-  now or tracking explicitly.
-- **Suggestion**: optional improvement or preference.
-- **Question**: clarification needed before judging issue.
-
-Follow repository-specific labels or review vocabulary when present.
+Use [review emoji legend](../references/review-emoji-legend.md) as single source
+for finding severity and overall verdict. Follow repository-specific labels or
+review vocabulary when present.
 
 ## Output
 
-Findings first, concise and evidence-based. Include file/line references. Do not
-bury “no findings” behind summary prose or claim approval when validation was
-incomplete.
+Findings first, concise and evidence-based. Include file/line references. Prefix
+posted findings and verdicts using the review emoji legend; use same prefixes in
+chat when useful for consistent disposition. Do not bury “no findings” behind
+summary prose or claim approval when validation was incomplete.

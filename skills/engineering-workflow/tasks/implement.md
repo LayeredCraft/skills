@@ -8,14 +8,16 @@ For unresolved high-impact design, run [Design](design.md) first.
 Always:
 
 - [Coding standards](../references/coding-standards.md)
-- [Testing](../references/testing.md)
-- [Documentation](../references/documentation.md)
 
 As relevant:
 
-- [Design decisions](../references/design-decisions.md)
-- [Security](../references/security.md)
-- [Contributing](../references/contributing.md)
+- [Testing](../references/testing.md) — behavior or tests change
+- [Documentation](../references/documentation.md) — docs, examples, comments, or
+  public contracts change
+- [Design decisions](../references/design-decisions.md) — decision or plan exists
+  or change introduces a meaningful design choice
+- [Security](../references/security.md) — trust boundary or sensitive data changes
+- [Contributing](../references/contributing.md) — preparing contribution artifacts
 
 ## Procedure
 
@@ -26,11 +28,14 @@ As relevant:
 3. Inspect nearby implementation/tests before editing; follow local patterns.
 4. Implement smallest coherent change. Avoid unrelated cleanup and new dependencies
    unless necessary and justified.
-5. Add or update tests while building. Include regression, boundary, integration,
-   or consumer tests matching actual risks.
-6. Keep plan/checklist current as implementation diverges or completes.
-7. Update docs, examples, changelog, migrations, or public API references required
-   by behavior change.
+5. When behavior changes or identified risk warrants coverage, add or update tests
+   while building. Include regression, boundary, integration, or consumer tests
+   matching actual risks. For test-only work, avoid unrelated production or doc
+   changes.
+6. Keep an existing plan/checklist current as implementation diverges or completes.
+7. Update docs, examples, changelog, migrations, or public API references when
+   behavior, public contracts, or repository policy requires it. For docs-only
+   work, do not invent unrelated tests or code changes.
 8. Inspect unfamiliar validation scripts before execution. Ask before running
    commands that install software, access network or credentials, mutate external
    systems, or may be destructive. Then run applicable formatter/linter,
@@ -42,5 +47,6 @@ As relevant:
 
 ## Output
 
-Working change matching agreed scope, tests and docs updated, validation evidence
-reported, and plan status accurate. Clearly state anything not verified.
+Working change matching agreed scope; applicable tests, docs, and plan state
+updated; validation evidence reported. Clearly state anything not verified and
+why an update was not applicable when that might otherwise be ambiguous.

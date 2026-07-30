@@ -48,9 +48,10 @@ rewriting old rationale unless repository policy says otherwise.
 
 ## Plans
 
-Create persistent plan when work is multi-step, spans sessions, has meaningful
-sequencing, or needs coordination. Re-read plan from disk before resuming and
-update it as work proceeds.
+When user requested or approved persistent design artifacts, create a plan if
+work is multi-step, spans sessions, has meaningful sequencing, or needs
+coordination. If a plan already exists, re-read it from disk before resuming and
+update it as authorized work proceeds.
 
 Useful plan sections:
 

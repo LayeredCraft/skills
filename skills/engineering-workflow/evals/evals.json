@@ -1,0 +1,93 @@
+{
+  "skill_name": "engineering-workflow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Study this repository and tell me how you would structure a reusable automated skill-validation workflow.",
+      "expected_output": "Inspects local policy and precedent, compares viable options proportional to impact, and defaults to chat without unrequested filesystem changes.",
+      "files": [],
+      "expectations": [
+        "Does not create or edit ADR, plan, documentation, or production files without requesting authorization.",
+        "Consults repository-local instructions and existing architecture before recommending a design.",
+        "Surfaces genuine design choices instead of silently selecting an ambiguous direction."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Fix the empty-input and blank-field bug in parser_project/parser.py. Preserve notes.txt as unrelated user work. Implement and verify the smallest safe fix.",
+      "expected_output": "Preserves unrelated work, fixes parser behavior, adds regression coverage, and reports exact validation evidence.",
+      "files": [
+        "evals/files/parser_project/parser.py",
+        "evals/files/parser_project/test_parser.py",
+        "evals/files/parser_project/notes.txt"
+      ],
+      "expectations": [
+        "Leaves notes.txt unchanged.",
+        "Makes parse_fields return an empty list for empty or whitespace-only input and omit blank comma-separated fields.",
+        "Adds or updates regression tests and reports exact test command and result."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Improve clarity in docs_project/INSTALL.md without changing behavior or public contracts.",
+      "expected_output": "Makes only scoped documentation changes and does not invent unrelated code or test work.",
+      "files": ["evals/files/docs_project/INSTALL.md"],
+      "expectations": [
+        "Changes only INSTALL.md.",
+        "Does not invent tests or production code.",
+        "Runs or recommends only documentation-relevant validation."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Review review_project/change.patch in detail using review_project/CONTRIBUTING.md. Network and hosting APIs are unavailable.",
+      "expected_output": "Reviews complete local patch, reports evidence-based emoji-prefixed findings, and states unavailable metadata or checks.",
+      "files": [
+        "evals/files/review_project/change.patch",
+        "evals/files/review_project/CONTRIBUTING.md"
+      ],
+      "expectations": [
+        "Uses local patch and repository policy instead of stopping because platform APIs are unavailable.",
+        "Identifies both seeded defects before reporting verdict.",
+        "Uses defined review emoji dispositions and does not claim PR metadata or CI was verified."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Walk me through auth_project authentication flow, why it was designed this way, and what tests prove. Do not modify files.",
+      "expected_output": "Explains current fixture in execution order, connects decision rationale and tests to behavior, and makes no edits.",
+      "files": [
+        "evals/files/auth_project/auth.py",
+        "evals/files/auth_project/test_auth.py",
+        "evals/files/auth_project/decision.md"
+      ],
+      "expectations": [
+        "Explains token validation in execution order using current files.",
+        "Connects constant-time signature comparison and expiry boundary tests to behavior and rationale.",
+        "Makes no filesystem or external-system changes."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Triage exported review feedback in feedback_project/comments.json and prepare local fixes. Network is unavailable; do not claim replies were posted or threads resolved.",
+      "expected_output": "Classifies supplied feedback and clearly separates proposed local work from unavailable platform mutations.",
+      "files": ["evals/files/feedback_project/comments.json"],
+      "expectations": [
+        "Classifies actionable defect, suggestion, and praise separately.",
+        "Does not claim comments were posted, commits pushed, or threads resolved.",
+        "Requests approval before applying fixes or external mutations and reports missing platform state."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Add boundary tests for math_project/clamp.py. Do not change production behavior unless a test proves a bug.",
+      "expected_output": "Adds focused tests without unrelated production or documentation changes.",
+      "files": ["evals/files/math_project/clamp.py"],
+      "expectations": [
+        "Adds tests covering lower boundary, upper boundary, and an in-range value.",
+        "Does not change clamp.py when tests confirm current behavior.",
+        "Does not create unrelated documentation."
+      ]
+    }
+  ]
+}
