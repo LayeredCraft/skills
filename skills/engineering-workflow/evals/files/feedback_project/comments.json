@@ -1,0 +1,20 @@
+[
+  {
+    "id": 101,
+    "type": "inline",
+    "resolved": false,
+    "body": "Token expiry accepts credentials at the exact expiry boundary."
+  },
+  {
+    "id": 102,
+    "type": "issue",
+    "resolved": false,
+    "body": "Suggestion: rename helper to make intent clearer."
+  },
+  {
+    "id": 103,
+    "type": "review",
+    "resolved": false,
+    "body": "Great regression coverage here, thanks!"
+  }
+]

@@ -1,0 +1,10 @@
+diff --git a/auth.py b/auth.py
+index 1111111..2222222 100644
+--- a/auth.py
++++ b/auth.py
+@@ -1,4 +1,6 @@
+ def authenticate(token: str) -> bool:
++    print(f"auth token={token}")
+     return token == "expected"
++
++# No test changes included.

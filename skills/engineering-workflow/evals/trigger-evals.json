@@ -1,0 +1,79 @@
+[
+  {
+    "query": "Design a durable job scheduler for this service. Compare options against existing architecture and propose an implementation plan.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix the intermittent parser failure without disturbing my staged migration work, then run the relevant checks.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review PR 184 for correctness, tests, security, and consistency with this repository's ADRs.",
+    "should_trigger": true
+  },
+  {
+    "query": "Address every unresolved review thread on this PR, apply valid fixes, verify them, and prepare replies.",
+    "should_trigger": true
+  },
+  {
+    "query": "Explain this caching implementation end to end, including why its design was chosen and what the tests prove.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add integration tests for the new payment retry behavior and follow this repo's test conventions.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write migration documentation for this breaking API change and update all affected examples.",
+    "should_trigger": true
+  },
+  {
+    "query": "We need a new authorization pattern across three packages. Research local precedent and help decide where the decision belongs.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement the accepted storage ADR and keep its multi-phase plan current as you work.",
+    "should_trigger": true
+  },
+  {
+    "query": "Audit this source generator change for hostile input handling and realistic consumer verification.",
+    "should_trigger": true
+  },
+  {
+    "query": "Commit my current staged changes using a conventional commit message.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a branch for this bug fix and push it.",
+    "should_trigger": false
+  },
+  {
+    "query": "Open a draft PR from the current branch using the repository template.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the typo 'recieve' in README.md and nothing else.",
+    "should_trigger": false
+  },
+  {
+    "query": "What PartiQL syntax updates one DynamoDB item?",
+    "should_trigger": false
+  },
+  {
+    "query": "Add a Zensical card grid to this documentation landing page.",
+    "should_trigger": false
+  },
+  { "query": "What does HTTP status 409 mean?", "should_trigger": false },
+  {
+    "query": "Rename this local variable from x to count in the function I pasted.",
+    "should_trigger": false
+  },
+  {
+    "query": "Read package.json and tell me the package name.",
+    "should_trigger": false
+  },
+  {
+    "query": "Format this Markdown table so its columns align.",
+    "should_trigger": false
+  }
+]
