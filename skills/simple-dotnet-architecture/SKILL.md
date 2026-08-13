@@ -1,6 +1,6 @@
 ---
 name: simple-dotnet-architecture
-description: Design, implement, review, or simplify .NET APIs, background workers, and message consumers using pragmatic feature slices and only the complexity the application needs. Use when choosing boundaries between delivery code, operations, EF Core, services, clients, workers, or consumers; restructuring a .NET application; or deciding whether repositories, CQRS, MediatR, Clean Architecture, modules, or distributed-service boundaries are justified.
+description: Design, implement, review, or simplify .NET 8+ Minimal APIs, background workers, and message consumers using pragmatic feature slices and only the complexity the application needs. Use when choosing boundaries between delivery code, operations, EF Core, services, clients, workers, or consumers; restructuring a .NET application; or deciding whether repositories, CQRS, MediatR, Clean Architecture, modules, or distributed-service boundaries are justified.
 ---
 
 # Simple .NET Architecture
@@ -13,7 +13,7 @@ Identify the application's entry point, then load only its reference:
 
 | Shape | Delivery edge | Load |
 | --- | --- | --- |
-| HTTP API | Minimal API endpoint or controller action | [API feature slices](references/api-feature-slices.md) |
+| HTTP API | ASP.NET Core Minimal API endpoint | [API feature slices](references/api-feature-slices.md) |
 | Background worker | `BackgroundService`, scheduled job, or hosted service | [Workers](references/workers.md) |
 | Message consumer | Queue, topic, or stream consumer | [Consumers](references/consumers.md) |
 

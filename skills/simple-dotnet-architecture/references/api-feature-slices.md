@@ -1,6 +1,6 @@
 # API Feature Slices
 
-Use this reference for ASP.NET Core Minimal APIs or controllers. Start with one operation per file:
+Use this reference for ASP.NET Core Minimal APIs targeting .NET 8 or later. Read the application's target framework before using version-specific APIs; the `AddValidation` note below applies only to .NET 10+. Start with one operation per file:
 
 ```text
 HTTP request -> Endpoint -> Handler -> DbContext / services / external clients

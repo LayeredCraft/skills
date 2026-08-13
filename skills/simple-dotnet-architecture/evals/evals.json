@@ -1,0 +1,64 @@
+{
+  "skill_name": "simple-dotnet-architecture",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design a .NET 8 Minimal API endpoint to create a product with EF Core. Keep the implementation simple and show the files and registration needed.",
+      "expected_output": "Uses a feature slice with endpoint-owned HTTP contracts, a concrete handler, direct DbContext use, and feature-level composition.",
+      "files": [],
+      "expectations": [
+        "Uses endpoint-local Request and Response models rather than a shared DTO by default.",
+        "Keeps HTTP status mapping out of the handler.",
+        "Avoids a repository, MediatR, handler interface, and generic ProductService without evidence.",
+        "Places ProductsModule at the feature root and keeps Program.cs limited to application composition."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our product search returns only ID, name, and price. Should the handler return Product, a nested Result, or the endpoint Response? Explain and propose the smallest code shape.",
+      "expected_output": "Selects the simplest useful application output and keeps the HTTP contract separate without mechanically duplicating types.",
+      "files": [],
+      "expectations": [
+        "Does not prescribe Handler.Result when it would only duplicate Endpoint.Response.",
+        "Allows a handler-specific projection when selecting only necessary columns or expressing a distinct application result.",
+        "Does not return an EF entity directly as the HTTP response."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Add a recurring invoice worker that runs every five minutes. It uses EF Core and sometimes a downstream payment provider fails. Show the ownership boundaries and safe host lifecycle shape.",
+      "expected_output": "Treats the worker as the delivery edge, creates a scope per run, keeps the operation framework-independent, and chooses an explicit failure policy.",
+      "files": [],
+      "expectations": [
+        "Does not constructor-inject a scoped DbContext into BackgroundService.",
+        "Propagates cancellation and avoids overlapping runs unless concurrency safety is established.",
+        "States whether failures fail fast or log/back off/retry and does not silently swallow them.",
+        "Calls out idempotency or reconciliation for the external payment side effect."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Consume OrderSubmitted messages from a queue and start fulfillment. The broker is at-least-once and the service writes to SQL Server. Design the consumer and its retry behavior.",
+      "expected_output": "Separates broker concerns from the operation, provides durable duplicate handling, and acknowledges only after successful durable work.",
+      "files": [],
+      "expectations": [
+        "Assumes at-least-once delivery unless a stronger end-to-end guarantee is established.",
+        "Requires durable deduplication or an idempotent state transition.",
+        "Explains that the inbox completion and local state change must be transactional, or the operation must be independently idempotent.",
+        "Distinguishes transient retry, permanent/dead-letter, and business-rejection outcomes."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Products and Orders both need pricing logic. Where should it live? Also, two product handlers share a small summary shape. Propose folders and boundaries.",
+      "expected_output": "Places shared code according to ownership and keeps transport models at the narrowest scope.",
+      "files": [],
+      "expectations": [
+        "Uses a named cross-feature pricing capability rather than a generic Services or Common folder.",
+        "Places ProductSummary inside the Products feature when only product handlers share it.",
+        "Does not reuse endpoint request/response types as application or message models.",
+        "Registers services as concrete types unless a real provider or module boundary warrants an interface."
+      ]
+    }
+  ]
+}

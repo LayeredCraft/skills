@@ -49,6 +49,8 @@ SharedKernel/
 
 The folder names are defaults, not a required project layout. The important rule is that a file's location reveals its owner and intended consumers.
 
+Do not copy framework-specific patterns from this skill into an older target blindly. Keep architectural rules stable, but verify current APIs and version-specific behavior against official documentation for the target framework.
+
 ## Keep models at the narrowest scope
 
 ```text

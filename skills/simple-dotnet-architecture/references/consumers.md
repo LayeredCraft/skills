@@ -58,7 +58,7 @@ public static class OrdersMessagingModule
 }
 ```
 
-Keep `MessageInbox` durable and protect its event ID with a uniqueness constraint. Make a claim lease recoverable after a crash; `TryClaimAsync` must return `AlreadyCompleted` only for a completed delivery, and may reclaim an expired in-progress delivery. For a broker SDK that invokes a singleton callback, create a scope per delivery there and resolve `OrderSubmittedConsumer` from that scope. The consumer above deliberately has no broker SDK types.
+Keep `MessageInbox` durable and protect its event ID with a uniqueness constraint. For a local database-only operation, persist the operation's state change and `CompleteAsync` in the same database transaction using the same scoped `DbContext`; otherwise a crash between the two can repeat the operation. If the operation includes an external side effect, do not keep that database transaction open around the call. Instead, make the side effect independently idempotent and reconcile it on retry, or use durable state plus an outbox. Make a claim lease recoverable after a crash; `TryClaimAsync` must return `AlreadyCompleted` only for a completed delivery, and may reclaim an expired in-progress delivery. For a broker SDK that invokes a singleton callback, create a scope per delivery there and resolve `OrderSubmittedConsumer` from that scope. The consumer above deliberately has no broker SDK types.
 
 Assume at-least-once delivery unless the broker and its full processing path demonstrably guarantee otherwise. Make processing idempotent using a durable deduplication record, a unique business key, or a state transition that safely rejects repeats. Scope the idempotency key to the producer and message type where necessary.
 

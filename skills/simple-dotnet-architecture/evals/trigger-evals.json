@@ -1,0 +1,30 @@
+[
+  {
+    "query": "Design a simple .NET 8 Minimal API for product management without adding unnecessary Clean Architecture layers.",
+    "should_trigger": true
+  },
+  {
+    "query": "How should I structure an ASP.NET Core worker that retries invoice processing safely?",
+    "should_trigger": true
+  },
+  {
+    "query": "Review this RabbitMQ consumer design for idempotency, retries, and dead-letter handling.",
+    "should_trigger": true
+  },
+  {
+    "query": "Should I add MediatR and repositories to this EF Core API?",
+    "should_trigger": true
+  },
+  {
+    "query": "How do I write a LINQ GroupBy query in C#?",
+    "should_trigger": false
+  },
+  {
+    "query": "What does HTTP 409 Conflict mean?",
+    "should_trigger": false
+  },
+  {
+    "query": "Commit the changes on my current branch and push them.",
+    "should_trigger": false
+  }
+]

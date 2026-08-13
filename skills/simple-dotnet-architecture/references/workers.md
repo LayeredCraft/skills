@@ -29,12 +29,24 @@ public sealed class BillingWorker(
 
         while (await timer.WaitForNextTickAsync(stoppingToken))
         {
-            await using var scope = scopeFactory.CreateAsyncScope();
-            var operation = scope.ServiceProvider
-                .GetRequiredService<RunOverdueInvoices.Handler>();
+            try
+            {
+                await using var scope = scopeFactory.CreateAsyncScope();
+                var operation = scope.ServiceProvider
+                    .GetRequiredService<RunOverdueInvoices.Handler>();
 
-            await operation.HandleAsync(stoppingToken);
-            logger.LogInformation("Overdue-invoice run completed");
+                await operation.HandleAsync(stoppingToken);
+                logger.LogInformation("Overdue-invoice run completed");
+            }
+            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+            {
+                break;
+            }
+            catch (Exception exception)
+            {
+                logger.LogError(exception, "Overdue-invoice run failed");
+                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
+            }
         }
     }
 }
@@ -51,6 +63,8 @@ public static class BillingModule
 ```
 
 Keep scheduling in `BillingWorker`; make `RunOverdueInvoices.Handler` a normal scoped operation that accepts only its input and `CancellationToken`. For a one-off or queue-triggered item, create one scope per item rather than per timer tick.
+
+The example deliberately logs, backs off, and continues after an unexpected failure. Choose this policy only when individual runs are safe to retry. Otherwise, let the host fail fast and rely on supervised restart, or classify failures into retryable, permanent, and operator-action-required outcomes. Never silently swallow a failed run.
 
 For recurring work, define the trigger, selection criteria, work-item claim or lock strategy, retry/backoff policy, and maximum parallelism. Make a run safe after restart: use durable state, an idempotency key, or a claim/checkpoint where duplicate execution is possible.
 
