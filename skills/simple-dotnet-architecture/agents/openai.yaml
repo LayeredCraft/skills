@@ -1,0 +1,4 @@
+interface:
+  display_name: "Simple .NET Architecture"
+  short_description: "Scale .NET delivery apps without overengineering"
+  default_prompt: "Use $simple-dotnet-architecture to design or simplify this .NET API, worker, or message consumer."
