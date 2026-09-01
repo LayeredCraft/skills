@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modern Python"
+  short_description: "Current design and coding practices for Python"
+  default_prompt: "Use $modern-python to implement this Python change with modern, maintainable patterns."
