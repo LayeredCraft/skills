@@ -11,6 +11,12 @@ Use the weakest honest interface (`Iterable`, `Collection`, `Sequence`, `Mapping
 
 Use a dataclass by default; choose `frozen`, `kw_only`, or `slots` for a concrete reason. Use `default_factory` for mutable fields. `TypedDict` describes external dictionaries statically—validate before trusting it. `NamedTuple` is for intentional tuple semantics.
 
+## Structure
+
+Organize modules around one cohesive responsibility and clear dependency direction. Split a file when it mixes distinct concepts, layers, or reasons to change—not at an arbitrary line count. Keep related small types together; do not create a file per class.
+
+Prefer functions for stateless transformations and one-off actions. Introduce a class when state, lifecycle, invariants, or a replaceable behavior belong together. Do not use classes as namespaces. Keep functions focused on one meaningful operation; extract a helper only when it has a clear name and responsibility. Avoid modules or classes that coordinate unrelated work.
+
 Public APIs are typed, intentional, and stable. Use keyword-only evolving options, package `py.typed` for published inline-typed libraries, and translate errors only at abstraction boundaries with preserved causes. Deprecations name a replacement and removal point.
 
 Keep CLI parsing at the edge; use `argparse` unless a framework earns its dependency. Public changes require type, exception, docstring, compatibility, and focused-test review. Test an installed artifact when packaging or import behavior changes.
