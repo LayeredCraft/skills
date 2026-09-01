@@ -28,6 +28,6 @@ Use this reference for tool setup, tests, diagnostics, performance work, securit
 
 - Validate, normalize, and limit untrusted input at the boundary: size, time, queue depth, concurrency, and output are all resources.
 - Never unpickle untrusted data.
-- Use `subprocess` argument sequences with `shell=False` by default. Do not use f-strings to assemble SQL, shell, HTML, or another language from untrusted values; use that target's parameterized/escaping API.
+- Use `subprocess` argument sequences with `shell=False` by default. Use `check=True` and an explicit timeout when the caller needs failure or runtime bounds. Do not use f-strings to assemble SQL, shell, HTML, or another language from untrusted values; use that target's parameterized/escaping API.
 - Use `secrets` for security tokens and `compare_digest` for sensitive comparisons when applicable. Use `tempfile` APIs instead of inventing temporary names.
 - Static types aid review; they never replace runtime enforcement at a trust boundary.
