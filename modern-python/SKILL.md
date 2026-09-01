@@ -14,6 +14,7 @@ Write maintainable Python that fits the repository's supported interpreter range
 3. Keep public functions, cross-module data, callbacks, and meaningful state typed. Let clear local variables be inferred.
 4. Use built-in generics, `collections.abc` interfaces, and `X | None` / `X | Y` where the version permits. Avoid spreading `Any`; use `object` and narrow untrusted values instead.
 5. Keep validation at trust boundaries, expose intentional public APIs, and make cleanup and error behavior explicit.
+6. Before finishing a non-trivial change, run the relevant configured checks—tests, formatting, linting, and type checking—and report the commands and actual results.
 
 Choose the smallest applicable reference. Do not load all references by default.
 
@@ -22,7 +23,7 @@ Choose the smallest applicable reference. Do not load all references by default.
 - For type design, data models, public library APIs, package structure, or CLI boundaries, read [references/design-and-typing.md](references/design-and-typing.md).
 - For `asyncio`, threads, processes, cancellation, timeouts, resource ownership, or concurrent-error handling, read [references/concurrency.md](references/concurrency.md).
 - For testing, formatting, linting, static analysis, profiling, logging, security, or compatibility/deprecation work, read [references/quality-and-operations.md](references/quality-and-operations.md).
-- For public API documentation or docstring review, read [references/documentation.md](references/documentation.md).
+- When adding or reviewing public API documentation or docstrings, read [references/documentation.md](references/documentation.md).
 
 ## Default decisions
 

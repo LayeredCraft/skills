@@ -10,6 +10,8 @@ Use this reference for type boundaries, data models, library design, package str
 - Python 3.13+: use `typing.TypeIs` when a custom predicate soundly narrows a subtype. Keep `TypeGuard` for unsound-but-useful cases such as invariant mutable containers.
 - Python 3.14+: deferred annotation evaluation changes runtime introspection. Do not depend on annotation evaluation side effects; retain a compatibility approach for older supported versions.
 
+When an older supported Python version needs a newer typing construct, use `typing_extensions` only for that construct and declare it as a dependency. Do not raise the project's runtime floor merely to use newer annotation spelling.
+
 ## Contracts and types
 
 - Accept the weakest honest interface: `Iterable` for one pass, `Collection` for length/containment, `Sequence` for indexing, and `Mapping` when mutation is unnecessary.
@@ -34,6 +36,10 @@ Use this reference for type boundaries, data models, library design, package str
 - Prefer `pyproject.toml`; use a `src/` layout for distributable packages unless the existing project has a sound, established alternative.
 - Translate low-level exceptions only at an abstraction boundary, preserving the cause with `raise PublicError(...) from exc`.
 - Deprecate established contracts with a replacement, expected removal point, and appropriate warning/static metadata. Do not break users merely to change style.
+
+## Public-change review
+
+Before finalizing a public API change, review its parameter and return types, documented exceptions, docstring, compatibility effect, and focused tests. Test a distributable package through an installed artifact when packaging or import behavior changed.
 
 ## CLI boundary
 
