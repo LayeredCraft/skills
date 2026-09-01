@@ -18,14 +18,14 @@ Load only the relevant reference:
 - [Design and typing](references/design-and-typing.md): models, APIs, packaging, CLI, or type design.
 - [Concurrency](references/concurrency.md): async work, threads, processes, deadlines, cancellation, or shutdown.
 - [Quality and operations](references/quality-and-operations.md): tests, tooling, logging, performance, security, or deprecation.
-- [Documentation](references/documentation.md): public API documentation or docstrings.
+- [Documentation](references/documentation.md): documentation or docstrings.
 
 ## Defaults
 
 - Use dataclasses for owned records, `TypedDict` for external dict-shaped data, and small protocols for injected behavior. Use ABCs only for deliberate runtime hierarchies or shared implementation.
 - Keep parsing and framework objects at the CLI edge; `main(argv=None) -> int` returns an exit status.
 - Libraries do not configure global logging or perform import-time work.
-- Related async tasks use `TaskGroup` and have an owner, cancellation path, deadline, and cleanup path.
+- Related async tasks use `TaskGroup` on Python 3.11+ and always have an owner, cancellation path, deadline, and cleanup path.
 - Follow existing tooling. New projects choose one formatter, Ruff as the usual linter, and one primary type checker.
 - Use concise Google-style docstrings for public or non-obvious behavior, not trivial private code.
 

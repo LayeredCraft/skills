@@ -6,4 +6,4 @@ Separate pure logic from I/O where useful. Inject effects tests must control. Te
 
 Measure before optimizing: `cProfile` for execution shape, `timeit` for microbenchmarks, `tracemalloc` for allocations. Improve algorithms and data movement first; bound caches.
 
-Validate and limit untrusted input. Never unpickle it. Use `subprocess` argument lists with `shell=False`, plus `check=True` and a timeout when appropriate. Parameterize target languages instead of interpolating untrusted data. Use `secrets`, `compare_digest`, and `tempfile` for their intended security cases. Types do not enforce runtime security.
+Validate and limit untrusted input. Never unpickle it. Use `subprocess` argument lists with `shell=False`, plus `check=True` and a timeout when appropriate. Use the target API's parameterization or context-sensitive escaping instead of interpolating untrusted data. Use `secrets`, `compare_digest`, and `tempfile` for their intended security cases. Types do not enforce runtime security.
