@@ -1,48 +1,16 @@
-# Design, typing, and interfaces
+# Design and typing
 
-Use this reference for type boundaries, data models, library design, package structure, and CLI code.
+- Python 3.10+: built-in generics, `X | Y`, pattern matching, `ParamSpec`, `TypeGuard`.
+- Python 3.11+: `TaskGroup`, `Self`, `Required`, `NotRequired`, `ExceptionGroup`.
+- Python 3.12+: PEP 695 type parameters only when the floor permits.
+- Python 3.13+: prefer sound `TypeIs` predicates; use `TypeGuard` when narrowing is intentionally unsound.
+- Python 3.14+: annotations are deferred. Do not rely on annotation side effects.
+- For newer typing features on older supported Python, import only the needed construct from `typing_extensions` and declare the dependency.
 
-## Version-aware language choices
+Use the weakest honest interface (`Iterable`, `Collection`, `Sequence`, `Mapping`). Prefer ordinary narrowing over `cast`; `cast` is not validation. Use small `Protocol`s for structural dependencies and `NewType`, `Literal`, overloads, or `ParamSpec` only for real type relationships.
 
-- Python 3.10+: use `list[str]`, `dict[str, bytes]`, `collections.abc` interfaces, `T | None`, structural pattern matching where shape-driven dispatch helps, `ParamSpec`, and `TypeGuard`.
-- Python 3.11+: prefer `asyncio.TaskGroup` for related async work; `Self`, `Required`, `NotRequired`, `assert_never`, and `ExceptionGroup` are available.
-- Python 3.12+: use PEP 695 type-parameter syntax (`def first[T](...)`) only when the project floor is 3.12 or higher.
-- Python 3.13+: use `typing.TypeIs` when a custom predicate soundly narrows a subtype. Keep `TypeGuard` for unsound-but-useful cases such as invariant mutable containers.
-- Python 3.14+: deferred annotation evaluation changes runtime introspection. Do not depend on annotation evaluation side effects; retain a compatibility approach for older supported versions.
+Use a dataclass by default; choose `frozen`, `kw_only`, or `slots` for a concrete reason. Use `default_factory` for mutable fields. `TypedDict` describes external dictionaries statically—validate before trusting it. `NamedTuple` is for intentional tuple semantics.
 
-When an older supported Python version needs a newer typing construct, use `typing_extensions` only for that construct and declare it as a dependency. Do not raise the project's runtime floor merely to use newer annotation spelling.
+Public APIs are typed, intentional, and stable. Use keyword-only evolving options, package `py.typed` for published inline-typed libraries, and translate errors only at abstraction boundaries with preserved causes. Deprecations name a replacement and removal point.
 
-## Contracts and types
-
-- Accept the weakest honest interface: `Iterable` for one pass, `Collection` for length/containment, `Sequence` for indexing, and `Mapping` when mutation is unnecessary.
-- Prefer normal narrowing (`isinstance`, `is not None`, early return, raise) over `cast`. A cast records static knowledge; it never validates runtime data.
-- Use `Protocol` for small consumer-owned structural interfaces, especially adapters and test fakes. Use `@runtime_checkable` only for coarse capability checks.
-- Use `NewType` for distinct scalar IDs where mixing values would be a bug. Use `Literal` or overloads when inputs and outputs genuinely correlate.
-- Use `ParamSpec` for decorators/adapters that preserve a callable signature. Use a callable protocol when keyword-only details matter.
-
-## Models and ownership
-
-- Use `@dataclass` as the normal owned model. Consider `frozen=True` for value objects, `kw_only=True` for evolving constructors, and `slots=True` when measured instance count or deliberate API rigidity justifies it.
-- Never use mutable field defaults; use `field(default_factory=...)`.
-- Use `TypedDict` for JSON/config/request-like dictionaries. It is static only, so validate untrusted data before treating it as trusted. Prefer field-level `Required`, `NotRequired`, and `ReadOnly` when they express the schema.
-- Use `NamedTuple` only where tuple semantics—unpacking and positional order—are part of the contract.
-- Copy or wrap mutable inputs at ownership boundaries, not indiscriminately.
-
-## Public APIs and packaging
-
-- Type public parameters, returns, yielded values, callbacks, and important attributes. Make sync/async distinctions explicit.
-- Prefer keyword-only policy options that will likely grow. Use positional-only parameters only when parameter names should deliberately remain non-contractual.
-- Keep top-level exports intentional and implementation modules private by convention. For published inline-typed packages, ship `py.typed`.
-- Prefer `pyproject.toml`; use a `src/` layout for distributable packages unless the existing project has a sound, established alternative.
-- Translate low-level exceptions only at an abstraction boundary, preserving the cause with `raise PublicError(...) from exc`.
-- Deprecate established contracts with a replacement, expected removal point, and appropriate warning/static metadata. Do not break users merely to change style.
-
-## Public-change review
-
-Before finalizing a public API change, review its parameter and return types, documented exceptions, docstring, compatibility effect, and focused tests. Test a distributable package through an installed artifact when packaging or import behavior changed.
-
-## CLI boundary
-
-- Use `argparse` when standard-library portability matters; use a framework such as Typer only when its dependency is justified by the CLI.
-- Keep parser/framework objects out of domain code. Send requested output to stdout; send diagnostics to stderr or logging.
-- Keep `__main__.py` as a small wrapper around the same entry point used by the installed script.
+Keep CLI parsing at the edge; use `argparse` unless a framework earns its dependency. Public changes require type, exception, docstring, compatibility, and focused-test review. Test an installed artifact when packaging or import behavior changes.
