@@ -5,37 +5,28 @@ description: Implement, review, or modernize Python server, library, and CLI cod
 
 # Modern Python
 
-Write maintainable Python that fits the repository's supported interpreter range. Prefer ordinary, readable control flow over compact tricks. Preserve established public APIs unless the request authorizes a compatibility change.
+Match the repository's supported Python range and existing conventions. Prefer readable control flow and preserve public contracts unless change is authorized.
 
-## First pass
+## Work
 
-1. Read the project's `pyproject.toml`, contribution guidance, existing tool configuration, and nearby code before choosing syntax or tools.
-2. Identify the minimum supported Python version. Do not introduce parser-level features above that floor. If it is not stated and cannot be inferred, use broadly modern Python 3.10 syntax and call out the assumption when it affects the result.
-3. Keep public functions, cross-module data, callbacks, and meaningful state typed. Let clear local variables be inferred.
-4. Use built-in generics, `collections.abc` interfaces, and `X | None` / `X | Y` where the version permits. Avoid spreading `Any`; use `object` and narrow untrusted values instead.
-5. Keep validation at trust boundaries, expose intentional public APIs, and make cleanup and error behavior explicit.
-6. Before finishing a non-trivial change, run the relevant configured checks—tests, formatting, linting, and type checking—and report the commands and actual results.
+1. Read `pyproject.toml`, project guidance, and nearby code. Establish the minimum Python version; if unknown, use Python 3.10 syntax and state the assumption when it matters.
+2. Type public and cross-module boundaries. Use built-in generics, `collections.abc`, unions, and honest interfaces. Keep validation, resource ownership, and error behavior explicit.
+3. Before finishing a non-trivial change, run relevant configured tests, formatter, linter, and type checker; report actual results.
 
-Choose the smallest applicable reference. Do not load all references by default.
+Load only the relevant reference:
 
-## Route by task
+- [Design and typing](references/design-and-typing.md): models, APIs, packaging, CLI, or type design.
+- [Concurrency](references/concurrency.md): async work, threads, processes, deadlines, cancellation, or shutdown.
+- [Quality and operations](references/quality-and-operations.md): tests, tooling, logging, performance, security, or deprecation.
+- [Documentation](references/documentation.md): public API documentation or docstrings.
 
-- For type design, data models, public library APIs, package structure, or CLI boundaries, read [references/design-and-typing.md](references/design-and-typing.md).
-- For `asyncio`, threads, processes, cancellation, timeouts, resource ownership, or concurrent-error handling, read [references/concurrency.md](references/concurrency.md).
-- For testing, formatting, linting, static analysis, profiling, logging, security, or compatibility/deprecation work, read [references/quality-and-operations.md](references/quality-and-operations.md).
-- When adding or reviewing public API documentation or docstrings, read [references/documentation.md](references/documentation.md).
+## Defaults
 
-## Default decisions
+- Use dataclasses for owned records, `TypedDict` for external dict-shaped data, and small protocols for injected behavior. Use ABCs only for deliberate runtime hierarchies or shared implementation.
+- Keep parsing and framework objects at the CLI edge; `main(argv=None) -> int` returns an exit status.
+- Libraries do not configure global logging or perform import-time work.
+- Related async tasks use `TaskGroup` and have an owner, cancellation path, deadline, and cleanup path.
+- Follow existing tooling. New projects choose one formatter, Ruff as the usual linter, and one primary type checker.
+- Use concise Google-style docstrings for public or non-obvious behavior, not trivial private code.
 
-- Use a `dataclass` for owned record-like values; use `TypedDict` for dictionary-shaped external data; use a small `Protocol` for injected behavior. Use an ABC only for intentional runtime hierarchy or shared implementation.
-- Keep CLI parsing at the edge. Pass ordinary typed values into application code; have `main(argv: Sequence[str] | None = None) -> int` return an exit status.
-- Keep libraries free of global logging configuration and import-time side effects.
-- In async code, make each task's owner, cancellation path, deadline, and cleanup path clear. Prefer `TaskGroup` for sibling work belonging to one operation.
-- Use formatter, linter, and type checker settings already present in the repository. For a new project, choose one formatter, Ruff as the usual linter, and one primary type checker.
-- Document public and non-obvious behavior with concise Google-style docstrings; do not add boilerplate docstrings to self-explanatory private code.
-
-## Review focus
-
-Treat these as deliberate exceptions that need a local reason: `Any`, `cast`, type/lint ignores, broad exception catches, `shell=True`, unbounded task creation or caches, mutable global state, and unsafe deserialization.
-
-Do not modernize spelling, APIs, or dependencies solely for fashion. Prefer changes that improve a concrete contract, safety property, or maintenance cost.
+Review exceptions to these defaults locally: `Any`, `cast`, ignores, broad catches, `shell=True`, unbounded tasks/caches, mutable globals, and unsafe deserialization.
