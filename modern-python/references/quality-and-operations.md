@@ -1,8 +1,8 @@
 # Quality and operations
 
-Follow repository tooling. New projects use one formatter, Ruff, and one type checker; target the minimum supported Python. Keep suppressions local and explained.
+Follow repository tooling. New projects use one formatter, Ruff, and one type checker; target the minimum supported Python. Applications use the project's reproducible lock/install workflow; libraries keep supported dependency ranges deliberate. Keep suppressions local and explained.
 
-Separate pure logic from I/O where useful. Inject effects tests must control. Prefer protocol-based fakes to deep mocks; test CLI core separately and async cancellation without arbitrary sleeps. Libraries use module loggers and never configure global logging. Do not log secrets.
+Separate pure logic from I/O where useful. Inject effects tests must control. Test observable behavior; pair defect fixes with focused regressions. Prefer protocol-based fakes to deep mocks; test CLI core separately and async cancellation without arbitrary sleeps. Libraries use module loggers and never configure global logging. Do not log secrets.
 
 Measure before optimizing: `cProfile` for execution shape, `timeit` for microbenchmarks, `tracemalloc` for allocations. Improve algorithms and data movement first; bound caches.
 
