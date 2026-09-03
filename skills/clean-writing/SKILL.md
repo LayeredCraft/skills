@@ -1,29 +1,19 @@
 ---
 name: clean-writing
-description: "Use whenever writing, editing, or reviewing prose. Make it clear, direct, and easy to understand; remove AI-like filler without losing meaning or nuance."
+description: "Use for all user-facing prose: responses, drafts, edits, reviews, documentation, and technical explanations. Write clearly and naturally, without filler or lost nuance."
 ---
 
 # Clean writing
 
-Write clearly, directly, and respectfully. Follow explicit user and higher-priority instructions when they conflict with this skill. Do not add forced personality, emotion, slang, fake candor, or imitation.
+Write clearly, directly, and respectfully. Follow higher-priority and explicit user instructions. Do not add forced personality or imitation.
 
-## Core rules
+- Lead with the answer, decision, action, or point. Add context only when it helps readers understand or act.
+- Preserve facts, uncertainty, and exact technical, legal, or evidentiary text. Do not invent specificity or turn uncertainty into certainty.
+- Use plain words, concrete verbs, consistent terms, and active voice when the actor matters. Name relevant actors, reasons, limits, and failures.
+- Match length and format to the task. Use structure only when it helps readers scan or act. Retain required syntax, labels, and formatting.
 
-- Lead with the answer, decision, action, or point. Add only context that helps the reader understand or act.
-- Preserve facts, uncertainty, and exact text whose wording has technical, legal, or evidentiary meaning. Do not invent specificity or turn possibility into certainty.
-- Use ordinary words, concrete verbs, active voice when the actor matters, and one term per concept. Name the actor, reason, limit, or failure case when needed.
-- Match length and detail to the task. Use paragraphs and formatting only when they help the reader scan or act.
+For technical explanations, state the result first, then add only material mechanism, evidence, or limits. Procedures need steps and expected results. Decisions need a recommendation, reason, and material cost or alternative.
 
-## Explain technical information
+For edits, return clean copy unless annotations or source formatting are requested. Preserve meaning and register, make the smallest useful change, and flag material ambiguity.
 
-Lead with the result. Add mechanism, evidence, or a limit only when it changes what the reader understands or does. Procedures need steps and expected results. Decisions need a recommendation and reason; add a cost or alternative only when it materially changes the decision. Documentation should explain reasoning and non-obvious behavior, not self-evident code.
-
-## Remove automatic AI patterns
-
-Remove empty greetings, praise, setup, closing boilerplate, hype, vague attribution, generic balance, summary loops, decorative formatting, weak nominalized verbs, and stacked hedges. State facts, conditions, consequences, and real tradeoffs instead. Keep contrast, passive voice, or lists when they improve clarity; avoid repeated formula, not legitimate use.
-
-## Editing
-
-For edits and rewrites, return clean copy only unless the user asks for notes. For reviews, return the requested assessment and suggest revisions when useful. Preserve meaning and register, make the smallest useful edit, and flag material ambiguity instead of guessing.
-
-Before sending, make sure the opening states the point or action, every sentence adds information, facts and limits remain, and the format fits the task.
+Cut greetings, praise, setup, boilerplate, hype, vague attribution, generic balance, repetition, decorative formatting, weak nominalizations, and stacked hedges. Keep contrasts, passive voice, and lists when helpful.

@@ -77,7 +77,7 @@ Zensical-flavored documentation skill for structured authoring, reference-driven
 
 ### `clean-writing`
 
-General writing skill for clear, calm communication without AI-like filler, hype, or rigid templates.
+General writing skill for clear, direct communication without AI-like filler, hype, or rigid templates.
 
 - Applies to every user-facing response, draft, rewrite, and technical explanation
 - Leads with answer, then adds only needed context

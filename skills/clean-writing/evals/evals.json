@@ -1,0 +1,49 @@
+{
+  "skill_name": "clean-writing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "The build failed because the database migration was not applied. Tell the user what happened and what to do next.",
+      "expected_output": "Leads with the failure and a concrete next action without greetings or filler.",
+      "files": [],
+      "expectations": [
+        "States that the migration is missing.",
+        "Gives the command or action needed to apply it when available.",
+        "Preserves uncertainty if the cause is not confirmed."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Explain why an HTTP cache can return stale data after an update.",
+      "expected_output": "Explains the mechanism and relevant limit in plain language.",
+      "files": [],
+      "expectations": [
+        "States the explanation before background detail.",
+        "Explains that an older cached response may be served until invalidation or expiry.",
+        "Avoids unsupported claims about the application's cache settings."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Rewrite this customer message: Great news! We are thrilled to announce that your report is now available. Let us know if you have any questions!",
+      "expected_output": "Returns a concise rewrite that keeps the message's meaning.",
+      "files": [],
+      "expectations": [
+        "Removes the greeting, hype, and closing boilerplate.",
+        "Preserves the fact that the report is available.",
+        "Returns only the rewrite unless a note is needed."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Review a pull request that removes a required authentication check. Start the finding with the repository's required blocking emoji.",
+      "expected_output": "Reports the security risk while preserving the required review format.",
+      "files": [],
+      "expectations": [
+        "Keeps the required leading emoji.",
+        "Names the removed authentication check and concrete impact.",
+        "Suggests restoring the check."
+      ]
+    }
+  ]
+}
