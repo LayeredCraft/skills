@@ -1,51 +1,29 @@
 ---
 name: clean-writing
-description: "Use whenever writing, editing, or reviewing prose: docs, stories, comments, emails, messages, technical explanations, and chat replies. Make text clear, direct, and easy to understand. Remove AI-like filler and templates without losing meaning or needed nuance."
+description: "Use whenever writing, editing, or reviewing prose. Make it clear, direct, and easy to understand; remove AI-like filler without losing meaning or nuance."
 ---
 
 # Clean writing
 
-Write to convey information clearly. Be calm, direct, and respectful. Do not add forced personality, emotion, slang, fake candor, or imitation.
+Write clearly, directly, and respectfully. Follow explicit user and higher-priority instructions when they conflict with this skill. Do not add forced personality, emotion, slang, fake candor, or imitation.
 
 ## Core rules
 
-- Lead with answer, decision, action, or point. Add context only when it helps reader understand or act.
-- Preserve facts, numbers, names, links, code, commands, technical terms, and uncertainty. Never invent specificity or turn possibility into certainty.
-- Use ordinary words and concrete verbs. Keep technical terms when they carry needed meaning.
-- Prefer active voice when actor matters. Name actor, action, reason, limit, or failure case when reader needs it.
-- Give each paragraph one job. Use headings, lists, tables, bold, and code only when they help reader scan or act.
-- Use one term for one concept. Do not rotate synonyms for variety.
-- Adapt length and detail to reader and task. Clear does not mean clipped, harsh, or oversimplified.
+- Lead with the answer, decision, action, or point. Add only context that helps the reader understand or act.
+- Preserve facts, uncertainty, and exact text whose wording has technical, legal, or evidentiary meaning. Do not invent specificity or turn possibility into certainty.
+- Use ordinary words, concrete verbs, active voice when the actor matters, and one term per concept. Name the actor, reason, limit, or failure case when needed.
+- Match length and detail to the task. Use paragraphs and formatting only when they help the reader scan or act.
 
 ## Explain technical information
 
-Use only parts reader needs:
-
-1. Point: answer, recommendation, or action.
-2. Mechanism: why it works or what causes behavior.
-3. Evidence: example, command, source, constraint, or observed result.
-4. Consequence: tradeoff, limit, or next action.
-
-For procedures, give clear steps and expected result. For decisions, recommend option, explain why, then name meaningful cost or alternative. For documentation, explain reasoning and non-obvious behavior, not code reader can already read.
+Lead with the result. Add mechanism, evidence, or a limit only when it changes what the reader understands or does. Procedures need steps and expected results. Decisions need a recommendation and reason; add a cost or alternative only when it materially changes the decision. Documentation should explain reasoning and non-obvious behavior, not self-evident code.
 
 ## Remove automatic AI patterns
 
-Cut or rewrite these when they add no information:
-
-- Greetings, praise, chatbot setup, and closing boilerplate.
-- False contrast: "This is not X, it is Y." State Y. Keep contrast only when correcting likely, important confusion.
-- Fake suspense, teacher narration, empty importance, hype, and vague attribution.
-- Generic balance such as "it depends" or "each option has tradeoffs." State real condition or tradeoff.
-- Summary loops, rule-of-three padding, decorative formatting, and assistant-shaped markdown.
-- Weak or hidden verbs: "perform validation" becomes "validate."
-- Hedging stacks. State real uncertainty once.
-
-Do not turn these into rigid bans. One passive sentence, contrast, list of three, or em dash can be right. Fix repeated, formulaic use. Do not replace one tell with forced slang or punchy fragments.
+Remove empty greetings, praise, setup, closing boilerplate, hype, vague attribution, generic balance, summary loops, decorative formatting, weak nominalized verbs, and stacked hedges. State facts, conditions, consequences, and real tradeoffs instead. Keep contrast, passive voice, or lists when they improve clarity; avoid repeated formula, not legitimate use.
 
 ## Editing
 
-Return clean rewrite only unless user asks for notes. Preserve meaning and register. Make smallest edit that fixes clarity, structure, or tone. Flag meaningful ambiguity instead of guessing.
+For edits and rewrites, return clean copy only unless the user asks for notes. For reviews, return the requested assessment and suggest revisions when useful. Preserve meaning and register, make the smallest useful edit, and flag material ambiguity instead of guessing.
 
-## Final pass
-
-Check that first sentence earns reader's attention, every sentence adds information, facts and limits survive, and format fits content.
+Before sending, make sure the opening states the point or action, every sentence adds information, facts and limits remain, and the format fits the task.
