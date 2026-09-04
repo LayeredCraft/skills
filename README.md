@@ -16,13 +16,14 @@ This repo is a shared home for installable agent skills.
 
 ## Available skills
 
-| Skill                  | Description                                                                                                            | Install                                                                              |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `git-workflow`         | Commit work, create branches, and open pull requests using conventional git workflow conventions                       | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`         |
-| `engineering-workflow` | Project-agnostic process for design, implementation, testing, review, feedback, security, and documentation            | `npx skills add https://github.com/LayeredCraft/skills --skill engineering-workflow` |
-| `simple-dotnet-architecture` | Pragmatic .NET 8+ Minimal API, worker, and consumer architecture guidance | `npx skills add https://github.com/LayeredCraft/skills --skill simple-dotnet-architecture` |
-| `zensical-site`        | Tooling and guidance for Zensical-flavored documentation work                                                          | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`        |
-| `partiql-dynamodb`     | DynamoDB-specific PartiQL guidance with focused references for statements, functions, operators, transactions, and IAM | `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb`     |
+| Skill                        | Description                                                                                                            | Install                                                                                    |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `git-workflow`               | Commit work, create branches, and open pull requests using conventional git workflow conventions                       | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`               |
+| `engineering-workflow`       | Project-agnostic process for design, implementation, testing, review, feedback, security, and documentation            | `npx skills add https://github.com/LayeredCraft/skills --skill engineering-workflow`       |
+| `simple-dotnet-architecture` | Pragmatic .NET 8+ Minimal API, worker, and consumer architecture guidance                                              | `npx skills add https://github.com/LayeredCraft/skills --skill simple-dotnet-architecture` |
+| `zensical-site`              | Tooling and guidance for Zensical-flavored documentation work                                                          | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`              |
+| `partiql-dynamodb`           | DynamoDB-specific PartiQL guidance with focused references for statements, functions, operators, transactions, and IAM | `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb`           |
+| `clean-writing`              | Clear, calm, natural writing for conversation, technical explanations, and prose editing                               | `npx skills add https://github.com/LayeredCraft/skills --skill clean-writing`              |
 
 ## Install a skill
 
@@ -73,6 +74,16 @@ Zensical-flavored documentation skill for structured authoring, reference-driven
 - Best for teams building polished docs with consistent voice and formatting
 - Includes supporting references and templates inside `skills/zensical-site`
 - Install with `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`
+
+### `clean-writing`
+
+General writing skill for clear, direct communication without AI-like filler, hype, or rigid templates.
+
+- Applies to every user-facing response, draft, rewrite, and technical explanation
+- Leads with answer, then adds only needed context
+- Preserves facts, uncertainty, code, commands, and technical precision
+- Uses direct language without becoming clipped or harsh
+- Install with `npx skills add https://github.com/LayeredCraft/skills --skill clean-writing`
 
 ### `partiql-dynamodb`
 
