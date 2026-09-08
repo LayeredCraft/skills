@@ -40,7 +40,7 @@ verified while a dependency still warns.
 
 Read the library's .csproj and scan the source. Record:
 
-- `TargetFrameworks` (analyzers need `net8.0` or later; multi-target if needed)
+- `TargetFrameworks` (analyzers need `net7.0`+ annotations; `net8.0` recommended for the fullest set — multi-target if needed)
 - Existing `IsAotCompatible` / `IsTrimmable` / `EnableAotAnalyzer` properties
 - Dependencies (`PackageReference`) — an un-annotated dependency caps what this
   library can achieve; the OpenTelemetry SqlClient case: when the underlying

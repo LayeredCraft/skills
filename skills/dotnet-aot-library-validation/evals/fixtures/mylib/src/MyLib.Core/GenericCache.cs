@@ -11,7 +11,7 @@ public static class GenericCache
     public static void RegisterSlot<T>(Type valueType)
     {
         var slotType = typeof(ContextSlot<>).MakeGenericType(valueType);
-        var slot = Activator.CreateInstance(slotType, typeof(T));
+        var slot = Activator.CreateInstance(slotType, typeof(T))!;
         Slots[slotType] = slot;
     }
 }

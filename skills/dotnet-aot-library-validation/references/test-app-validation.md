@@ -74,8 +74,17 @@ dotnet publish AotCompatibility.TestApp -c Release -r <RID>
 #!/usr/bin/env bash
 set -euo pipefail
 
+case "$(uname -s)/$(uname -m)" in
+  Darwin/arm64)  RID=osx-arm64 ;;
+  Darwin/x86_64) RID=osx-x64 ;;
+  Linux/x86_64)  RID=linux-x64 ;;
+  Linux/aarch64) RID=linux-arm64 ;;
+  MINGW*/x86_64|CYGWIN*/x86_64) RID=win-x64 ;;
+  *) echo "Unsupported host: $(uname -s)/$(uname -m)"; exit 1 ;;
+esac
+
 LOG=$(mktemp)
-dotnet publish AotCompatibility.TestApp -c Release -r "$(uname -m | grep -q arm64 && echo osx-arm64 || echo osx-x64)" > "$LOG" 2>&1 || { cat "$LOG"; exit 1; }
+dotnet publish AotCompatibility.TestApp -c Release -r "$RID" > "$LOG" 2>&1 || { cat "$LOG"; exit 1; }
 
 # Trimming analysis warnings IL2xxx and AOT warnings IL3xxx indicate breaks.
 grep -E 'warning (IL2[0-9]{3}|IL3[0-9]{3})' "$LOG" | sort -u > warnings.txt
@@ -87,7 +96,7 @@ if [ -s warnings.txt ]; then
 fi
 
 echo "AOT compatibility: clean."
-./bin/Release/net8.0/<RID>/publish/AotCompatibility.TestApp   # exercise APIs
+./bin/Release/net8.0/$RID/publish/AotCompatibility.TestApp   # exercise APIs
 ```
 
 Keep an allowlist if you deliberately suppress warnings: diff current warnings

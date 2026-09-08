@@ -10,7 +10,7 @@ public static class Payload
         JsonSerializer.Serialize(value, value.GetType());
 
     public static T FromJson<T>(string json) where T : new() =>
-        JsonSerializer.Deserialize<T>(json);
+        JsonSerializer.Deserialize<T>(json) ?? new T();
 
     public static string DescribeKind(RecordKind kind)
     {

@@ -23,7 +23,7 @@ public static class PluginLoader
                 _ = method.GetParameters();
             }
 
-            results.Add((IPlugin)Activator.CreateInstance(type));
+            results.Add((IPlugin)Activator.CreateInstance(type)!);
         }
         return results;
     }
