@@ -61,6 +61,21 @@ internal static extern string ToLower(string str);
 internal static partial string ToLower(string str);   // partial, not extern
 ```
 
+`LibraryImportAttribute` is only available on .NET 7+. Libraries that still
+target `netstandard2.0` (or another pre-.NET-7 TFM) need a TFM guard so the
+legacy target keeps the `[DllImport]` declaration instead of failing to
+compile:
+
+```csharp
+#if NET7_0_OR_GREATER
+[LibraryImport("nativelib", EntryPoint = "to_lower", StringMarshalling = StringMarshalling.Utf16)]
+internal static partial string ToLower(string str);
+#else
+[DllImport("nativelib", EntryPoint = "to_lower", CharSet = CharSet.Unicode)]
+internal static extern string ToLower(string str);
+#endif
+```
+
 Migration deltas:
 
 - `CharSet` → `StringMarshalling` (ANSI removed; UTF-8 first-class: `Utf8`)
