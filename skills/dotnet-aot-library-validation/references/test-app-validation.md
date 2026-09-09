@@ -87,7 +87,8 @@ LOG=$(mktemp)
 dotnet publish AotCompatibility.TestApp -c Release -r "$RID" > "$LOG" 2>&1 || { cat "$LOG"; exit 1; }
 
 # Trimming analysis warnings IL2xxx and AOT warnings IL3xxx indicate breaks.
-grep -E 'warning (IL2[0-9]{3}|IL3[0-9]{3})' "$LOG" | sort -u > warnings.txt
+# `|| true` keeps a clean (no-match) grep from tripping `pipefail` and exiting early.
+grep -E 'warning (IL2[0-9]{3}|IL3[0-9]{3})' "$LOG" | sort -u > warnings.txt || true
 
 if [ -s warnings.txt ]; then
   echo "AOT compatibility warnings found:"
@@ -127,6 +128,7 @@ jobs:
       - run: sudo apt-get install -y clang zlib1g-dev
         if: runner.os == 'Linux'
       - run: ./build/test-aot-compatibility.sh
+        shell: bash
 ```
 
 Reference implementation (OpenTelemetry .NET):
