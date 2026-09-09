@@ -87,10 +87,15 @@ LOG=$(mktemp)
 dotnet publish AotCompatibility.TestApp -c Release -r "$RID" > "$LOG" 2>&1 || { cat "$LOG"; exit 1; }
 
 # Trimming analysis warnings IL2xxx and AOT warnings IL3xxx indicate breaks.
+# `set +e` around the pipeline: under pipefail, grep's no-match exit (1) would
+# otherwise trip `set -e` immediately, before the status check below can run.
+set +e
 grep -E 'warning (IL2[0-9]{3}|IL3[0-9]{3})' "$LOG" | sort -u > warnings.txt
 grep_status=${PIPESTATUS[0]}
+set -e
+
 # grep exits 1 for "no matches" (the clean/success case) — only bail on real
-# errors (status >= 2), so a clean run doesn't get killed by pipefail.
+# errors (status >= 2).
 if [ "$grep_status" -ge 2 ]; then
   echo "grep failed with status $grep_status" >&2
   exit "$grep_status"
