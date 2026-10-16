@@ -1,0 +1,23 @@
+{
+  "skill_name": "layeredcraft-package-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a new LayeredCraft NuGet library named LayeredCraft.RetryPolicies. It will be used by minimal-lambda and aws-secrets-manager-provider. Set up repo, CI, first PR, preview, and first release. It supports net10.0 and net11.0; do not claim AOT until proven.",
+      "expected_output": "A staged repository and delivery plan using LayeredCraft workflow conventions, a real-consumer dogfood plan for both named repositories, least-privilege workflow permissions, and owner-owned NuGet prerequisites.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Bootstrap LayeredCraft.ContractGen, a Roslyn generator plus a small runtime package. We need first package release and want our existing services to dogfood generated clients before merge.",
+      "expected_output": "A generator/runtime package graph, generator-specific consumer compilation proof, package-asset inspection, and workflow/release setup without assuming a public API or consumer repository.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Set up LayeredCraft.Hosting.HealthChecks as an AOT-friendly ASP.NET extension package. Make repo ready for a first PR and NuGet release. lambda-web-functions-dotnet should consume it.",
+      "expected_output": "A package setup plan that routes AOT work to dedicated validation, uses a packed real-host consumer proof, and separates safe PR CI from OIDC release publishing.",
+      "files": []
+    }
+  ]
+}
