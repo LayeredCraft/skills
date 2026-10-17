@@ -20,7 +20,7 @@ This repo is a shared home for installable agent skills.
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `git-workflow`                  | Commit work, create branches, and open pull requests using conventional git workflow conventions                       | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`                  |
 | `engineering-workflow`          | Project-agnostic process for design, implementation, testing, review, feedback, security, and documentation            | `npx skills add https://github.com/LayeredCraft/skills --skill engineering-workflow`          |
-| `simple-dotnet-architecture`    | Pragmatic .NET 8+ Minimal API, worker, and consumer architecture guidance                                              | `npx skills add https://github.com/LayeredCraft/skills --skill simple-dotnet-architecture`    |
+| `modern-dotnet`                 | Pragmatic .NET 8+ application development: Minimal APIs, workers, consumers, code placement, and configuration         | `npx skills add https://github.com/LayeredCraft/skills --skill modern-dotnet`                 |
 | `zensical-site`                 | Tooling and guidance for Zensical-flavored documentation work                                                          | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`                 |
 | `partiql-dynamodb`              | DynamoDB-specific PartiQL guidance with focused references for statements, functions, operators, transactions, and IAM | `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb`              |
 | `dotnet-aot-library-validation` | Makes .NET class libraries Native AOT compatible: analyzers, IL2xxx/IL3xxx fixes, source generators, and CI validation | `npx skills add https://github.com/LayeredCraft/skills --skill dotnet-aot-library-validation` |
@@ -58,14 +58,14 @@ Project-agnostic workflow for non-trivial engineering work. Adapts to local repo
 - Preserves repository-local conventions while keeping safety requirements explicit
 - Install with `npx skills add https://github.com/LayeredCraft/skills --skill engineering-workflow`
 
-### `simple-dotnet-architecture`
+### `modern-dotnet`
 
-Pragmatic architecture guidance for .NET 8+ Minimal APIs, background workers, and message consumers.
+The organization's default approach to .NET 8+ application development: feature slices, clear delivery-edge boundaries, and only the complexity the operations require.
 
 - Starts with feature slices and clear delivery-edge boundaries
 - Covers direct EF Core use, services and shared models, idempotency, outbox boundaries, and gradual complexity
-- Includes focused references and code examples for APIs, workers, and consumers
-- Install with `npx skills add https://github.com/LayeredCraft/skills --skill simple-dotnet-architecture`
+- Includes focused references for APIs, workers, consumers, code placement, and configuration
+- Install with `npx skills add https://github.com/LayeredCraft/skills --skill modern-dotnet`
 
 ### `zensical-site`
 

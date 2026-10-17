@@ -75,4 +75,6 @@ For outgoing events that reflect a database write, persist the event in an outbo
 
 Version message contracts additively, preserve compatibility where the producer/consumer contract requires it, and keep broker schemas separate from HTTP contracts and EF entities. Split a consumer into its own deployable service only for independent ownership, scaling, data ownership, or failure isolation—not merely because it receives messages.
 
+## Testing
+
 Test the operation separately from the broker. Add consumer tests for duplicate suppression, malformed-message handling, transient versus permanent failure classification, and acknowledgement/dead-letter behavior using the broker adapter's test seam. Run at least one integration test against the actual broker before relying on settlement or retry semantics in production.

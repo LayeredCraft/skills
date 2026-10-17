@@ -1,5 +1,5 @@
 {
-  "skill_name": "simple-dotnet-architecture",
+  "skill_name": "modern-dotnet",
   "evals": [
     {
       "id": 1,
@@ -58,6 +58,30 @@
         "Places ProductSummary inside the Products feature when only product handlers share it.",
         "Does not reuse endpoint request/response types as application or message models.",
         "Registers services as concrete types unless a real provider or module boundary warrants an interface."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Our JWT authentication, authorization policy, and the settings they need are all inline in Program.cs and it keeps growing. Where should this live, and how should the values be bound?",
+      "expected_output": "Moves per-concern wiring into an AddX extension method, binds settings through the options system with startup validation, and keeps Program.cs as composition.",
+      "files": [],
+      "expectations": [
+        "Places authentication and authorization setup in a concern-named extension method rather than inline in Program.cs.",
+        "Binds configuration through AddOptions<T>().BindConfiguration(...) rather than scattered Configuration[...] reads.",
+        "Adds startup validation so missing configuration fails fast instead of at first use.",
+        "Does not assert a trimming or Native AOT limitation without verifying it."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "This project publishes with PublishAot. Can I still bind configuration into a strongly typed options class, or do I need to read each value manually?",
+      "expected_output": "States that on .NET 8+ the configuration binder source generator makes Get<T>, Bind, and BindConfiguration trim-safe, and recommends verifying with the analyzers instead of hand-writing reads.",
+      "files": [],
+      "expectations": [
+        "Does not recommend hand-written Configuration[\"...\"] reads as the default AOT workaround.",
+        "Names the configuration binder source generator as the mechanism that keeps binding trim-safe.",
+        "Suggests verifying by building with the trim/AOT analyzers rather than asserting the constraint from memory.",
+        "Keeps options validation with the options system, such as Validate/ValidateOnStart or [OptionsValidator]."
       ]
     }
   ]

@@ -74,4 +74,6 @@ For work that calls external systems, persist local state before the side effect
 
 Keep job-specific request and result models local to the worker. Reuse an operation only when a worker and another edge perform the identical use case; do not make HTTP request/response contracts the worker's application contract.
 
+## Testing
+
 Test the operation's selection, state transitions, and retry-safe behavior independently. Add a focused host test only for registration, schedule/trigger behavior, cancellation, or concurrency wiring that an operation test cannot cover. Use a controllable clock or trigger in tests; do not wait for real timer intervals.

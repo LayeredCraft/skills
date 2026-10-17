@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modern .NET"
+  short_description: "Build .NET apps without overengineering"
+  default_prompt: "Use $modern-dotnet to design or simplify this .NET API, worker, or message consumer."

@@ -16,11 +16,31 @@
     "should_trigger": true
   },
   {
+    "query": "Where should the auth and options setup go so Program.cs isn't a dumping ground?",
+    "should_trigger": true
+  },
+  {
+    "query": "We publish this API with PublishAot. Can I bind config into a typed options class or do I have to read each key manually?",
+    "should_trigger": true
+  },
+  {
     "query": "How do I write a LINQ GroupBy query in C#?",
     "should_trigger": false
   },
   {
     "query": "What does HTTP 409 Conflict mean?",
+    "should_trigger": false
+  },
+  {
+    "query": "What is the difference between a JWT and an opaque access token?",
+    "should_trigger": false
+  },
+  {
+    "query": "How do I add a NuGet package to my .csproj and publish it to our internal feed?",
+    "should_trigger": false
+  },
+  {
+    "query": "My xUnit test is flaky when it runs in parallel. How do I fix the shared state?",
     "should_trigger": false
   },
   {

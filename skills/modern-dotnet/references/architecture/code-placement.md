@@ -1,4 +1,4 @@
-# Shared Code and Capabilities
+# Code Placement
 
 Group code by ownership and purpose, not by technical type. Do not create global `Services`, `Models`, `Helpers`, or `Common` folders as default destinations.
 
@@ -101,5 +101,7 @@ public sealed class StripePaymentClient(HttpClient http) : IPaymentProvider
         throw new NotImplementedException();
 }
 ```
+
+## Testing
 
 Test a service's business behavior directly. Test typed clients at the HTTP boundary. Do not introduce interfaces only to mock feature-local services or handlers.

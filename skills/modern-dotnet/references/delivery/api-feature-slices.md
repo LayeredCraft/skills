@@ -103,7 +103,7 @@ Features/
 
 Use a single file by default. An operation file may contain the endpoint, endpoint contracts, handler, and handler result; the file represents the operation, not a single class. Keep `Program.cs` as composition only. Register handlers and map routes per feature.
 
-Place `ProductsModule.cs` at the root of `Features/Products`, beside its operation files—not in a global mapping or startup folder. It owns only the feature's `AddProducts` dependency registrations and `MapProducts` endpoint mappings. Keep route implementation in each operation's `Endpoint.Map`; the module calls those methods. `Program.cs` calls the module methods and owns application-wide setup such as the `DbContext`, authentication, exception handling, and OpenAPI.
+Place `ProductsModule.cs` at the root of `Features/Products`, beside its operation files—not in a global mapping or startup folder. It owns only the feature's `AddProducts` dependency registrations and `MapProducts` endpoint mappings. Keep route implementation in each operation's `Endpoint.Map`; the module calls those methods. `Program.cs` calls the module methods and invokes application-wide setup such as the `DbContext`, authentication, exception handling, and OpenAPI. Define that setup in per-concern `AddX` extension methods—see [Configuration and options](../implementation/configuration-and-options.md)—so `Program.cs` reads as a list of what the application is made of rather than the place where each concern's options are configured.
 
 Split one operation into a directory when the operation needs several cohesive supporting types—for example, a large mapping, complex validation, a policy, a state-machine/domain type, or focused operation tests—and the single file is no longer easy to scan:
 
@@ -144,5 +144,7 @@ app.MapProducts();
 Put coarse authorization on endpoints or route groups. Perform resource ownership and business eligibility in the handler or a policy service, passing needed actor data rather than `HttpContext`. Use centralized exception handling and Problem Details for unexpected failures; map expected operation outcomes to HTTP status codes at the endpoint.
 
 Validate request shape at the HTTP edge. In .NET 10+, Minimal APIs can use built-in validation through `AddValidation`; keep business invariants out of HTTP-only validation.
+
+## Testing
 
 Test handler decisions without HTTP where that produces a clear, fast test. Add an API integration test for route binding, authorization, validation, status codes, and response contract. Do not create a repository solely to replace an EF Core test with a mock.
