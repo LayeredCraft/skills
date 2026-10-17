@@ -1,9 +1,12 @@
 # Configuration and Options
 
-Configuration is data, not code. Read each value once into a typed options object and consume
-it where it is needed; do not spread `Configuration[...]` reads through startup code or
-handlers. This reference covers where a value belongs, how to bind it, and what to do when
-trimming or Native AOT looks like it rules a mechanism out.
+Configuration is data, not code. Every value is read once into a typed options object that the
+binder populates for you, and consumed from there.
+
+Do not pull values out of configuration by hand. `Configuration["Payment:ApiKey"]`, an injected
+`IConfiguration`, and a hand-built settings object all bypass binding, validation, and reload,
+and they scatter one section's shape across the codebase. Declare the options type, bind it to
+its section, and let DI hand out the populated instance.
 
 ## Choose the source
 
@@ -24,13 +27,47 @@ a clear startup failure is more honest than a plausible-looking wrong value.
 Name section names, policy names, and scope strings as constants on the options or policy
 type so wiring and endpoints cannot drift apart.
 
-## Bind through the options system
+## The options type
+
+One sealed class per section, with the annotations that state what a valid configuration looks
+like sitting beside the properties they constrain:
+
+```csharp
+public sealed class PaymentOptions
+{
+    public const string SectionName = "Payment";
+
+    [Required]
+    public required string ApiKey { get; set; }
+
+    [Required, Url]
+    public required string BaseUrl { get; set; }
+
+    [Range(1, 300)]
+    public int TimeoutSeconds { get; set; } = 30;
+}
+```
+
+`required` guards the code side: a consumer cannot forget to set the property. The annotations
+guard the configuration side, where the value can simply be absent at runtime. They cover
+different failures, so keep both.
+
+A single public parameterized constructor is supported, so records and `init`-only types bind
+directly.
+
+Two limits fail silently, so they are worth knowing up front:
+
+- Only public read/write **properties** bind; a field is ignored.
+- Only mutable collections bind. `IReadOnlyList<T>` and `IReadOnlyDictionary<TKey, TValue>` are
+  never populated — bind to `List<T>` or `Dictionary<TKey, TValue>` and expose the read-only
+  view to consumers.
+
+## Bind
 
 ```csharp
 services
     .AddOptions<PaymentOptions>()
     .BindConfiguration(PaymentOptions.SectionName)
-    .Validate(o => !string.IsNullOrWhiteSpace(o.ApiKey), "Payment:ApiKey must be configured.")
     .ValidateOnStart();
 ```
 
@@ -43,10 +80,40 @@ where it is hardest to diagnose — instead of at startup where it is obvious.
 
 ## Validate
 
-- One or two simple checks: an inline `.Validate(predicate, message)` is enough.
-- Many options types, or declarative rules: put `[Required]` (and friends) on the options type
-  and attribute a partial `IValidateOptions<T>` with `[OptionsValidator]`. The generator emits
-  the validation code, so it stays trim-safe.
+Annotations on the options type are the default. Add a rule they cannot express — anything about
+the relationship between two properties — with `.Validate(predicate, message)`:
+
+```csharp
+services
+    .AddOptions<PaymentOptions>()
+    .BindConfiguration(PaymentOptions.SectionName)
+    .Validate(
+        o => o.BaseUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase),
+        "Payment:BaseUrl must use https.")
+    .ValidateOnStart();
+```
+
+Annotations still need a validator, and there are two ways to supply one.
+`.ValidateDataAnnotations()` reflects over the attributes at runtime; the source generator emits
+the same checks as code, which is why it is the choice that survives trimming and Native AOT.
+Attribute an empty partial `IValidateOptions<T>`:
+
+```csharp
+[OptionsValidator]
+public partial class ValidatePaymentOptions : IValidateOptions<PaymentOptions>
+{
+}
+```
+
+The attribute only generates the validator. Register it, or nothing validates:
+
+```csharp
+services.AddSingleton<IValidateOptions<PaymentOptions>, ValidatePaymentOptions>();
+```
+
+Validation covers the options type's own properties. Apply `[ValidateObjectMembers]` to a nested
+options property and `[ValidateEnumeratedItems]` to a collection property to recurse into them;
+without the attribute, rules on the nested type are never evaluated.
 
 ## Consume it
 
@@ -74,8 +141,12 @@ should be reachable this way.
 
 The Microsoft.Extensions.Configuration.Binder **source generator** replaces the reflection in
 `ConfigurationBinder` with generated property setters, so `Get<T>()`, `Bind()`, and
-`BindConfiguration()` stay trim-safe. It is on by default in projects that publish with Native
-AOT; in a context where it is not, set `EnableConfigurationBindingGenerator` explicitly.
+`BindConfiguration()` stay trim-safe. It is enabled automatically when the project sets
+`PublishAot`; anywhere else, set `EnableConfigurationBindingGenerator` explicitly.
+
+The generated binder is not identical to the reflection binder: it does not convert a value
+through a custom type's `TypeConverter`. Where an options property is a custom type that has
+one, bind a `string` and convert it inside the options type instead.
 
 Hand-written `Configuration["A:B"]` reads are therefore not the AOT workaround people assume
 they are; reach for them only for a genuinely single primitive where an options type would be
@@ -111,8 +182,8 @@ public static IServiceCollection AddApiAuthentication(this IServiceCollection se
     services
         .AddOptions<CognitoOptions>()
         .BindConfiguration(CognitoOptions.SectionName)
-        .Validate(o => !string.IsNullOrWhiteSpace(o.Issuer), "Cognito:Issuer must be configured.")
         .ValidateOnStart();
+    services.AddSingleton<IValidateOptions<CognitoOptions>, ValidateCognitoOptions>();
 
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
     services
