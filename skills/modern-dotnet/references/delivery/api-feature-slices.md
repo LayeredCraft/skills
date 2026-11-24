@@ -15,21 +15,21 @@
 
 ## Keep HTTP at the endpoint
 
-The endpoint owns routing, binding, input shape validation, transport authorization, and the HTTP response. It calls the Application handler directly in new designs. Pass actor data when the use case needs to enforce resource authorization. Keep HTTP types out of the handler.
+The endpoint owns routing, binding, input shape validation, HTTP authorization, and the HTTP response. It calls the Application handler directly in new designs. Keep `HttpContext`, the request's `ClaimsPrincipal`, and ASP.NET Core policy types at the HTTP boundary.
 
 Use `MapGet`, `MapPost`, and the other Minimal API route methods for new endpoints. Keep existing authorization, validation, and transaction behavior when introducing or migrating a route. Apply required policies to the new route or route group explicitly. Bind IDs as parameters by default so a malformed value returns 400. Use a route constraint such as `:guid` to disambiguate routes or preserve an existing contract that returns 404 when the route does not match.
 
 ## Place validation and authorization
 
-| Owner                   | Checks                                                                                                                                  |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Minimal API or listener | Parse the input, validate its transport shape, establish a trusted caller, and apply the entry point's access policy.                   |
-| Application             | Check permission for the specific operation and resource using the trusted caller and tenant. Apply these checks for every entry point. |
-| Domain                  | Enforce rules about the object's state and allowed transitions.                                                                         |
+| Owner                   | Checks                                                                                                                                   |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Minimal API or listener | Parse the input, validate its transport shape, and enforce access policies specific to the entry point.                                  |
+| Application             | Enforce access rules that apply to the operation across entry points. Use only the trusted identity or scope values the operation needs. |
+| Domain                  | Enforce rules about the object's state and allowed transitions.                                                                          |
 
-For cancellation, bind a shipment ID and require the Shipping write policy in HTTP. Get the user and tenant from authenticated identity. In a listener, establish the caller and tenant from the trusted integration or service identity and its authorization rules. Pass that information explicitly when calling Application. Request fields can identify a requested resource. They cannot establish the caller's identity or authority.
+Use `RequireAuthorization` on an endpoint or route group for route-level access. When an HTTP-specific policy depends on the resource, call `IAuthorizationService.AuthorizeAsync` from the endpoint or an endpoint filter with the authenticated principal and the resource data the policy needs. Complete the check before invoking the write. [ASP.NET Core resource-based authorization](https://learn.microsoft.com/en-us/aspnet/core/security/authorization/resource-based).
 
-Scope the shipment lookup to the tenant the caller is authorized to access. Return the same missing case for an absent shipment and a shipment the caller must not discover. Use a forbidden case if the caller can see the shipment and lacks permission to cancel it. Once authorized, call the domain cancellation rule. An already-shipped shipment is a domain outcome. [ASP.NET Core resource-based authorization](https://learn.microsoft.com/en-us/aspnet/core/security/authorization/resource-based).
+For example, if tenant isolation applies to both HTTP and a listener, pass an authorized tenant ID to Application and include it in the shipment lookup. Derive it from authenticated identity or a trusted integration's access rules. Treat tenant IDs from request and message bodies as requested scope and verify them before use. Return the same missing case for an absent shipment and a shipment the caller must not discover. Use a forbidden case if the caller can see the shipment and lacks permission to cancel it. The domain still decides whether the shipment state allows cancellation.
 
 ## Map HTTP responses consistently
 
@@ -113,7 +113,7 @@ Infrastructure/Shipping/ShipmentMapping.cs
 Tests/Shipping/CancelShipmentTests.cs
 ```
 
-In this new design the handler returns initialized cases from its outcome union. Only the endpoint selects HTTP statuses.
+This single-tenant example assumes the `ShippingWrite` policy grants permission to cancel any shipment. The listener accepts cancellation messages from producers granted the same authority. The handler returns initialized cases from its outcome union. The endpoint selects HTTP statuses.
 
 ```csharp
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -177,7 +177,7 @@ public sealed class CancelShipment(IShippingDbContext db)
 }
 ```
 
-The domain owns both transitions. Configure `Shipment.Version` in Infrastructure so dispatch and cancellation check the original version when saving. Apply a migration when adding the token to an existing schema. After a conflict, finish the scope without another save. A retry starts in a fresh context and evaluates the state again. See [context registration](../architecture/persistence-and-writes.md#register-a-shared-scoped-context), [concurrent writes](../architecture/persistence-and-writes.md#protect-rules-against-concurrent-writes), and [race tests](../implementation/testing.md#test-a-write-race).
+The domain owns both transitions. Configure `Shipment.Version` in Infrastructure so dispatch and cancellation check the original version when saving. Add the column through the project's schema change process. After a conflict, finish the scope without another save. A retry starts in a fresh context and evaluates the state again. See [context registration](../architecture/persistence-and-writes.md#register-a-shared-scoped-context), [concurrent writes](../architecture/persistence-and-writes.md#protect-rules-against-concurrent-writes), and [race tests](../implementation/testing.md#test-a-write-race).
 
 ```csharp
 public Guid Version { get; private set; } = Guid.NewGuid();

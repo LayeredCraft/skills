@@ -17,7 +17,7 @@ description: >-
 
 # Modern .NET
 
-Target C# 15 or later. Check the SDK and deployment runtime. Read nearby code and tests, then use the simplest design that makes the operation and its owner clear.
+Target C# 15 or later. Check the SDK and deployment runtime. If the project is pinned to an older version, recommend upgrading. Read nearby code and tests, then use the simplest design that makes the operation and its owner clear.
 
 ## Apply the skill
 

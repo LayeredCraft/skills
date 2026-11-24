@@ -8,6 +8,7 @@
 - [Folder examples](#folder-examples)
 - [Name files and types for the operation](#name-files-and-types-for-the-operation)
 - [Give logic an owner](#give-logic-an-owner)
+- [Keep domain rules on the model](#keep-domain-rules-on-the-model)
 
 ## Choose the smallest boundary that fits
 
@@ -81,9 +82,28 @@ For example, adding SQS to a colocated `Shipping/CancelShipment.cs` creates two 
 ## Give logic an owner
 
 - Keep a handler's orchestration, inputs, and output cases with the operation. Keep runtime request shapes and parsing with the adapter. Reuse a serializable application DTO as a public contract when that is its intended shape.
-- Put invariants and transitions on the domain object whose state they govern. For example, `Inventory.TryReserve` owns the stock rule. The handler loads inventory and decides which changes commit together. Use a smart enum or value object when the domain concept carries behavior or rules.
 - Keep feature-local helpers and shared policies near their callers. Give a reusable cross-area capability a named home such as `Pricing`. A service earns its place when it implements a cohesive policy or capability.
 - Put a provider client with its integration. Use a small contract at a real dependency boundary. Avoid forwarding services, catch-all folders, and interfaces created solely to mock an operation.
 - Keep a shared domain type only when the meaning and ownership are actually shared. Similar fields alone are a poor reason to share a model.
 
 A new entry point is a file boundary first. Split deployment, data ownership, or projects when there is a separate requirement such as scaling, failure isolation, or a dependency the compiler should enforce.
+
+## Keep domain rules on the model
+
+Use a plain value when its meaning is clear and it has no domain rules of its own. Use an immutable value object when a concept has its own validity rules or compares by value. For example, a shipment weight is a positive quantity in kilograms.
+
+```csharp
+public sealed record ShipmentWeight
+{
+    private ShipmentWeight(decimal kilograms) => Kilograms = kilograms;
+
+    public decimal Kilograms { get; }
+
+    public static ShipmentWeight? TryCreate(decimal kilograms) =>
+        kilograms > 0 ? new ShipmentWeight(kilograms) : null;
+}
+```
+
+Use an entity when identity persists as state changes. Give it methods named for the allowed transitions and keep protected state behind private setters. For example, [`Inventory.TryReserve`](persistence-and-writes.md#protect-rules-against-concurrent-writes) owns the stock rule. The application handler loads inventory, asks it to reserve stock, and decides which changes commit together.
+
+Use the same validity rules on creation and updates. Keep EF Core mapping in Infrastructure and check that loading stored data preserves the model's invariants. Check existing rows before making a new rule mandatory.

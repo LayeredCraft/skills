@@ -19,7 +19,7 @@ When HTTP and a listener share an operation, use separate adapter files and put 
 
 ## Example of a shared cancellation handler
 
-`Listener/Shipping/CancelShipmentListener.cs` calls the same `CancelShipment` as the [Minimal API write endpoint](api-feature-slices.md#example-of-a-write-endpoint). It accepts a decoded message and resolves the handler in a scope for the delivery.
+`Listener/Shipping/CancelShipmentListener.cs` calls the same `CancelShipment` as the [Minimal API write endpoint](api-feature-slices.md#example-of-a-write-endpoint). This single-tenant example assumes the queue grants send access only to producers authorized to cancel any shipment. The listener accepts a decoded message and resolves the handler in a scope for the delivery.
 
 ```csharp
 public sealed record CancelShipmentMessage(Guid ShipmentId);

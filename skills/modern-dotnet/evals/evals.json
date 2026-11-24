@@ -129,7 +129,7 @@
       "files": [],
       "expectations": [
         "Names DispatchShipmentEndpoint.cs and DispatchShipmentListener.cs with a shared Application/Shipping/DispatchShipment.cs.",
-        "Validates transport input at each adapter and passes trusted actor and tenant information to Application.",
+        "Validates input at each adapter, applies HTTP access policy at the endpoint, and passes the authorized tenant ID to Application without passing the HTTP principal.",
         "Scopes resource access in Application and maps both hidden and absent shipments to HTTP 404.",
         "Keeps dispatch eligibility in the domain and maps expected outcomes inline in the Minimal API.",
         "Gives delivery and database retries their own owners and leaves carrier booking outside the database retry.",
