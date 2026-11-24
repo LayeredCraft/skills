@@ -1,27 +1,26 @@
-# Workers
+# Workers and jobs
 
-Use this reference for `BackgroundService`, `IHostedService`, scheduled jobs, polling loops, and long-running processes. Treat the worker as a delivery edge, not as the location for business logic:
+**Summary.** Keep scheduling, dependency scopes, and shutdown in the host. A worker, scheduled job, or CLI invokes an Application operation.
 
-```text
-Schedule / trigger -> Worker -> Operation -> DbContext / services / external clients
-```
+## Contents
 
-The worker owns host lifecycle, scheduling or polling, concurrency limits, cancellation, and observability. The operation owns one unit of work and must not depend on `BackgroundService`, service-provider scope management, or host lifecycle APIs.
+- [Choose the host](#choose-the-host)
+- [Example of a scoped worker](#example-of-a-scoped-worker)
+- [Handle failures and verify behavior](#handle-failures-and-verify-behavior)
+- [Example of an in-process event pipeline](#example-of-an-in-process-event-pipeline)
 
-Create a DI scope per unit of work; resolve scoped dependencies inside it. Do not inject a scoped `DbContext` into a singleton hosted service. Honor the stopping token, propagate cancellation, and avoid overlapping runs unless the operation is explicitly concurrency-safe.
+## Choose the host
 
-```text
-Features/
-  Billing/
-    RunOverdueInvoices.cs
-    BillingWorker.cs
-    BillingModule.cs
-```
+Treat a scheduled job, polling worker, or CLI command as an entry point. Translate the trigger to application input and call the handler directly in a new design. Use the existing application entry point when it owns required validation or transactions. Keep the loop, schedule, shutdown, concurrency limits, and exit behavior with the host. Keep business rules and the commit with the operation and its domain types.
+
+- Use a run-once executable when an external scheduler starts the job. Pass the logical processing window when a retry needs to process the same work. Define overlap and catch-up behavior with the scheduler.
+- Use `BackgroundService` for a long-running loop in a .NET host. Registering with `AddHostedService` gives the worker a singleton lifetime. Resolve the handler and context inside a scope for each independent run or work item. Give parallel operations separate contexts.
+- A CLI owns arguments, output, and exit codes. It can use the same handler as a scheduled job when both execute the same operation.
+
+## Example of a scoped worker
 
 ```csharp
-public sealed class BillingWorker(
-    IServiceScopeFactory scopeFactory,
-    ILogger<BillingWorker> logger) : BackgroundService
+public sealed class BillingWorker(IServiceScopeFactory scopes) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -29,51 +28,24 @@ public sealed class BillingWorker(
 
         while (await timer.WaitForNextTickAsync(stoppingToken))
         {
-            try
-            {
-                await using var scope = scopeFactory.CreateAsyncScope();
-                var operation = scope.ServiceProvider
-                    .GetRequiredService<RunOverdueInvoices.Handler>();
-
-                await operation.HandleAsync(stoppingToken);
-                logger.LogInformation("Overdue-invoice run completed");
-            }
-            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
-            {
-                break;
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, "Overdue-invoice run failed");
-                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
-            }
+            await using var scope = scopes.CreateAsyncScope();
+            var handler = scope.ServiceProvider.GetRequiredService<ReconcileInvoices>();
+            await handler.HandleAsync(stoppingToken);
         }
-    }
-}
-
-public static class BillingModule
-{
-    public static IServiceCollection AddBilling(this IServiceCollection services)
-    {
-        services.AddScoped<RunOverdueInvoices.Handler>();
-        services.AddHostedService<BillingWorker>();
-        return services;
     }
 }
 ```
 
-Keep scheduling in `BillingWorker`; make `RunOverdueInvoices.Handler` a normal scoped operation that accepts only its input and `CancellationToken`. For a one-off or queue-triggered item, create one scope per item rather than per timer tick.
+## Handle failures and verify behavior
 
-The example deliberately logs, backs off, and continues after an unexpected failure. Choose this policy only when individual runs are safe to retry. Otherwise, let the host fail fast and rely on supervised restart, or classify failures into retryable, permanent, and operator-action-required outcomes. Never silently swallow a failed run.
+This loop runs one operation at a time. Unexpected failures reach the host. Choose backoff and retry only for work that can safely repeat. Keep permanent failures visible. Use a checkpoint when restarting a long or multi-step job would otherwise lose progress or repeat effects. For an external call, use the provider's idempotency support when available and reconcile an unknown outcome before repeating the effect.
 
-For recurring work, define the trigger, selection criteria, work-item claim or lock strategy, retry/backoff policy, and maximum parallelism. Make a run safe after restart: use durable state, an idempotency key, or a claim/checkpoint where duplicate execution is possible.
+Keep a small worker in the existing host if its lifecycle and resource needs fit. Deploy it separately when scaling, ownership, or failure isolation requires it. Use a controllable trigger in component tests and a real database for persistence behavior. [.NET worker services](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers), [Scoped hosted services](https://learn.microsoft.com/en-us/dotnet/core/extensions/scoped-service).
 
-Use a worker in the web host for small, coupled work. Move it to a separately deployed worker only when its scaling, reliability, operational ownership, or failure isolation differs from the API. A different process does not automatically require a different domain model or service boundary.
+## Example of an in-process event pipeline
 
-For work that calls external systems, persist local state before the side effect where possible. If a crash can occur between the external call and local update, use an idempotency key with the provider and reconcile on retry. Use a transactional outbox when reliably publishing a follow-up message is required.
+A long-running console app polls a forum for new topics. The poller owns the cursor and sends `NewTopic` to the fetch worker. The fetch worker loads the post and sends `PostFetched` to the archive, log, and notification workers. Each owns its own effect. The host wires the routes and owns shutdown and the exit code.
 
-Keep job-specific request and result models local to the worker. Reuse an operation only when a worker and another edge perform the identical use case; do not make HTTP request/response contracts the worker's application contract.
+Call the next operation directly when it can share the caller's timing and failure behavior. Use a [bounded queue](consumers.md#in-process-delivery) when a stage needs its own backlog or concurrency.
 
-## Testing
-
-Test the operation's selection, state transitions, and retry-safe behavior independently. Add a focused host test only for registration, schedule/trigger behavior, cancellation, or concurrency wiring that an operation test cannot cover. Use a controllable clock or trigger in tests; do not wait for real timer intervals.
+To test the routing, use a fetch queue with capacity one and pause the first fetch. Fill the queue with the next topic, then let the first fetch finish. Verify that it can publish its result and begin the next fetch.

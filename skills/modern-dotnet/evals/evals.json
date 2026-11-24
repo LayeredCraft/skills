@@ -3,85 +3,138 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "Design a .NET 8 Minimal API endpoint to create a product with EF Core. Keep the implementation simple and show the files and registration needed.",
-      "expected_output": "Uses a feature slice with endpoint-owned HTTP contracts, a concrete handler, direct DbContext use, and feature-level composition.",
+      "prompt": "Sketch a C# 15 Minimal API GET for a tiny shipping service using EF Core. It can find a shipment or miss. Show file placement, handler, and HTTP response.",
+      "expected_output": "A small business-named slice projects directly to a DTO and handles expected states inline.",
       "files": [],
       "expectations": [
-        "Uses endpoint-local Request and Response models rather than a shared DTO by default.",
-        "Keeps HTTP status mapping out of the handler.",
-        "Avoids a repository, MediatR, handler interface, and generic ProductService without evidence.",
-        "Places ProductsModule at the feature root and keeps Program.cs limited to application composition."
+        "Maps the route with ASP.NET Core Minimal APIs.",
+        "Uses a shallow Shipping folder and allows one file for the tiny single-entry operation.",
+        "Projects the needed columns into a serializable DTO using EF Core.",
+        "Uses a named union case for normal absence and maps it to 404 inline.",
+        "Uses a direct handler call and no EF Core repository or mediator."
       ]
     },
     {
       "id": 2,
-      "prompt": "Our product search returns only ID, name, and price. Should the handler return Product, a nested Result, or the endpoint Response? Explain and propose the smallest code shape.",
-      "expected_output": "Selects the simplest useful application output and keeps the HTTP contract separate without mechanically duplicating types.",
+      "prompt": "In a monolith, both HTTP and SQS start shipping. Standalone inventory reservation already saves. Shipping must reserve inventory and write its shipment atomically. Sketch placement, flow, and delivery tests.",
+      "expected_output": "Separate entry points call one application operation. The operation reuses the domain rule and owns one commit.",
       "files": [],
       "expectations": [
-        "Does not prescribe Handler.Result when it would only duplicate Endpoint.Response.",
-        "Allows a handler-specific projection when selecting only necessary columns or expressing a distinct application result.",
-        "Does not return an EF entity directly as the HTTP response."
+        "Separates HTTP and SQS adapter files and uses one shared Application handler.",
+        "Uses an Application-owned EF Core context interface when explaining separate projects.",
+        "Calls Inventory.TryReserve directly rather than the standalone handler that saves.",
+        "Stages shipment and inventory writes before one commit, then settles the SQS delivery.",
+        "Favors component and real-provider integration tests using shared Testcontainers and isolated test data."
       ]
     },
     {
       "id": 3,
       "prompt": "Add a recurring invoice worker that runs every five minutes. It uses EF Core and sometimes a downstream payment provider fails. Show the ownership boundaries and safe host lifecycle shape.",
-      "expected_output": "Treats the worker as the delivery edge, creates a scope per run, keeps the operation framework-independent, and chooses an explicit failure policy.",
+      "expected_output": "The worker owns scheduling and scopes. The handler owns the business operation.",
       "files": [],
       "expectations": [
-        "Does not constructor-inject a scoped DbContext into BackgroundService.",
-        "Propagates cancellation and avoids overlapping runs unless concurrency safety is established.",
-        "States whether failures fail fast or log/back off/retry and does not silently swallow them.",
+        "Creates a scope and resolves the handler for each independent run.",
+        "Propagates cancellation and makes overlap policy explicit.",
+        "Keeps technical failures visible and names a safe retry policy.",
         "Calls out idempotency or reconciliation for the external payment side effect."
       ]
     },
     {
       "id": 4,
-      "prompt": "Consume OrderSubmitted messages from a queue and start fulfillment. The broker is at-least-once and the service writes to SQL Server. Design the consumer and its retry behavior.",
-      "expected_output": "Separates broker concerns from the operation, provides durable duplicate handling, and acknowledges only after successful durable work.",
+      "prompt": "Consume OrderSubmitted messages from a queue and start fulfillment. Delivery can repeat. The service writes to SQL Server but has no requirement to publish a follow-up message. Design the consumer and its retry behavior.",
+      "expected_output": "Broker settlement is separate from business execution. The handler makes durable processing safe to repeat.",
       "files": [],
       "expectations": [
-        "Assumes at-least-once delivery unless a stronger end-to-end guarantee is established.",
-        "Requires durable deduplication or an idempotent state transition.",
-        "Explains that the inbox completion and local state change must be transactional, or the operation must be independently idempotent.",
-        "Distinguishes transient retry, permanent/dead-letter, and business-rejection outcomes."
+        "Acknowledges only after durable success or a safely processed duplicate.",
+        "Uses a repeat-safe transition, unique business key, or receipt committed with the business write.",
+        "Distinguishes transient retry, expected business outcomes, and permanent or malformed input.",
+        "Avoids requiring an outbox in the absence of a durable outgoing delivery need."
       ]
     },
     {
       "id": 5,
-      "prompt": "Products and Orders both need pricing logic. Where should it live? Also, two product handlers share a small summary shape. Propose folders and boundaries.",
-      "expected_output": "Places shared code according to ownership and keeps transport models at the narrowest scope.",
+      "prompt": "A shipping query needs a provider-specific SQL feature. Our other queries use EF Core LINQ. Show how to keep the query small and safe.",
+      "expected_output": "Uses EF Core with parameterized raw SQL inline and projects to the DTO.",
       "files": [],
       "expectations": [
-        "Uses a named cross-feature pricing capability rather than a generic Services or Common folder.",
-        "Places ProductSummary inside the Products feature when only product handlers share it.",
-        "Does not reuse endpoint request/response types as application or message models.",
-        "Registers services as concrete types unless a real provider or module boundary warrants an interface."
+        "Keeps EF Core as the default for the other queries.",
+        "Passes a multiline raw string literal directly to the parameterizing EF API.",
+        "Uses parameters for variable values and a response DTO for the projected result."
       ]
     },
     {
       "id": 6,
-      "prompt": "Our JWT authentication, authorization policy, and the settings they need are all inline in Program.cs and it keeps growing. Where should this live, and how should the values be bound?",
-      "expected_output": "Moves per-concern wiring into an AddX extension method, binds settings through the options system with startup validation, and keeps Program.cs as composition.",
+      "prompt": "Products and Orders both need pricing logic. Two product handlers also share a summary shape. Where should these types live?",
+      "expected_output": "Names shared behavior for what it does and keeps data types at the narrowest scope.",
       "files": [],
       "expectations": [
-        "Places authentication and authorization setup in a concern-named extension method rather than inline in Program.cs.",
-        "Binds configuration through AddOptions<T>().BindConfiguration(...) rather than scattered Configuration[...] reads.",
-        "Adds startup validation so missing configuration fails fast instead of at first use.",
-        "Does not assert a trimming or Native AOT limitation without verifying it."
+        "Uses a named Pricing area without a generic Services folder.",
+        "Places ProductSummary with Products when only those handlers share it.",
+        "Shares contracts only when they have intentional common meaning and ownership."
       ]
     },
     {
       "id": 7,
-      "prompt": "This project publishes with PublishAot. Can I still bind configuration into a strongly typed options class, or do I need to read each value manually?",
-      "expected_output": "States that on .NET 8+ the configuration binder source generator makes Get<T>, Bind, and BindConfiguration trim-safe, and recommends verifying with the analyzers instead of hand-writing reads.",
+      "prompt": "Our JWT and authorization setup and its options are inline in Program.cs. The app also uses Native AOT. How should we organize and bind it?",
+      "expected_output": "Uses typed validated options and extracts composition only where it helps.",
       "files": [],
       "expectations": [
-        "Does not recommend hand-written Configuration[\"...\"] reads as the default AOT workaround.",
-        "Names the configuration binder source generator as the mechanism that keeps binding trim-safe.",
-        "Suggests verifying by building with the trim/AOT analyzers rather than asserting the constraint from memory.",
-        "Keeps options validation with the options system, such as Validate/ValidateOnStart or [OptionsValidator]."
+        "Moves growing setup into a concern-named registration method.",
+        "Uses typed binding and startup validation.",
+        "Names supported binder and validation source generators and recommends checking build warnings."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Show a reusable C# 15 Result for success or failure when both values are strings. Implement Map, Bind, and Tap and show what happens on a failure.",
+      "expected_output": "Uses distinct success and failure cases and composes the operations without running callbacks after a failure.",
+      "files": [],
+      "expectations": [
+        "Uses independently typed success and failure cases even for identical payload types.",
+        "Map transforms the success and Bind can return another failure.",
+        "Tap leaves the original result unchanged.",
+        "All helpers skip success callbacks when the input is a failure."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Add POST /shipments/{id}/cancel to our ASP.NET Core application. An existing controller uses an MVC authorization filter and a mediator validation and transaction pipeline. An SQS listener calls the same cancellation operation. Cancellation can race with dispatch. What should change?",
+      "expected_output": "Adds a Minimal API adapter, preserves required behavior, and shares Application code across the two transports.",
+      "files": [],
+      "expectations": [
+        "Uses MapPost for the new HTTP endpoint.",
+        "Transfers required MVC filter behavior into Minimal API policy or filters and routes both adapters through the existing application pipeline.",
+        "Keeps the HTTP adapter and listener separate from their shared handler.",
+        "Matches initialized business outcomes inline in the endpoint.",
+        "Uses guarded writes for dispatch and cancellation, mapping a stale write to an HTTP conflict or a bounded redelivery that rechecks current state.",
+        "Calls for tests that exercise authorization, input validation, and transaction rollback through the new route."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Our C# Minimal API has separate Application and Infrastructure projects. Program.cs registers every shipping handler and EF Core dependency inline and is getting crowded. Where should this go? Would you organize a small one-project app the same way?",
+      "expected_output": "Shows concise host composition and explicit registrations owned by the appropriate project or business area. Allows a small host to register its services directly.",
+      "files": [],
+      "expectations": [
+        "Shows named Application and Infrastructure registration methods called by Program.cs.",
+        "Registers services and lifetimes explicitly without assembly scanning.",
+        "Resolves the Application context interface to the same scoped concrete EF Core instance.",
+        "Allows simple inline registrations in a small app."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "We are adding POST /shipments/{id}/dispatch to a new C# 15 shipping app. An SQS listener also starts the same dispatch. Users must not discover shipments in other tenants. A carrier booking can time out after the carrier accepts it, and some messages will be redelivered. Our API has no existing response convention. Sketch concrete file names, where checks and mapping go, and what happens on a retry.",
+      "expected_output": "Uses separate Minimal API and SQS adapters, common application checks, consistent HTTP statuses, and one owner per retry.",
+      "files": [],
+      "expectations": [
+        "Names DispatchShipmentEndpoint.cs and DispatchShipmentListener.cs with a shared Application/Shipping/DispatchShipment.cs.",
+        "Validates transport input at each adapter and passes trusted actor and tenant information to Application.",
+        "Scopes resource access in Application and maps both hidden and absent shipments to HTTP 404.",
+        "Keeps dispatch eligibility in the domain and maps expected outcomes inline in the Minimal API.",
+        "Gives delivery and database retries their own owners and leaves carrier booking outside the database retry.",
+        "Reconciles an uncertain booking using its stable key and does not issue a new unkeyed booking on replay.",
+        "Returns 202 and acknowledges SQS after a durable handoff, with the worker owning carrier retries after the handoff."
       ]
     }
   ]

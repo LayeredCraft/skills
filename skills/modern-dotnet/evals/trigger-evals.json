@@ -1,30 +1,62 @@
 [
   {
-    "query": "Design a simple .NET 8 Minimal API for product management without adding unnecessary Clean Architecture layers.",
+    "query": "Create a .NET application that tracks shipments.",
     "should_trigger": true
   },
   {
-    "query": "How should I structure an ASP.NET Core worker that retries invoice processing safely?",
+    "query": "Add a ShippingAddress class to this C# app and make it validate postal codes.",
     "should_trigger": true
   },
   {
-    "query": "Review this RabbitMQ consumer design for idempotency, retries, and dead-letter handling.",
+    "query": "In Order.cs, block cancellation after a shipment has been dispatched.",
     "should_trigger": true
   },
   {
-    "query": "Should I add MediatR and repositories to this EF Core API?",
+    "query": "Add POST /shipments/{id}/cancel to our ASP.NET Core service.",
     "should_trigger": true
   },
   {
-    "query": "Where should the auth and options setup go so Program.cs isn't a dumping ground?",
+    "query": "Add invoice reminders to our existing .NET billing application.",
     "should_trigger": true
   },
   {
-    "query": "We publish this API with PublishAot. Can I bind config into a typed options class or do I have to read each key manually?",
+    "query": "Implement a method in Shipment.cs to reschedule a delivery.",
     "should_trigger": true
   },
   {
-    "query": "How do I write a LINQ GroupBy query in C#?",
+    "query": "Review how this .NET monolith divides responsibilities between Shipping and Billing.",
+    "should_trigger": true
+  },
+  {
+    "query": "Sketch a tiny C# 15 EF Core Minimal API with a typed found and missing response.",
+    "should_trigger": true
+  },
+  {
+    "query": "In our C# shipping app, how should a Minimal API endpoint and an SQS-triggered Lambda share the shipment handler?",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a .NET background worker that retries invoice processing safely.",
+    "should_trigger": true
+  },
+  {
+    "query": "Should we add repositories and MediatR to this EF Core app?",
+    "should_trigger": true
+  },
+  {
+    "query": "Where should authentication and validated options live as Program.cs grows?",
+    "should_trigger": true
+  },
+  {
+    "query": "Our .NET Program.cs is crowded with dependency injection registrations. Move them into the projects that own them.",
+    "should_trigger": true
+  },
+  {
+    "query": "How can our EF Core component tests share a Testcontainers database?",
+    "should_trigger": true
+  },
+  {
+    "query": "What's the syntax for a LINQ GroupBy query in C#?",
     "should_trigger": false
   },
   {
@@ -36,11 +68,11 @@
     "should_trigger": false
   },
   {
-    "query": "How do I add a NuGet package to my .csproj and publish it to our internal feed?",
+    "query": "How do I fix IL3050 in my class library before publishing its NuGet package?",
     "should_trigger": false
   },
   {
-    "query": "My xUnit test is flaky when it runs in parallel. How do I fix the shared state?",
+    "query": "Deploy a Lambda function resource with an existing CloudFormation YAML template.",
     "should_trigger": false
   },
   {

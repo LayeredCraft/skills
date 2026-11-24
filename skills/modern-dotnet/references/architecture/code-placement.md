@@ -1,107 +1,89 @@
-# Code Placement
+# Code placement
 
-Group code by ownership and purpose, not by technical type. Do not create global `Services`, `Models`, `Helpers`, or `Common` folders as default destinations.
+**Summary.** Organize by business area. Keep simple operations together and split files or projects when doing so clarifies ownership or enforces a dependency rule.
 
-## Decide whether to extract a service
+## Contents
 
-Keep logic in the handler when it is short and specific to one operation. Extract a concrete service when a cohesive capability, business policy, or integration is reused by multiple operations. A service does real work; it is not a forwarding layer between a handler and `DbContext`.
+- [Choose the smallest boundary that fits](#choose-the-smallest-boundary-that-fits)
+- [Folder examples](#folder-examples)
+- [Name files and types for the operation](#name-files-and-types-for-the-operation)
+- [Give logic an owner](#give-logic-an-owner)
 
-```text
-Handler          -> coordinates one operation
-Service          -> reusable capability or policy
-Typed client     -> external system boundary
-DbContext        -> EF Core persistence and unit of work
-```
+## Choose the smallest boundary that fits
 
-Do not create `ProductService` merely to contain `Get`, `Create`, `Update`, and `Delete` methods that repeat normal EF Core access. Register services as concrete types by default; use an interface only for an interchangeable provider, a genuine module boundary, or runtime implementation selection.
+Use business names such as `Shipping` and `Billing`. Reuse the business area name across layers where it helps trace an operation. Start with shallow folders. Add subfolders when the files have become hard to scan.
 
-## Place code with its owner
+| Situation                                                        | Shape                                                                                               |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Very small app with a simple single-entry operation              | One project. The adapter, handler, and operation-local types can share a file.                      |
+| Several adapters call the same operation, or dependencies differ | Give each adapter its own file. Put the shared handler in an Application folder or project.         |
+| Substantial business behavior needs a protected core             | Separate Domain, Application, and Infrastructure. Keep the entry point in the host.                 |
+| Larger monolith                                                  | Give each layer a project. Add business module boundaries when ownership or contracts warrant them. |
 
-Use these locations in a new application; preserve a coherent existing convention instead.
+Start with sibling files. Give a large operation its own folder if several related files benefit from being grouped. A file represents a coherent piece of work and can contain multiple types. Keep names such as `Features`, `UseCases`, `Commands`, and `Queries` optional.
 
-```text
-Features/
-  Products/
-    GetProduct.cs
-    CreateProduct.cs
-    ProductSummary.cs           # intentionally shared by product handlers
-    ProductAvailability.cs      # capability used only by product operations
-    ProductsModule.cs
-  Orders/
-    PlaceOrder.cs
+With separate projects, Application references Domain. Infrastructure implements contracts owned by Application and can reference Domain. The host wires Application and Infrastructure together. Domain stays independent of transport and persistence. If Application sits in an API project and Infrastructure must implement an API-owned interface, check the references before wiring both projects together. Keep the implementation in the host or give the contract an independent Application project when needed.
 
-Capabilities/
-  Pricing/
-    PricingService.cs           # capability used by Products and Orders
-  Payments/
-    PaymentClient.cs            # typed boundary to an external provider
+## Folder examples
 
-SharedKernel/
-  Money.cs                      # stable domain concept, not a convenience DTO
-  Currency.cs
-```
-
-- Keep operation-only helpers and models in the operation file or directory.
-- Keep feature-owned services and models in that feature folder.
-- Give a cross-feature capability its own named folder, such as `Capabilities/Pricing`; do not hide it in a generic shared folder.
-- Keep a typed external client with its integration/provider, not with the caller that first used it.
-- Create `SharedKernel` only for small, stable concepts with a shared meaning. Do not put convenience DTOs there.
-
-The folder names are defaults, not a required project layout. The important rule is that a file's location reveals its owner and intended consumers.
-
-Do not copy framework-specific patterns from this skill into an older target blindly. Keep architectural rules stable, but verify current APIs and version-specific behavior against official documentation for the target framework.
-
-## Keep models at the narrowest scope
+A small Minimal API can keep an endpoint and its handler together. Put the domain rule in the type that owns the state.
 
 ```text
-Endpoint Request/Response       -> nested in the endpoint
-One handler's projection        -> nested Handler.Result, only if meaningful
-Several handlers in one feature -> named model in that feature
-Message contract                -> owned/versioned at the messaging boundary
-Stable domain value object      -> SharedKernel, only when truly shared
+Shipping.Api/
+  Program.cs
+  Shipping/
+    GetShipment.cs        # Minimal API, query handler, and outcome cases
+    CancelShipment.cs     # Minimal API, command handler, and outcome cases
+    Shipment.cs           # Domain state and transitions
+    ShippingDbContext.cs
 ```
 
-Do not share an endpoint contract with a handler, another endpoint, or a message consumer just because the fields match. Do not share an EF entity as a DTO. Duplicate a small contract until sharing reflects an intentional, stable concept.
+When an endpoint and a listener share an operation in one host, split the files while keeping them in one project.
 
-## Examples
-
-`PricingService` is a cross-feature capability because both product previews and order placement use the same pricing policy:
-
-```csharp
-public sealed class PricingService
-{
-    public PriceQuote Quote(Product product, int quantity, CustomerTier tier) =>
-        new(product.Id, product.Price * quantity, product.Currency);
-}
-
-public sealed record PriceQuote(Guid ProductId, decimal Total, string Currency);
+```text
+Shipping.Host/
+  Program.cs
+  Api/Shipping/ShipOrderEndpoint.cs
+  Listener/Shipping/ShipOrderListener.cs
+  Application/Shipping/ShipOrder.cs
+  Domain/Shipping/Shipment.cs
+  Infrastructure/Shipping/ShippingDbContext.cs
 ```
 
-`ProductAvailability` stays in `Features/Products` when only product operations need it:
+A larger application can enforce its boundaries with projects. Each host maps its own request and calls the same operation.
 
-```csharp
-public sealed class ProductAvailability(AppDbContext db)
-{
-    public Task<bool> IsAvailableAsync(Guid productId, CancellationToken ct) =>
-        db.Products.AnyAsync(x => x.Id == productId && x.IsActive, ct);
-}
+```text
+Warehouse.Api/Shipping/ShipOrderEndpoint.cs
+Warehouse.Listener/Shipping/ShipOrderListener.cs
+Warehouse.Application/Shipping/ShipOrder.cs
+Warehouse.Application/Shipping/IShippingDbContext.cs
+Warehouse.Domain/Shipping/Shipment.cs
+Warehouse.Domain/Inventory/Inventory.cs
+Warehouse.Infrastructure/Shipping/ShippingDbContext.cs
+Warehouse.Infrastructure/Inventory/InventoryMapping.cs
+Warehouse.Tests/Shipping/ShipOrderTests.cs
 ```
 
-`PaymentClient` is a provider boundary, so an interface may be useful if multiple providers must be selected or a provider-specific implementation must be isolated:
+See [Minimal API examples](../delivery/api-feature-slices.md) for route mapping, [registration by project](../implementation/configuration-and-options.md#registration-by-project) for DI, and [persistence examples](persistence-and-writes.md) for the context and save boundary.
 
-```csharp
-public interface IPaymentProvider
-{
-    Task<PaymentResult> ChargeAsync(ChargeRequest request, CancellationToken ct);
-}
+## Name files and types for the operation
 
-public sealed class StripePaymentClient(HttpClient http) : IPaymentProvider
-{
-    public Task<PaymentResult> ChargeAsync(ChargeRequest request, CancellationToken ct) =>
-        throw new NotImplementedException();
-}
-```
+Keep established names when extending an existing area. Use these defaults where there is no local convention.
 
-## Testing
+| Role                           | Default                                                                                                                                             | When to split                                                                                                              |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Operation and handler          | `CancelShipment.cs`. Use `CancelShipment` as the standalone handler type, or `CancelShipment.Handler` when a small file also holds the entry point. | Give the handler an Application file when another adapter calls it or the transport dependencies need to stay separate.    |
+| HTTP and message adapters      | `CancelShipmentEndpoint.cs` and `CancelShipmentListener.cs` when they have their own files.                                                         | Split by entry point. Keep each adapter's wire input beside it.                                                            |
+| Operation-local DTO or outcome | Keep cases named for what they mean, such as `ShipmentNotFound`, beside the operation.                                                              | Move a type to its owner when it becomes a separately versioned contract or a stable concept shared by several operations. |
 
-Test a service's business behavior directly. Test typed clients at the HTTP boundary. Do not introduce interfaces only to mock feature-local services or handlers.
+For example, adding SQS to a colocated `Shipping/CancelShipment.cs` creates two adapters and moves the handler to `Application/Shipping/CancelShipment.cs`. The domain stays in its current place. Use the same business operation name across all three files.
+
+## Give logic an owner
+
+- Keep a handler's orchestration, inputs, and output cases with the operation. Keep runtime request shapes and parsing with the adapter. Reuse a serializable application DTO as a public contract when that is its intended shape.
+- Put invariants and transitions on the domain object whose state they govern. For example, `Inventory.TryReserve` owns the stock rule. The handler loads inventory and decides which changes commit together. Use a smart enum or value object when the domain concept carries behavior or rules.
+- Keep feature-local helpers and shared policies near their callers. Give a reusable cross-area capability a named home such as `Pricing`. A service earns its place when it implements a cohesive policy or capability.
+- Put a provider client with its integration. Use a small contract at a real dependency boundary. Avoid forwarding services, catch-all folders, and interfaces created solely to mock an operation.
+- Keep a shared domain type only when the meaning and ownership are actually shared. Similar fields alone are a poor reason to share a model.
+
+A new entry point is a file boundary first. Split deployment, data ownership, or projects when there is a separate requirement such as scaling, failure isolation, or a dependency the compiler should enforce.
