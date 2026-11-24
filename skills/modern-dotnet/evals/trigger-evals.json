@@ -1,0 +1,82 @@
+[
+  {
+    "query": "Create a .NET application that tracks shipments.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a ShippingAddress class to this C# app and make it validate postal codes.",
+    "should_trigger": true
+  },
+  {
+    "query": "In Order.cs, block cancellation after a shipment has been dispatched.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add POST /shipments/{id}/cancel to our ASP.NET Core service.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add invoice reminders to our existing .NET billing application.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement a method in Shipment.cs to reschedule a delivery.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review how this .NET monolith divides responsibilities between Shipping and Billing.",
+    "should_trigger": true
+  },
+  {
+    "query": "Sketch a tiny C# 15 EF Core Minimal API with a typed found and missing response.",
+    "should_trigger": true
+  },
+  {
+    "query": "In our C# shipping app, how should a Minimal API endpoint and an SQS-triggered Lambda share the shipment handler?",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a .NET background worker that retries invoice processing safely.",
+    "should_trigger": true
+  },
+  {
+    "query": "Should we add repositories and MediatR to this EF Core app?",
+    "should_trigger": true
+  },
+  {
+    "query": "Where should authentication and validated options live as Program.cs grows?",
+    "should_trigger": true
+  },
+  {
+    "query": "Our .NET Program.cs is crowded with dependency injection registrations. Move them into the projects that own them.",
+    "should_trigger": true
+  },
+  {
+    "query": "How can our EF Core component tests share a Testcontainers database?",
+    "should_trigger": true
+  },
+  {
+    "query": "What's the syntax for a LINQ GroupBy query in C#?",
+    "should_trigger": false
+  },
+  {
+    "query": "What does HTTP 409 Conflict mean?",
+    "should_trigger": false
+  },
+  {
+    "query": "What is the difference between a JWT and an opaque access token?",
+    "should_trigger": false
+  },
+  {
+    "query": "How do I fix IL3050 in my class library before publishing its NuGet package?",
+    "should_trigger": false
+  },
+  {
+    "query": "Deploy a Lambda function resource with an existing CloudFormation YAML template.",
+    "should_trigger": false
+  },
+  {
+    "query": "Commit the changes on my current branch and push them.",
+    "should_trigger": false
+  }
+]

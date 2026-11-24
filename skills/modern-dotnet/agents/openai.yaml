@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modern .NET"
+  short_description: "Build and simplify C# 15+ .NET applications"
+  default_prompt: "Use $modern-dotnet for this .NET code change or architecture decision."

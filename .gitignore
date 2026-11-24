@@ -211,3 +211,5 @@ bin/
 obj/
 *.user
 .artifacts/
+
+local
