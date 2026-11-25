@@ -16,14 +16,15 @@ This repo is a shared home for installable agent skills.
 
 ## Available skills
 
-| Skill                           | Description                                                                                                            | Install                                                                                       |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `git-workflow`                  | Commit work, create branches, and open pull requests using conventional git workflow conventions                       | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`                  |
-| `engineering-workflow`          | Project-agnostic process for design, implementation, testing, review, feedback, security, and documentation            | `npx skills add https://github.com/LayeredCraft/skills --skill engineering-workflow`          |
-| `modern-dotnet`                 | C# 15+ application development with Minimal APIs, domain modeling, EF Core, workers, and event listeners               | `npx skills add https://github.com/LayeredCraft/skills --skill modern-dotnet`                 |
-| `zensical-site`                 | Tooling and guidance for Zensical-flavored documentation work                                                          | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`                 |
-| `partiql-dynamodb`              | DynamoDB-specific PartiQL guidance with focused references for statements, functions, operators, transactions, and IAM | `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb`              |
-| `dotnet-aot-library-validation` | Makes .NET class libraries Native AOT compatible: analyzers, IL2xxx/IL3xxx fixes, source generators, and CI validation | `npx skills add https://github.com/LayeredCraft/skills --skill dotnet-aot-library-validation` |
+| Skill                              | Description                                                                                                            | Install                                                                                          |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `git-workflow`                     | Commit work, create branches, and open pull requests using conventional git workflow conventions                       | `npx skills add https://github.com/LayeredCraft/skills --skill git-workflow`                     |
+| `engineering-workflow`             | Project-agnostic process for design, implementation, testing, review, feedback, security, and documentation            | `npx skills add https://github.com/LayeredCraft/skills --skill engineering-workflow`             |
+| `modern-dotnet`                    | C# 15+ application development with Minimal APIs, domain modeling, EF Core, workers, and event listeners               | `npx skills add https://github.com/LayeredCraft/skills --skill modern-dotnet`                    |
+| `zensical-site`                    | Tooling and guidance for Zensical-flavored documentation work                                                          | `npx skills add https://github.com/LayeredCraft/skills --skill zensical-site`                    |
+| `partiql-dynamodb`                 | DynamoDB-specific PartiQL guidance with focused references for statements, functions, operators, transactions, and IAM | `npx skills add https://github.com/LayeredCraft/skills --skill partiql-dynamodb`                 |
+| `dotnet-aot-library-validation`    | Makes .NET class libraries Native AOT compatible: analyzers, IL2xxx/IL3xxx fixes, source generators, and CI validation | `npx skills add https://github.com/LayeredCraft/skills --skill dotnet-aot-library-validation`    |
+| `layeredcraft-package-development` | Create LayeredCraft NuGet packages, verify packed consumers, and set up GitHub Actions and publishing                  | `npx skills add https://github.com/LayeredCraft/skills --skill layeredcraft-package-development` |
 
 ## Install a skill
 
