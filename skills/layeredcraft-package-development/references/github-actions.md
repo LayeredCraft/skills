@@ -38,18 +38,55 @@ AOT smoke tests, or a formatter the template cannot run. Keep PR build jobs
 read-only and free of secrets. Set `useMtpRunner` only for MTP projects and use a
 matching `global.json`. The shared v11 PR build defaults to no CDK deployment.
 
-| Caller under `.github/workflows/`                                                                                                      | Shared workflow       | Events and permissions                                                                                                                                                                                                                                       |
-| -------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`pr-title-check.yaml`](https://github.com/LayeredCraft/lambda-web-functions-dotnet/blob/main/.github/workflows/pr-title-check.yaml)   | `pr-title-check.yml`  | PR opened, edited, synchronized, reopened, or ready for review. Grant `pull-requests: read` and `statuses: write` to the metadata-only job.                                                                                                                  |
-| [`release-drafter.yaml`](https://github.com/LayeredCraft/lambda-web-functions-dotnet/blob/main/.github/workflows/release-drafter.yaml) | `release-drafter.yml` | Main pushes, manual dispatch, and PR changes including `ready_for_review`. Pass `event_name: ${{ github.event_name }}` and `pr_draft: ${{ github.event.pull_request.draft == true }}`. Grant `contents: write` and `pull-requests: write` to the caller job. |
+Use the [PR title caller](https://github.com/LayeredCraft/cdk-constructs/blob/main/.github/workflows/pr-title-check.yaml)
+on PR open, edit, synchronize, reopen, and ready for review. Align its pin with
+PR build. The v11.2 title check accepts `feat`, `fix`, `docs`, `refactor`,
+`test`, `chore`, `ci`, and `revert`. Scope is optional and the subject starts
+with a lowercase letter. The check uses `pull-requests: read` and `statuses: write`.
+[Shared PR title check](https://github.com/LayeredCraft/devops-templates/blob/v11.2/.github/workflows/pr-title-check.yml)
 
-Start from the linked PR title and Release Drafter callers and align their
-shared workflow pins with PR build. Keep `.github/release-drafter.yml` in the package repo. Match conventional PR
-titles to release labels and use `v$RESOLVED_VERSION` for tags. Configure
-`type: feat` for minor bumps and `type: fix` for patch bumps. Decide how
-`breaking-change` affects pre-1.0 versions. Check that the version resolver and
-release-note categories agree with the repo's policy. Compono has a concrete
-[Release Drafter configuration](https://github.com/LayeredCraft/compono/blob/main/.github/release-drafter.yml).
+## Release Drafter
+
+Add both files when setting up a new package repository.
+
+- Copy the [starter configuration](../assets/release-drafter.yml) to
+  `.github/release-drafter.yml`. This controls PR labels, release notes,
+  and version resolution.
+- Start from the [CDK Constructs caller](https://github.com/LayeredCraft/cdk-constructs/blob/main/.github/workflows/release-drafter.yaml)
+  for `.github/workflows/release-drafter.yaml`. Keep the shared workflow pin
+  aligned with PR and publish workflows. Grant `contents: write` and
+  `pull-requests: write` to the caller and pass
+  `event_name: ${{ github.event_name }}` and
+  `pr_draft: ${{ github.event.pull_request.draft == true }}`.
+
+The shared workflow labels non-draft PRs on open, edit, synchronize, reopen,
+and ready for review. It updates the draft release on pushes to `main` and
+manual dispatch. The preview workflow reads the same config in dry-run mode
+to calculate the next package version.
+
+The starter matches the label names and release sections used across the
+organization. For example, `feat(api): add batching` gets `type: feat` and
+`fix(api)!: remove the old overload` gets `type: fix` and `breaking-change`.
+The highest eligible bump wins. Breaking changes bump major, features bump
+minor, and the other included types default to patch. The `internal` and
+`skip-changelog` labels remove a PR from both notes and version calculation.
+The release name and tag use `v$RESOLVED_VERSION`. Check the resolved first
+version against the brief. If the project explicitly stays on a `0.x` line,
+set its breaking-change rule accordingly.
+
+The starter uses category rules supported by Release Drafter v7.7.0, which
+the v11.2 shared workflows pin. Compono and Minimal Lambda use this format.
+Older package configs can contain top-level `version-resolver`, `include-labels`,
+and `exclude-labels`. Check the action version before reusing a config from
+another repo. Keep a repository's existing version policy when updating its
+workflow. DynamoDB EF Core Provider uses separate configs for independent
+major-version lines.
+[Compono config](https://github.com/LayeredCraft/compono/blob/main/.github/release-drafter.yml),
+[Minimal Lambda config](https://github.com/LayeredCraft/minimal-lambda/blob/main/.github/release-drafter.yml),
+[DynamoDB EF Core 11 config](https://github.com/LayeredCraft/dynamodb-efcore-provider/blob/main/.github/release-drafter-ef11.yml),
+[Release Drafter v7.7.0](https://github.com/release-drafter/release-drafter/blob/v7.7.0/README.md#version-resolver)
+
+## Dependency updates
 
 Use weekly Dependabot updates for NuGet and GitHub Actions when setting up a
 new package repo. Group minor and patch updates if it suits the repo. Preserve
@@ -98,8 +135,9 @@ jobs:
 For `.github/workflows/publish-preview.yaml`, use the same job layout with
 `publish-preview.yml` and add `pull-requests: write` to the build job. Use
 `workflow_dispatch` and run it from `main`. Add pushes to `main` if the repo
-publishes previews after merge. Release Drafter supplies the next version
-and the preview workflow appends `-preview.<run-number>`. The tagged release
+publishes previews after merge. Most existing package callers do this and
+skip docs-only pushes. Release Drafter supplies the next version and the
+preview workflow appends `-preview.<run-number>`. The tagged release
 takes its version from the GitHub release tag. Both use the `nuget-packages`
 artifact by default.
 
@@ -116,8 +154,9 @@ when entering it in NuGet.org.
 ## First PR and release
 
 1. Verify the local build, tests, and packed consumer. When the PR runs,
-   check the observed results and confirm Release Drafter applies the
-   intended version labels.
+   verify the title check and confirm Release Drafter applies the intended
+   labels. After merge, check the draft's notes and proposed `vX.Y.Z` tag
+   before the first publish.
 2. When preview publishing is authorized, run the preview caller. Verify the
    artifact, wait for the exact package version to appear on NuGet.org, and
    restore it into the consumer.
