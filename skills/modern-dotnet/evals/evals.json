@@ -136,6 +136,19 @@
         "Reconciles an uncertain booking using its stable key and does not issue a new unkeyed booking on replay.",
         "Returns 202 and acknowledges SQS after a durable handoff, with the worker owning carrier retries after the handoff."
       ]
+    },
+    {
+      "id": 12,
+      "prompt": "Review our notification worker's Program.cs. It only calls BuildNotificationHost(args) and returns await RunNotificationAsync(host). The builder wrapper loads .env, creates the Generic Host builder, applies secret-file overrides, registers the notification client, rules, and workers, and builds the host. The run wrapper checks VPN connectivity, validates rules, starts workers, sends a startup alert, waits for shutdown, drains the queue, and sends a shutdown alert after a successful drain. A rejected preflight exits with 2 before workers start or alerts are sent. Fatal errors are logged and exit with 1. Graceful shutdown exits with 0. The VPN client owns response parsing, the alert sender owns throttling, and the queue owns draining. Sketch what Program.cs should show and where details should live. Would a second worker that only needs the standard host lifecycle need the same run sequence?",
+      "expected_output": "Shows the composition and ordered lifecycle in Program.cs, with named registrations, work delegated to existing owners, and unchanged exit and alert behavior.",
+      "files": [],
+      "expectations": [
+        "Shows .env loading, Generic Host builder creation, secret-file overrides, explicit named registrations, and Build() in Program.cs in that order.",
+        "Shows and awaits the custom steps in Program.cs in order, including preflight before worker startup and drain before the conditional shutdown alert.",
+        "Preserves exit code 2 with no workers or alerts after rejected preflight, logged fatal exit code 1, and graceful exit code 0.",
+        "Keeps VPN parsing, alert throttling, and queue draining in their existing owners and registration details beside the feature or adapter.",
+        "Uses the framework run call for the worker with a standard lifecycle."
+      ]
     }
   ]
 }

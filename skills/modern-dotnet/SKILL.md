@@ -23,19 +23,20 @@ Target C# 15 or later. Check the SDK and deployment runtime. If the project is p
 
 1. For any application code change or architecture decision, start with [Code placement](references/architecture/code-placement.md). Identify the business area and the type or file that should own the change.
 2. Open only the additional references that match the work. Start with their summaries and contents, then jump to the sections you need.
-3. Use ASP.NET Core Minimal APIs for new HTTP endpoints. Call handlers directly in new designs. For scoped changes, follow established names and preserve the existing public contract, authorization, validation, and transaction behavior. Name the concrete reason for each new boundary.
+3. When writing or reviewing `Program.cs`, check that you can trace host creation, ordered configuration, named registrations, `Build()`, and the run sequence from that file. Keep custom startup gates and shutdown decisions visible and delegate each step's implementation. For web hosts, also check middleware order and top-level endpoint mappings. See [host composition](references/implementation/configuration-and-options.md#keep-startup-focused-on-composition).
+4. Use ASP.NET Core Minimal APIs for new HTTP endpoints. Call handlers directly in new designs. For scoped changes, follow established names and preserve the existing public contract, authorization, validation, and transaction behavior. Name the concrete reason for each new boundary.
 
 ## References
 
-| Task                                                | Reference                                                                           |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| EF Core, CQRS, inline SQL, commits, events          | [Persistence and writes](references/architecture/persistence-and-writes.md)         |
-| Unions, Result, Option, pattern matching            | [Expected outcomes](references/implementation/expected-outcomes.md)                 |
-| Implementing or composing Map, Bind, and Tap        | [Functional helpers](references/implementation/functional-helpers.md)               |
-| HTTP and Minimal APIs                               | [HTTP endpoints](references/delivery/api-feature-slices.md)                         |
-| Worker, scheduled job, or CLI                       | [Workers and jobs](references/delivery/workers.md)                                  |
-| Queue, stream, event listener, or Lambda            | [Event listeners and Lambda](references/delivery/consumers.md)                      |
-| Startup, dependency injection, settings, or options | [Configuration and options](references/implementation/configuration-and-options.md) |
-| Test design or shared fixtures                      | [Integration and component tests](references/implementation/testing.md)             |
+| Task                                         | Reference                                                                           |
+| -------------------------------------------- | ----------------------------------------------------------------------------------- |
+| EF Core, CQRS, inline SQL, commits, events   | [Persistence and writes](references/architecture/persistence-and-writes.md)         |
+| Unions, Result, Option, pattern matching     | [Expected outcomes](references/implementation/expected-outcomes.md)                 |
+| Implementing or composing Map, Bind, and Tap | [Functional helpers](references/implementation/functional-helpers.md)               |
+| HTTP and Minimal APIs                        | [HTTP endpoints](references/delivery/api-feature-slices.md)                         |
+| Worker, scheduled job, or CLI                | [Workers and jobs](references/delivery/workers.md)                                  |
+| Queue, stream, event listener, or Lambda     | [Event listeners and Lambda](references/delivery/consumers.md)                      |
+| Host lifecycle, DI, settings, or options     | [Configuration and options](references/implementation/configuration-and-options.md) |
+| Test design or shared fixtures               | [Integration and component tests](references/implementation/testing.md)             |
 
 Every reference, including every new page, must start with a brief summary and a linked table of contents directly after its title, before the detailed guidance. Keep the contents in sync with the page's sections.
