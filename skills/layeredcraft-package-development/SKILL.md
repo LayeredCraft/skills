@@ -31,8 +31,9 @@ description: >-
    against the exact local package version. Fix build, test, package, and
    consumer failures before calling the library ready.
 5. Wire the standard [GitHub Actions callers](references/github-actions.md)
-   for a new package repo. In an existing repo, include the new project in
-   the solution the workflows already use. Confirm the workflow commands use
+   and Release Drafter configuration for a new package repo. In an existing
+   repo, include the new project in the solution the workflows already use.
+   Confirm the workflow commands use
    the same SDK, test runner, and solution as local validation. Set up or
    publish a remote release when the brief includes it.
 
