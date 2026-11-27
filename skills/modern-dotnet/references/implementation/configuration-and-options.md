@@ -1,10 +1,11 @@
 # Configuration and options
 
-**Summary.** Keep startup focused on explicit wiring. Group growing registrations by owner. Bind related settings to typed options and validate required values at startup.
+**Summary.** Keep the host choice, registrations, and run sequence visible in `Program.cs`. Group registration details by owner. Bind related settings to typed options and validate required values at startup.
 
 ## Contents
 
 - [Keep startup focused on composition](#keep-startup-focused-on-composition)
+- [Show custom startup and shutdown](#show-custom-startup-and-shutdown)
 - [Small app registration](#small-app-registration)
 - [Registration by project](#registration-by-project)
 - [Set and bind configuration](#set-and-bind-configuration)
@@ -13,9 +14,24 @@
 
 ## Keep startup focused on composition
 
-Use `Program.cs` to show what the host adds. Keep a small registration list inline. As it grows, put setup in the project or business area that owns the services and call named methods explicitly from `Program.cs`. Extract a group when its name makes the startup flow easier to read. Keep options and their validation with the concern that owns them.
+Use `Program.cs` as the composition root. Show which host runs, what it registers, what must succeed before it starts, and what happens when it stops. Keep builder creation, order-sensitive configuration, registration calls, `Build()`, and the run sequence visible. For a web host, also show the middleware order and top-level endpoint group mappings. Judge the file by how easily readers can follow those decisions. Line count is secondary.
 
-Register application handlers and infrastructure services explicitly. Avoid assembly scanning for project-owned registrations. Each named method should make it easy to find the service, implementation, and lifetime. A project with no services to register, such as a pure Domain project, can stay independent of DI.
+Keep a small registration list inline. Group related registrations in named `Add` methods near the feature or adapter that owns them. Keep details such as HTTP client settings, options validation, and worker lifetimes inside those methods. Pick names that tell the reader what each call adds. Register app-owned services explicitly so readers can see which implementations and lifetimes the app uses without tracing assembly scanning or automatic discovery. A project with no services to register, such as a pure Domain project, can stay independent of DI.
+
+## Show custom startup and shutdown
+
+Use the framework's run call for a standard lifecycle. When the app has custom startup or shutdown policy, keep the major steps and the decisions that control them in `Program.cs`. Show what prevents startup, what must finish before shutdown completes, and which outcomes determine the exit code. Call named methods for the work at each step. Use explicit awaits when one step must finish before the next begins. Use LINQ or functional helpers where they make transformations or decisions easier to read. If a builder or run wrapper hides the process order, move that sequence into `Program.cs`.
+
+GAFS Notification is an example of a custom lifecycle. Its steps run in this order.
+
+1. Load `.env`, create the Generic Host builder, and apply secret-file overrides.
+2. Call the named registration methods and build the host.
+3. Check Mullvad and validate rules before starting workers.
+4. Start workers and send the startup alert.
+5. Wait for shutdown, drain the workers, and send the shutdown alert when appropriate.
+6. Return the exit code.
+
+Keep VPN response parsing, alert throttling, and queue draining with their existing owners. When moving lifecycle calls, preserve the behavior on failed preflight, fatal errors, and graceful shutdown, including which alerts run and which exit code is returned.
 
 ## Small app registration
 

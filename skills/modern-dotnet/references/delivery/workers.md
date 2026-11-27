@@ -11,7 +11,7 @@
 
 ## Choose the host
 
-Treat a scheduled job, polling worker, or CLI command as an entry point. Translate the trigger to application input and call the handler directly in a new design. Use the existing application entry point when it owns required validation or transactions. Keep the loop, schedule, shutdown, concurrency limits, and exit behavior with the host. Keep business rules and the commit with the operation and its domain types.
+Treat a scheduled job, polling worker, or CLI command as an entry point. Translate the trigger to application input and call the handler directly in a new design. A worker and an HTTP endpoint can call the same Application operation. Use the existing application entry point when it owns required validation or transactions. Keep the loop, schedule, shutdown, concurrency limits, and exit behavior with the host. Keep business rules and the commit with the operation and its domain types. See [custom startup and shutdown](../implementation/configuration-and-options.md#show-custom-startup-and-shutdown) for how to show the host's lifecycle in `Program.cs`.
 
 - Use a run-once executable when an external scheduler starts the job. Pass the logical processing window when a retry needs to process the same work. Define overlap and catch-up behavior with the scheduler.
 - Use `BackgroundService` for a long-running loop in a .NET host. Registering with `AddHostedService` gives the worker a singleton lifetime. Resolve the handler and context inside a scope for each independent run or work item. Give parallel operations separate contexts.

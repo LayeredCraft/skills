@@ -212,7 +212,7 @@ modelBuilder.Entity<Shipment>().Property(x => x.Version).IsConcurrencyToken();
 
 ## Register and evolve the operation
 
-Register the scoped context and `GetShipment.Handler` at startup and call `GetShipment.Map(app)`. Group registrations and route mappings by business area when the host starts accumulating them. Keep the route implementation with the operation. See [registration by project](../implementation/configuration-and-options.md#registration-by-project) for explicit DI in a layered app.
+Keep the web builder choice, middleware order, and top-level endpoint group mappings visible in `Program.cs`. Group registrations and route mappings by business area as they grow. Keep route details and handlers with their features. See [registration by project](../implementation/configuration-and-options.md#registration-by-project) for explicit DI in a layered app.
 
 ```csharp
 // Program.cs, after registering the context and the ShippingWrite policy
